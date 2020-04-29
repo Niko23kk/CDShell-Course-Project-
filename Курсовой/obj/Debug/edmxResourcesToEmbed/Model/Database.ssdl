@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище BuildModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Elements">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="20" />
+    <Property Name="Type" Type="nvarchar" MaxLength="20" />
+    <Property Name="Info" Type="nvarchar" MaxLength="1" />
+    <Property Name="Price" Type="money" />
+    <Property Name="Front view" Type="binary" MaxLength="1" />
+    <Property Name="Side view" Type="binary" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="Project">
+    <Key>
+      <PropertyRef Name="ID Project" />
+    </Key>
+    <Property Name="ID Project" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date of change" Type="date" />
+    <Property Name="Project name" Type="nvarchar" MaxLength="15" />
+    <Property Name="Status" Type="int" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="ID User" />
+    </Key>
+    <Property Name="ID User" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="25" />
+    <Property Name="Surname" Type="nvarchar" MaxLength="25" />
+    <Property Name="Email" Type="nvarchar" MaxLength="30" />
+    <Property Name="Login" Type="nvarchar" MaxLength="25" />
+    <Property Name="Password" Type="varbinary" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="UserProject">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID User" Type="int" />
+    <Property Name="ID Project" Type="int" />
+  </EntityType>
+  <EntityType Name="WorkField">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="ID Project" Type="int" />
+    <Property Name="Element ID" Type="int" />
+    <Property Name="PisitionX" Type="int" />
+    <Property Name="PositionY" Type="int" />
+    <Property Name="PositionZ" Type="int" />
+  </EntityType>
+  <Association Name="FK__UserProje__ID Pr__7F2BE32F">
+    <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+    <End Role="UserProject" Type="Self.UserProject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="ID Project" />
+      </Principal>
+      <Dependent Role="UserProject">
+        <PropertyRef Name="ID Project" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserProje__ID Us__7E37BEF6">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="UserProject" Type="Self.UserProject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID User" />
+      </Principal>
+      <Dependent Role="UserProject">
+        <PropertyRef Name="ID User" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__WorkField__Eleme__04E4BC85">
+    <End Role="Elements" Type="Self.Elements" Multiplicity="0..1" />
+    <End Role="WorkField" Type="Self.WorkField" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Elements">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="WorkField">
+        <PropertyRef Name="Element ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__WorkField__ID Pr__03F0984C">
+    <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+    <End Role="WorkField" Type="Self.WorkField" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="ID Project" />
+      </Principal>
+      <Dependent Role="WorkField">
+        <PropertyRef Name="ID Project" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище BuildModelContainer">
+    <EntitySet Name="Elements" EntityType="Self.Elements" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserProject" EntityType="Self.UserProject" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WorkField" EntityType="Self.WorkField" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__UserProje__ID Pr__7F2BE32F" Association="Self.FK__UserProje__ID Pr__7F2BE32F">
+      <End Role="Project" EntitySet="Project" />
+      <End Role="UserProject" EntitySet="UserProject" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserProje__ID Us__7E37BEF6" Association="Self.FK__UserProje__ID Us__7E37BEF6">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserProject" EntitySet="UserProject" />
+    </AssociationSet>
+    <AssociationSet Name="FK__WorkField__Eleme__04E4BC85" Association="Self.FK__WorkField__Eleme__04E4BC85">
+      <End Role="Elements" EntitySet="Elements" />
+      <End Role="WorkField" EntitySet="WorkField" />
+    </AssociationSet>
+    <AssociationSet Name="FK__WorkField__ID Pr__03F0984C" Association="Self.FK__WorkField__ID Pr__03F0984C">
+      <End Role="Project" EntitySet="Project" />
+      <End Role="WorkField" EntitySet="WorkField" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

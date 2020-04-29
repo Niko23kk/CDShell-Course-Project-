@@ -1,0 +1,68 @@
+﻿<Window x:Class="Курсовой.View.NewTextureWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:Курсовой.ViewModel"
+        xmlns:local="clr-namespace:Курсовой.View"
+        mc:Ignorable="d"
+        Title="CD SHELL" Height="650" Width="500" ResizeMode="NoResize"
+        Style="{StaticResource WindowStyle}">
+    <Window.DataContext>
+        <vm:NewTextureViewModel/>
+    </Window.DataContext>
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush  ImageSource="pack://application:,,,/Resourses/Images/Background.jpg" Stretch="UniformToFill">
+                <ImageBrush.RelativeTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleY="0" AngleX="0"/>
+                        <RotateTransform Angle="0"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </ImageBrush.RelativeTransform>
+            </ImageBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Row="1" Text="Title" FontSize="20" Margin="0,0,20,0" HorizontalAlignment="Right"/>
+        <TextBox Text="{Binding Title}" Grid.Row="1" Grid.Column="1" Width="200" HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="4.8,2.2,0,18.6"/>
+
+        <TextBlock Grid.Row="2" Text="Info" FontSize="20" Margin="0,0,20,0" HorizontalAlignment="Right"/>
+        <TextBox Text="{Binding Info}" Grid.Row="2" Grid.Column="1" Width="200" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+        <TextBlock Grid.Row="3" Text="Price" FontSize="20" Margin="0,0,20,0" HorizontalAlignment="Right"/>
+        <TextBox Text="{Binding Price}" Grid.Row="3" Grid.Column="1" Width="200" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+        <TextBlock Grid.Row="4" Text="Size" FontSize="20" Margin="0,0,20,0" HorizontalAlignment="Right"/>
+        <TextBox Text="{Binding SizeX}" Grid.Row="4" Grid.Column="1" Width="50" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding SizeY}" Grid.Row="4" Grid.Column="1" Width="50" Height="30" Margin="100,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+        <TextBlock Grid.Row="5" Text="Title" FontSize="20" Margin="0,0,20,0" HorizontalAlignment="Right"/>
+        <Canvas Background="#B2E8E8E8" Grid.Row="5" Grid.Column="1" VerticalAlignment="Top" Height="80" Width="200" HorizontalAlignment="Left">
+            <Image Name="FrontView" Height="80" Width="80" AllowDrop="True" />
+        </Canvas>
+
+        <TextBlock Grid.Row="6" Text="Title" FontSize="20" Margin="0,0,20,0" HorizontalAlignment="Right"/>
+        <Canvas Background="#B2E8E8E8" Grid.Row="6" Grid.Column="1" VerticalAlignment="Top" Width="200" Height="80" HorizontalAlignment="Left">
+            <Image Name="SideView" Height="80" Width="80" AllowDrop="True"  />
+        </Canvas>
+
+        <Button Grid.Row="7" Grid.ColumnSpan="2" Margin="0,50,0,0" Width="150" Style="{StaticResource MainButton}" Content="Add"/>
+    </Grid>
+</Window>

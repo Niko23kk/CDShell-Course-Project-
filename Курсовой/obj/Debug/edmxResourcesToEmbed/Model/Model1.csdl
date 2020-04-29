@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BuildModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Elements">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Type" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Info" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Front_view" Type="Binary" MaxLength="1" FixedLength="true" />
+    <Property Name="Side_view" Type="Binary" MaxLength="1" FixedLength="true" />
+    <NavigationProperty Name="WorkField" Relationship="Self.FK__WorkField__Eleme__66603565" FromRole="Elements" ToRole="WorkField" />
+  </EntityType>
+  <EntityType Name="Project">
+    <Key>
+      <PropertyRef Name="ID_Project" />
+    </Key>
+    <Property Name="ID_Project" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date_of_change" Type="DateTime" Precision="0" />
+    <Property Name="Project_name" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Int32" />
+    <NavigationProperty Name="UserProject" Relationship="Self.FK__UserProje__ID_Pr__60A75C0F" FromRole="Project" ToRole="UserProject" />
+    <NavigationProperty Name="WorkField" Relationship="Self.FK__WorkField__ID_Pr__656C112C" FromRole="Project" ToRole="WorkField" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="ID_User" />
+    </Key>
+    <Property Name="ID_User" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="Surname" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Login" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="Binary" MaxLength="1" FixedLength="false" />
+    <NavigationProperty Name="UserProject" Relationship="Self.FK__UserProje__ID_Us__5FB337D6" FromRole="User" ToRole="UserProject" />
+  </EntityType>
+  <EntityType Name="UserProject">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_User" Type="Int32" />
+    <Property Name="ID_Project" Type="Int32" />
+    <NavigationProperty Name="Project" Relationship="Self.FK__UserProje__ID_Pr__60A75C0F" FromRole="UserProject" ToRole="Project" />
+    <NavigationProperty Name="User" Relationship="Self.FK__UserProje__ID_Us__5FB337D6" FromRole="UserProject" ToRole="User" />
+  </EntityType>
+  <EntityType Name="WorkField">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="ID_Project" Type="Int32" />
+    <Property Name="Element_ID" Type="Int32" />
+    <Property Name="PisitionX" Type="Int32" />
+    <Property Name="PositionY" Type="Int32" />
+    <Property Name="PositionZ" Type="Int32" />
+    <NavigationProperty Name="Elements" Relationship="Self.FK__WorkField__Eleme__66603565" FromRole="WorkField" ToRole="Elements" />
+    <NavigationProperty Name="Project" Relationship="Self.FK__WorkField__ID_Pr__656C112C" FromRole="WorkField" ToRole="Project" />
+  </EntityType>
+  <Association Name="FK__WorkField__Eleme__66603565">
+    <End Role="Elements" Type="Self.Elements" Multiplicity="0..1" />
+    <End Role="WorkField" Type="Self.WorkField" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Elements">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="WorkField">
+        <PropertyRef Name="Element_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserProje__ID_Pr__60A75C0F">
+    <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+    <End Role="UserProject" Type="Self.UserProject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="ID_Project" />
+      </Principal>
+      <Dependent Role="UserProject">
+        <PropertyRef Name="ID_Project" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__WorkField__ID_Pr__656C112C">
+    <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+    <End Role="WorkField" Type="Self.WorkField" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="ID_Project" />
+      </Principal>
+      <Dependent Role="WorkField">
+        <PropertyRef Name="ID_Project" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserProje__ID_Us__5FB337D6">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="UserProject" Type="Self.UserProject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID_User" />
+      </Principal>
+      <Dependent Role="UserProject">
+        <PropertyRef Name="ID_User" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BuildEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Elements" EntityType="Self.Elements" />
+    <EntitySet Name="Project" EntityType="Self.Project" />
+    <EntitySet Name="User" EntityType="Self.User" />
+    <EntitySet Name="UserProject" EntityType="Self.UserProject" />
+    <EntitySet Name="WorkField" EntityType="Self.WorkField" />
+    <AssociationSet Name="FK__WorkField__Eleme__66603565" Association="Self.FK__WorkField__Eleme__66603565">
+      <End Role="Elements" EntitySet="Elements" />
+      <End Role="WorkField" EntitySet="WorkField" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserProje__ID_Pr__60A75C0F" Association="Self.FK__UserProje__ID_Pr__60A75C0F">
+      <End Role="Project" EntitySet="Project" />
+      <End Role="UserProject" EntitySet="UserProject" />
+    </AssociationSet>
+    <AssociationSet Name="FK__WorkField__ID_Pr__656C112C" Association="Self.FK__WorkField__ID_Pr__656C112C">
+      <End Role="Project" EntitySet="Project" />
+      <End Role="WorkField" EntitySet="WorkField" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserProje__ID_Us__5FB337D6" Association="Self.FK__UserProje__ID_Us__5FB337D6">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserProject" EntitySet="UserProject" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

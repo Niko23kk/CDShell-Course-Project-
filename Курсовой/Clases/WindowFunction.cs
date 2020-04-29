@@ -16,7 +16,7 @@ using System.Runtime.InteropServices;
 using System.Collections;
 
 
-namespace Whush.Demo.Styles.VS2012
+namespace Whush.Demo.Styles
 {
     internal static class LocalExtensions
     {
@@ -33,7 +33,7 @@ namespace Whush.Demo.Styles.VS2012
         }
     }
 
-    public partial class VS2012WindowStyle
+    public partial class WindowStyle
     {
         void IconMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {

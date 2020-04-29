@@ -1,8 +1,13 @@
 ﻿
 FD:\Учеба\4_сем\Курсач\Курсовой\Курсовой\App.xaml;;
-FD:\Учеба\4_сем\Курсач\Курсовой\Курсовой\Windows\MainWindow.xaml;;
+FD:\Учеба\4_сем\Курсач\Курсовой\Курсовой\View\HomePage.xaml;;
+FD:\Учеба\4_сем\Курсач\Курсовой\Курсовой\View\InfoPage.xaml;;
+FD:\Учеба\4_сем\Курсач\Курсовой\Курсовой\View\MainWindow.xaml;;
 FD:\Учеба\4_сем\Курсач\Курсовой\Курсовой\Style\Style.xaml;;
 FD:\Учеба\4_сем\Курсач\Курсовой\Курсовой\Style\WindowStyle.xaml;;
-FD:\Учеба\4_сем\Курсач\Курсовой\Курсовой\Windows\Registration.xaml;;
-FD:\Учеба\4_сем\Курсач\Курсовой\Курсовой\Windows\SignIn.xaml;;
+FD:\Учеба\4_сем\Курсач\Курсовой\Курсовой\View\NewTextureWindow.xaml;;
+FD:\Учеба\4_сем\Курсач\Курсовой\Курсовой\View\Registration.xaml;;
+FD:\Учеба\4_сем\Курсач\Курсовой\Курсовой\View\SettingsPage.xaml;;
+FD:\Учеба\4_сем\Курсач\Курсовой\Курсовой\View\SignIn.xaml;;
+FD:\Учеба\4_сем\Курсач\Курсовой\Курсовой\View\SignInWindow.xaml;;
 

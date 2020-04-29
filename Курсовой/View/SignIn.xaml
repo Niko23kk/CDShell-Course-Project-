@@ -1,0 +1,64 @@
+﻿<Page x:Class="Курсовой.View.SignIn"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ff="clr-namespace:Курсовой.Clases"
+        xmlns:vm="clr-namespace:Курсовой.ViewModel"
+        xmlns:local="clr-namespace:Курсовой.View"
+        mc:Ignorable="d"
+        MinHeight="400" MinWidth="300" Name="SignInPage">
+    <Page.DataContext>
+        <vm:SignInViewModel/>
+    </Page.DataContext>
+    <Grid ShowGridLines="True" RenderTransformOrigin="0.5,0.5">
+        <Grid.Background>
+            <ImageBrush  ImageSource="pack://application:,,,/Resourses/Images/Background.jpg" Stretch="UniformToFill">
+                <ImageBrush.RelativeTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleY="0" AngleX="0"/>
+                        <RotateTransform Angle="0"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </ImageBrush.RelativeTransform>
+            </ImageBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="1" Text="Sign in" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="32" FontWeight="Bold" Foreground="#9E9E9E"/>
+
+        <TextBox Name="Login" Text="{Binding Login, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" MinWidth="300" Height="35"/>
+        <TextBlock IsHitTestVisible="False" Grid.Row="3" FontSize="16" Text="Login" Width="300"  TextAlignment="Left" Height="35" Padding="7" FontFamily="Calibri" Foreground="#9E9E9E">
+            <TextBlock.Style>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Text, ElementName=Login}" Value="">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+
+        <PasswordBox Name="Password" Grid.Row="4" MinWidth="300" Height="35" ff:Secure.BoundPassword="{Binding Password,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+
+        <Button Grid.Row="6" Style="{StaticResource MainButton}" Content="Sign in" Width="150" Command="{Binding SignInClick}" CommandParameter="{Binding ElementName=SignInPage}"/>
+        
+        <WrapPanel Grid.Row="7" HorizontalAlignment="Center" Orientation="Vertical" Margin="10">
+            <TextBlock Text="If you are not registered click button " TextWrapping="Wrap" FontSize="14" Foreground="#9E9E9E"/>
+            <TextBlock HorizontalAlignment="Center">
+                <Hyperlink  FontFamily="Calibri" FontSize="14" Command="{Binding RegistrationClick}" CommandParameter="{Binding ElementName=SignInPage}"><TextBlock Text="Click me"/></Hyperlink>
+            </TextBlock>
+        </WrapPanel>
+    </Grid>
+</Page>

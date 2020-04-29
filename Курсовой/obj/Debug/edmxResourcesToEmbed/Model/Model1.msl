@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище BuildModelContainer" CdmEntityContainer="BuildEntities">
+    <EntitySetMapping Name="Elements">
+      <EntityTypeMapping TypeName="BuildModel.Elements">
+        <MappingFragment StoreEntitySet="Elements">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Info" ColumnName="Info" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Front_view" ColumnName="Front view" />
+          <ScalarProperty Name="Side_view" ColumnName="Side view" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Project">
+      <EntityTypeMapping TypeName="BuildModel.Project">
+        <MappingFragment StoreEntitySet="Project">
+          <ScalarProperty Name="ID_Project" ColumnName="ID Project" />
+          <ScalarProperty Name="Date_of_change" ColumnName="Date of change" />
+          <ScalarProperty Name="Project_name" ColumnName="Project name" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User">
+      <EntityTypeMapping TypeName="BuildModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="ID_User" ColumnName="ID User" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Login" ColumnName="Login" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserProject">
+      <EntityTypeMapping TypeName="BuildModel.UserProject">
+        <MappingFragment StoreEntitySet="UserProject">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ID_User" ColumnName="ID User" />
+          <ScalarProperty Name="ID_Project" ColumnName="ID Project" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WorkField">
+      <EntityTypeMapping TypeName="BuildModel.WorkField">
+        <MappingFragment StoreEntitySet="WorkField">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ID_Project" ColumnName="ID Project" />
+          <ScalarProperty Name="Element_ID" ColumnName="Element ID" />
+          <ScalarProperty Name="PisitionX" ColumnName="PisitionX" />
+          <ScalarProperty Name="PositionY" ColumnName="PositionY" />
+          <ScalarProperty Name="PositionZ" ColumnName="PositionZ" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

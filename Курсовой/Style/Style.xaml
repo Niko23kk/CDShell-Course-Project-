@@ -2,9 +2,6 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Курсовой">
     <!--Font family-->
-    <Style TargetType="CheckBox">
-        <Setter Property="FontFamily" Value="Calibri"/>
-    </Style>
     <Style TargetType="TextBlock">
         <Setter Property="FontFamily" Value="Calibri"/>
     </Style>
@@ -14,6 +11,14 @@
     <Style TargetType="ListView">
         <Setter Property="FontFamily" Value="Calibri"/>
     </Style>
+
+    <Style TargetType="TextBlock" x:Key="StyleInfoPage">
+        <Setter Property="FontSize" Value="30"/>
+        <Setter Property="Foreground" Value="#FF3D3D3D"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+    </Style>
     
     <!--Text box-->
     <Style TargetType="TextBox">
@@ -21,7 +26,7 @@
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="FontFamily" Value="Calibri"/>
         <Setter Property="Foreground" Value="#9E9E9E"/>
-        <Setter Property="Padding" Value="5"/>
+        <Setter Property="Padding" Value="7"/>
         <Setter Property="Margin" Value="5,2"/>
         <Setter Property="FontSize" Value="16"/>
         <Setter Property="Template">
@@ -29,7 +34,6 @@
                 <ControlTemplate TargetType="{x:Type TextBox}">
                     <Grid Background="#B2E8E8E8" >
                         <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
-                        <TextBlock Name="Placeholder" Text="{Binding Path=Tag, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" Padding="3" Margin="5,2" FontSize="16"/>
                         <Separator Name="Underline" Margin="0,3,0,0" VerticalAlignment="Bottom"/>
                     </Grid>
                     <ControlTemplate.Triggers>
@@ -44,33 +48,142 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
-    <ControlTemplate TargetType="Button" x:Key="Registrate">
-        <Border CornerRadius="15,15,15,15" BorderThickness="1" Background="#FCD5A6"  >
-            <ContentControl Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Registrate" FontSize="20" FontFamily="Calibri"/>
-        </Border>
-    </ControlTemplate>
 
-    <Style TargetType="Button" x:Key="But">
-        <Style.Setters>
-            <Setter Property="Button.Foreground" Value="#9E9E9E" />
-        </Style.Setters>
+
+    <Style TargetType="PasswordBox">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="FontFamily" Value="Calibri"/>
+        <Setter Property="Foreground" Value="#9E9E9E"/>
+        <Setter Property="Padding" Value="7"/>
+        <Setter Property="Margin" Value="5,2"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type PasswordBox}">
+                    <Grid Background="#B2E8E8E8" >
+                        <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                        <!--<TextBlock Name="Placeholder" Text="{Binding Path=Tag, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" Padding="5" Margin="5,2" FontSize="16"/>-->
+                        <Separator Name="Underline" Margin="0,3,0,0" VerticalAlignment="Bottom"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="true">
+                            <Setter Property="Foreground" Value="Gray"/>
+                            <Setter Property="Visibility" TargetName="Underline" Value="Hidden"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="Button" x:Key="MainButton">
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="Button.Foreground" Value="White" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="15,15,15,15" BorderThickness="1" Background="#FF66C3D0"  >
+                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsPressed" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter Property="Foreground" Value="White" />
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="FontSize" Value="20" />
+                            <Setter Property="BorderThickness" Value="2"/>
+                            <Setter Property="FontWeight" Value="Bold"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="CheckBox">
+        <Setter Property="FontFamily" Value="Calibri"/>
+        <Setter Property="IsEnabled" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type CheckBox}">
+                    <Border CornerRadius="5" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"  Background="{TemplateBinding Background}">
+                        <Grid>
+                            <ContentPresenter Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Margin="{TemplateBinding Padding}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                            <Border VerticalAlignment="Center" HorizontalAlignment="Right" Padding="2,1">
+                                <Path Name="path" Stroke="White" StrokeThickness="5" StrokeStartLineCap="Round"  StrokeEndLineCap="Round" StrokeLineJoin="Round" />
+                            </Border>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="path" Property="Data" Value="M 0 5 L 3 10 10 0" />
+                            <Setter TargetName="path" Property="Stroke" Value="green" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="TextBlock" x:Key="MainMenu">
+        <Setter Property="Foreground" Value="#FF3D3D3D"/>
         <Style.Triggers>
-            <MultiTrigger>
-                <MultiTrigger.Conditions>
-                    <Condition Property="IsMouseOver" Value="True" />
-                    <Condition Property="IsPressed" Value="True" />
-                </MultiTrigger.Conditions>
-                <MultiTrigger.Setters>
-                    <Setter Property="FontSize" Value="12" />
-                    <Setter Property="Foreground" Value="White" />
-                </MultiTrigger.Setters>
-            </MultiTrigger>
             <Trigger Property="IsMouseOver" Value="true">
-                <Setter Property="BorderThickness" Value="2"/>
-                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="Foreground" Value="#FF66C3D0"/>
             </Trigger>
         </Style.Triggers>
+    </Style>
+
+    <Style TargetType="Button" x:Key="MenuButton">
+        <Setter Property="Button.Foreground" Value="{x:Null}" />
+        <Setter Property="Width" Value="300"/>
+        <Setter Property="Height" Value="80"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <ContentPresenter Name="Content" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <Separator VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="300" Margin="0"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter Property="FontSize" Value="20" />
+                            <Setter Property="Foreground" Value="Gray"/>
+                            <Setter Property="FontWeight" Value="Bold"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="Button" x:Key="NoStyleButton">
+        <Setter Property="Button.Foreground" Value="black" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <ContentPresenter Name="Content" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter Property="FontSize" Value="20" />
+                            <Setter Property="FontWeight" Value="Bold"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
 </ResourceDictionary>

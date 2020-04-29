@@ -1,0 +1,167 @@
+﻿<Page x:Class="Курсовой.View.HomePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:vm="clr-namespace:Курсовой.ViewModel"
+      xmlns:local="clr-namespace:Курсовой.View"
+      xmlns:mode="clr-namespace:System.ComponentModel;assembly=System"
+      mc:Ignorable="d" 
+      MinWidth="600"
+      d:DesignHeight="800" d:DesignWidth="1300"
+      Title="HomePage">
+
+    <Page.DataContext>
+        <vm:HomePageViewModel/>
+    </Page.DataContext>
+    
+    <Grid ShowGridLines="True">
+        <Grid.Background>
+            <ImageBrush  ImageSource="pack://application:,,,/Resourses/Images/Background.jpg" Stretch="UniformToFill">
+                <ImageBrush.RelativeTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleY="0" AngleX="0"/>
+                        <RotateTransform Angle="0"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </ImageBrush.RelativeTransform>
+            </ImageBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Name="MainHeight" Height="*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <DockPanel Grid.Row="1" Grid.Column="0" Margin="20,10,5,10" MinWidth="300">
+            <TextBlock DockPanel.Dock="Top" Text="Last projects" FontSize="32" TextWrapping="Wrap" Padding="10" Margin="30,10"/>
+            <ScrollViewer Name="ScrollContainer" ScrollViewer.CanContentScroll="False" VerticalScrollBarVisibility="Visible" Height="auto">
+                <ItemsControl x:Name="ListViewProducts" ItemsSource="{Binding ProjectsCurentUser}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Margin="2" CornerRadius="10" BorderThickness="1" BorderBrush="Gray">
+                                <Border.Background>
+                                    <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                                        <GradientStop Color="#FFBDF6FF" Offset="1"/>
+                                        <GradientStop Color="#FFA2F1FC" Offset="0"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                                <Grid Margin="15" VerticalAlignment="Center">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="2*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="40"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="{Binding Project_name}" TextWrapping="Wrap" FontSize="17"/>
+                                    <TextBlock Grid.Column="1" Text="{Binding Date_of_change}" TextWrapping="Wrap" FontSize="17"/>
+                                    <CheckBox Grid.Column="2" HorizontalAlignment="Left" IsChecked="{Binding Status}" Height="20" Width="20" Padding="20"/>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                    <!--<ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>-->
+                </ItemsControl>
+            </ScrollViewer>
+        </DockPanel>
+
+        <ScrollViewer Grid.Row="1" Grid.Column="1" ScrollViewer.CanContentScroll="False" VerticalScrollBarVisibility="Auto" Height="auto">
+            <StackPanel  Margin="10,10,20,30" >
+                <DockPanel>
+                    <Border CornerRadius="20" Padding="10 10 20 20">
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <LinearGradientBrush.RelativeTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                        <RotateTransform CenterY="0.5" CenterX="0.5" Angle="315"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </LinearGradientBrush.RelativeTransform>
+                                <GradientStop Color="#FF69EBC5" Offset="0"/>
+                                <GradientStop Color="#FFC2FFED" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="10"/>
+                        </Border.Effect>
+                        <WrapPanel>
+                            <Image Source="pack://application:,,,/Resourses/Logo.png" Height="80" Width="80" Margin="20,0"/>
+                            <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center">
+                                <TextBlock Text="{Binding Login}" FontSize="24" Margin="10,5"/>
+                                <WrapPanel>
+                                    <TextBlock Text="{Binding FirstName}" FontSize="18" Margin="10,3"/>
+                                    <TextBlock Text="{Binding SecondName}" FontSize="18" Margin="10,3"/>
+                                </WrapPanel>
+                                <TextBlock Text="{Binding Email}" FontSize="18" Margin="10,3"/>
+                            </StackPanel>
+                        </WrapPanel>
+                    </Border>
+                </DockPanel>
+
+                <Border Margin="10,20" CornerRadius="20" Width="auto" HorizontalAlignment="Center">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <LinearGradientBrush.RelativeTransform>
+                                <TransformGroup>
+                                    <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                    <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                    <RotateTransform Angle="135" CenterY="0.5" CenterX="0.5"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </LinearGradientBrush.RelativeTransform>
+                            <GradientStop Color="#FFB2F5FF" Offset="0"/>
+                            <GradientStop Color="#FF66C3D0" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="10"/>
+                    </Border.Effect>
+                    
+                    <Button Style="{StaticResource NoStyleButton}">
+                    <WrapPanel Margin="0,20" HorizontalAlignment="Center">
+                        <Image Margin="20,0" HorizontalAlignment="Center" Height="30" Width="30" Source="pack://application:,,,/Resourses/Images/add.png"/>
+                        <TextBlock TextWrapping="Wrap" Text="New project" VerticalAlignment="Center" FontSize="24" Width="150" Margin="10,0,30,0"/>
+                        </WrapPanel>
+                    </Button>
+                </Border>
+
+                <Border Margin="10,20" CornerRadius="20" Width="auto" HorizontalAlignment="Center">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <LinearGradientBrush.RelativeTransform>
+                                <TransformGroup>
+                                    <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                    <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                    <RotateTransform Angle="135" CenterY="0.5" CenterX="0.5"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </LinearGradientBrush.RelativeTransform>
+                            <GradientStop Color="#FFB2F5FF" Offset="0"/>
+                            <GradientStop Color="#FF66C3D0" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="10"/>
+                    </Border.Effect>
+                    <Button Style="{StaticResource NoStyleButton}" Command="{Binding AddTextureClick}">
+                        <WrapPanel Margin="0,20" HorizontalAlignment="Center">
+                            <Image Margin="20,0" HorizontalAlignment="Center" Height="30" Width="30" Source="pack://application:,,,/Resourses/Images/add.png"/>
+                            <TextBlock TextWrapping="Wrap" Text="New texture" VerticalAlignment="Center" FontSize="24" Width="150" Margin="10,0,30,0"/>
+                        </WrapPanel>
+                    </Button>
+                </Border>
+
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>
