@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Курсовой.Model;
 using Курсовой.Clases;
+using Курсовой.View;
 using System.ComponentModel;
 using System.Windows.Input;
 using System.Windows;
@@ -18,6 +19,10 @@ namespace Курсовой.ViewModel
         public MainWindowViewModel()
         {
             MainPage = "HomePage.xaml";
+            DBRepository<User> dBRepository = new DBRepository<User>(new BuildEntities());
+            User user=dBRepository.GetAll().Where(s => s.ID_User == CurrentUserID.getInstance().ID).First();
+            LoginCurrenUser = user.Login;
+            FirstCharLoginCurrenUser = user.Name[0].ToString()+user.Surname[0].ToString();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -26,6 +31,35 @@ namespace Курсовой.ViewModel
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
+
+        private string loginCurrenUser;
+        public string LoginCurrenUser
+        {
+            get
+            {
+                return loginCurrenUser;
+            }
+            set
+            {
+                loginCurrenUser = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string firstCharLoginCurrenUser;
+        public string FirstCharLoginCurrenUser
+        {
+            get
+            {
+                return firstCharLoginCurrenUser;
+            }
+            set
+            {
+                firstCharLoginCurrenUser = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         private string mainPage;
         public string MainPage
@@ -138,7 +172,7 @@ namespace Курсовой.ViewModel
         {
             get
             {
-                return new Com(obj =>
+                return new DelegateCommand(obj =>
                 {
                     LeftPanelWidth = new GridLength(300);
                     BurgerButtonVisible = Visibility.Collapsed;
@@ -151,11 +185,35 @@ namespace Курсовой.ViewModel
         {
             get
             {
-                return new Com(obj =>
+                return new DelegateCommand(obj =>
                 {
-                    LeftPanelWidth = new GridLength(100);
-                    BurgerButtonVisible = Visibility.Visible;
-                    ClosePanelButtonVisible = Visibility.Collapsed;
+                    if (MainPage == "WorkSpace.xaml")
+                    {
+                        LeftPanelWidth = new GridLength(0);
+                        BurgerButtonVisible = Visibility.Visible;
+                        ClosePanelButtonVisible = Visibility.Collapsed;
+                    }
+                    else
+                    {
+                        LeftPanelWidth = new GridLength(100);
+                        BurgerButtonVisible = Visibility.Visible;
+                        ClosePanelButtonVisible = Visibility.Collapsed;
+                    }
+                });
+            }
+        }
+
+        public ICommand LogoffClick
+        {
+            get
+            {
+                return new DelegateCommand(obj =>
+                {
+                    CurrentUserID.LogOut();
+                    SignInWindow signIn = new SignInWindow();
+                    signIn.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                    signIn.Show();
+                    (obj as Window).Close();
                 });
             }
         }

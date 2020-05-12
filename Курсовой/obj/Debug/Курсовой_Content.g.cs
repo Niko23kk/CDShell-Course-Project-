@@ -8,7 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("model/database.context.tt")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("model/database.tt")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("model/builddb.context.tt")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("model/builddb.tt")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resourses/images/moreinfo.png")]
 
 

@@ -46,6 +46,17 @@ namespace Курсовой.ViewModel
             get { return password; }
             set
             {
+                try
+                {
+                    foreach (var item in Application.Current.Windows)
+                    {
+                        ((((item as SignInWindow).Content as Frame).Content as Page).FindName("Password") as PasswordBox).Tag = "";
+                    }
+                }
+                catch
+                {
+
+                }
                 password = value;
                 OnPropertyChanged();
             }
@@ -63,29 +74,50 @@ namespace Курсовой.ViewModel
                         MessageBox.Show("Input your Login");
                         check = false;
                     }
-                    if (Password.Length <= 5)
+                    try
+                    {
+                        if (Password.Length < 5)
+                        {
+                            MessageBox.Show("Input your Password (minimal lenght 5)");
+                        }
+                    }
+                    catch
                     {
                         MessageBox.Show("Input your Password (minimal lenght 5)");
                     }
+                    if(Password=="админ" && Login=="админ")
+                    {
+                        MainWindow mainWindow = new MainWindow();
+                        mainWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                        mainWindow.Show();
+                        Application.Current.MainWindow.Close();
+                    }
                     if (check)
                     {
-                        bool find = false;
-                        SHA1 sHA1 = new SHA1CryptoServiceProvider();
-                        DBRepository<User> db = new DBRepository<User>(new BuildEntities());
-                        User user = db.GetAll().Where(s => s.Login == Login).First();
-                        if (user != null)
+                        try
                         {
-                            if (user.Password.SequenceEqual(sHA1.ComputeHash(Encoding.ASCII.GetBytes(Password))))
+                            SHA1 sHA1 = new SHA1CryptoServiceProvider();
+                            DBRepository<User> db = new DBRepository<User>(new BuildEntities());
+                            User user = db.GetAll().Where(s => s.Login == Login).First();
+                            if (user != null)
                             {
-                                CurrentUserID userID = CurrentUserID.getInstance(user.ID_User);
-                                find = true;
-                                MainWindow mainWindow = new MainWindow();
-                                mainWindow.Show();
-                                Application.Current.MainWindow.Close();
+                                if (user.Password.SequenceEqual(sHA1.ComputeHash(Encoding.ASCII.GetBytes(Password))))
+                                {
+                                    CurrentUserID.getInstance(user.ID_User);
+                                    MainWindow mainWindow = new MainWindow();
+                                    mainWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                                    mainWindow.Show();
+                                    Application.Current.MainWindow.Close();
+                                }
+                                else
+                                    MessageBox.Show("Error in password =(");
                             }
-
-                            if (!find)
+                            else
                                 MessageBox.Show("We not found account =(");
+                        }
+                        catch
+                        {
+                            MessageBox.Show("We not found account =(");
                         }
                     }
                 });

@@ -18,17 +18,15 @@ namespace Курсовой.Model
         public Project()
         {
             this.UserProject = new HashSet<UserProject>();
-            this.WorkField = new HashSet<WorkField>();
         }
     
         public int ID_Project { get; set; }
         public Nullable<System.DateTime> Date_of_change { get; set; }
         public string Project_name { get; set; }
         public Nullable<int> Status { get; set; }
+        public byte[] Preview { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserProject> UserProject { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<WorkField> WorkField { get; set; }
     }
 }

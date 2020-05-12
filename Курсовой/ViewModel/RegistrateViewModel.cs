@@ -12,7 +12,9 @@ using System.Windows.Input;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
+using System.Text.RegularExpressions;
 using System.Security.Cryptography;
+using Курсовой.View;
 
 namespace Курсовой.ViewModel
 {
@@ -95,8 +97,19 @@ namespace Курсовой.ViewModel
             get { return password; }
             set
             {
-                password = value;
-                OnPropertyChanged();
+                try
+                {
+                    if (value.Length > 0)
+                    {
+                        foreach (var item in Application.Current.Windows)
+                        {
+                            ((((item as Window).Content as Frame).Content as Page).FindName("Password") as PasswordBox).Tag = "";
+                        }
+                    }
+                    password = value;
+                    OnPropertyChanged();
+                }
+                catch { }
             }
         }
 
@@ -106,8 +119,19 @@ namespace Курсовой.ViewModel
             get { return conpassword; }
             set
             {
-                conpassword = value;
-                OnPropertyChanged();
+                try
+                {
+                    if (value.Length > 0)
+                    {
+                        foreach (var item in Application.Current.Windows)
+                        {
+                            ((((item as Window).Content as Frame).Content as Page).FindName("ConfirmPassword") as PasswordBox).Tag = "";
+                        }
+                    }
+                    conpassword = value;
+                    OnPropertyChanged();
+                }
+                catch { }
             }
         }
 
@@ -139,9 +163,10 @@ namespace Курсовой.ViewModel
                         MessageBox.Show("Input your Second name");
                         check = false;
                     }
-                    if (Email.Length == 0)
+                    if (!Regex.IsMatch(Email, @"^[-a-z0-9!#$%&'*+/=?^_`{|}~]+(\.[-a-z0-9!#$%&'*+/=?^_`{|}~]+)*@([a-z0-9]([-a-z0-9]{0,61}[a-z0-9])?\.)"+
+                        "*(aero|arpa|asia|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel|[a-z][a-z])$"))
                     {
-                        MessageBox.Show("Input your Email");
+                        MessageBox.Show("Uncorrectly format");
                         check = false;
                     }
                     if (Login.Length == 0)
@@ -151,12 +176,12 @@ namespace Курсовой.ViewModel
                     }
                     try
                     {
-                        if (Password.Length <=5)
+                        if (Password.Length <5)
                         {
                             MessageBox.Show("Check your Password (minimal lenght 5)");
                             check = false;
                         }
-                        if (ConPassword.Length <=5)
+                        if (ConPassword.Length <5)
                         {
                             MessageBox.Show("Check you Confirm Password (minimal lenght 5)");
                             check = false;
@@ -183,18 +208,19 @@ namespace Курсовой.ViewModel
                             Surname = SecondName,
                             Login = Login,
                             Email = Email,
-                            Password = sHA1.ComputeHash(Encoding.ASCII.GetBytes(Password))
+                            Password = sHA1.ComputeHash(Encoding.ASCII.GetBytes(Password)),
+                            Type="User"
                         };
                         try
                         {
                             db.Create(user);
+                            MessageBox.Show("Registration was successful");
+                            (obj as Page).NavigationService.Navigate(new Uri("pack://application:,,,/View/SignIn.xaml"), UriKind.RelativeOrAbsolute);
                         }
                         catch
                         {
                             MessageBox.Show("This Login is busy");
                         }
-                        MessageBox.Show("Registration was successful");
-                        (obj as Page).NavigationService.Navigate(new Uri("pack://application:,,,/View/SignIn.xaml"), UriKind.RelativeOrAbsolute);
                     }
                 });
             }

@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Globalization;
 
 namespace Курсовой.Clases
 {
     public static class Secure
     {
-        #region BoundPassword
         private static bool _updating = false;
 
         /// <summary>
@@ -76,7 +77,5 @@ namespace Курсовой.Clases
             SetBoundPassword(password, password.Password);
             _updating = false;
         }
-
-        #endregion
     }
 }

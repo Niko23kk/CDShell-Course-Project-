@@ -9,6 +9,8 @@ using Курсовой.View;
 using System.ComponentModel;
 using System.Windows.Input;
 using System.Windows;
+using System.Windows.Documents;
+using Microsoft.Win32;
 using System.Windows.Controls;
 
 
@@ -23,12 +25,7 @@ namespace Курсовой.ViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
 
-        public NewTextureViewModel()
-        {
-
-        }
-
-        private string title;
+        private string title="";
         public string Title
         {
             get { return title; }
@@ -39,60 +36,64 @@ namespace Курсовой.ViewModel
             }
         }
 
-        private string info;
-        public string Info
-        {
-            get { return info; }
-            set
-            {
-                info = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private string email;
-        public string Email
-        {
-            get { return email; }
-            set
-            {
-                email = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private string price;
-        public string Price
+        private int price;
+        public int Price
         {
             get { return price; }
             set
             {
-                price = value;
+                try
+                {
+                    price = value;
+                    OnPropertyChanged();
+                }
+                catch
+                {
+                    MessageBox.Show("It is a not number");
+                }
+            }
+        }
+
+        private int size;
+        public int Size
+        {
+            get { return size; }
+            set
+            {
+                try
+                {
+                    size = value;
+                    OnPropertyChanged();
+                }
+                catch
+                {
+                    MessageBox.Show("It is a not number");
+                }
+            }
+        }
+
+        private string frontImage;
+        public string FrontImage
+        {
+            get { return frontImage; }
+            set
+            {
+                frontImage = value;
                 OnPropertyChanged();
             }
         }
 
-        private string sezeX;
-        public string SizeX
+        private string sideImage;
+        public string SideImage
         {
-            get { return sezeX; }
+            get { return sideImage; }
             set
             {
-                SizeX = value;
+                sideImage = value;
                 OnPropertyChanged();
             }
         }
 
-        private string sezeY;
-        public string SizeY
-        {
-            get { return sezeY; }
-            set
-            {
-                SizeY = value;
-                OnPropertyChanged();
-            }
-        }
 
         public ICommand AddTextureClick
         {
@@ -100,8 +101,78 @@ namespace Курсовой.ViewModel
             {
                 return new DelegateCommand(obj =>
                 {
-                    NewTextureWindow window = new NewTextureWindow();
-                    window.Show();
+                    try
+                    {
+                        bool check = true;
+
+                        if (Title.Length == 0 || Title.Length > 25)
+                        {
+                            MessageBox.Show("Input title (max lenght 25)");
+                            check = false;
+                        }
+                        if (Price == 0)
+                        {
+                            MessageBox.Show("Input price");
+                            check = false;
+                        }
+                        if (Size == 0 || Size < 5)
+                        {
+                            MessageBox.Show("Uncorrect size");
+                            check = false;
+                        }
+
+                        if (check)
+                        {
+                            DBRepository<Elements> dBRepository = new DBRepository<Elements>(new BuildEntities());
+                            Elements element = new Elements
+                            {
+                                ID_User = CurrentUserID.getInstance().ID,
+                                TitleEng = Title,
+                                Price = Price,
+                                Size=Size
+                            };
+                            dBRepository.CreateTexture(element, FrontImage, SideImage);
+                            MessageBox.Show("Texture add");
+                        }
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Oop error, sorry =(");
+                    }
+                });
+            }
+        }
+
+        public ICommand FrontImageClick
+        {
+            get
+            {
+                return new DelegateCommand(obj =>
+                {
+                    OpenFileDialog openFile = new OpenFileDialog();
+                    openFile.Filter = "JPG Format (*.jpg)|*.jpg|PNG Format (*.png)|*.png";
+
+                    if (openFile.ShowDialog() == true)
+                    {
+                        FrontImage=openFile.FileName;
+                    }
+                });
+            }
+        }
+
+        public ICommand SideImageClick
+        {
+            get
+            {
+                return new DelegateCommand(obj =>
+                {
+                    OpenFileDialog openFile = new OpenFileDialog();
+                    openFile.Filter = "JPG Format (*.jpg)|*.jpg|PNG Format (*.png)|*.png";
+
+                    if (openFile.ShowDialog() == true)
+                    {
+                        SideImage = openFile.FileName;
+                    }
                 });
             }
         }

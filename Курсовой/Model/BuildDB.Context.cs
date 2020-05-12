@@ -16,7 +16,7 @@ namespace Курсовой.Model
     public partial class BuildEntities : DbContext
     {
         public BuildEntities()
-            : base("name=BuildEntities2")
+            : base("name=BuildEntities")
         {
         }
     
@@ -27,6 +27,7 @@ namespace Курсовой.Model
     
         public virtual DbSet<Elements> Elements { get; set; }
         public virtual DbSet<Project> Project { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<UserProject> UserProject { get; set; }
         public virtual DbSet<WorkField> WorkField { get; set; }

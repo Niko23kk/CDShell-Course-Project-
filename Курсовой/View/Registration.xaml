@@ -35,20 +35,78 @@
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
+
         <TextBlock Grid.Row="1" Text="Registrate" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="32" FontWeight="Bold" Foreground="#9E9E9E"/>
 
         <StackPanel Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal">
-            <TextBox Name="FirstName" Text="{Binding FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MinWidth="145" Height="35" />
-            <TextBox Name="SecondName" Text="{Binding SecondName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MinWidth="145" Height="35"/>
+
+            <Grid>
+                <TextBox Name="FirstName" Grid.Column="0" Text="{Binding FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MinWidth="145" Height="35" />
+                <TextBlock IsHitTestVisible="False" Grid.Column="0" FontSize="16" Text="First name" Width="145"  TextAlignment="Left" Height="35" Padding="7" FontFamily="Calibri" Foreground="#9E9E9E">
+                    <TextBlock.Style>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Text, ElementName=FirstName}" Value="">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </Grid>
+
+            <Grid>
+                <TextBox Name="SecondName" Grid.Column="1" Text="{Binding SecondName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MinWidth="145" Height="35"/>
+                <TextBlock IsHitTestVisible="False" Grid.Column="1" FontSize="16" Text="Second name" Width="145"  TextAlignment="Left" Height="35" Padding="7" FontFamily="Calibri" Foreground="#9E9E9E">
+                    <TextBlock.Style>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Text, ElementName=SecondName}" Value="">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </Grid>
+
         </StackPanel>
         <TextBox Name="E_mail" Text="{Binding Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" MinWidth="300" Height="35"/>
+        <TextBlock IsHitTestVisible="False" Grid.Row="3" FontSize="16" Text="Email" Width="300"  TextAlignment="Left" Height="35" Padding="7" FontFamily="Calibri" Foreground="#9E9E9E">
+            <TextBlock.Style>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Text, ElementName=E_mail}" Value="">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+        
         <TextBox Name="Login" Text="{Binding Login, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="4" MinWidth="300" Height="35"/>
+        <TextBlock IsHitTestVisible="False" Grid.Row="4" FontSize="16" Text="Login" Width="300"  TextAlignment="Left" Height="35" Padding="7" FontFamily="Calibri" Foreground="#9E9E9E">
+            <TextBlock.Style>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Text, ElementName=Login}" Value="">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+
         <StackPanel Grid.Row="5" HorizontalAlignment="Center" Orientation="Horizontal">
-            <PasswordBox Name="Password" Grid.Row="4" MinWidth="145" Height="35" ff:Secure.BoundPassword="{Binding Password,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
-            <PasswordBox Name="ConfirmPassword" Grid.Row="4" MinWidth="145" Height="35" ff:Secure.BoundPassword="{Binding ConPassword,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+            <PasswordBox Name="Password" Grid.Row="4" MinWidth="145" Height="35" ff:Secure.BoundPassword="{Binding Password,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Tag="Password"/>
+            <PasswordBox Name="ConfirmPassword" Grid.Row="4" MinWidth="145" Height="35" ff:Secure.BoundPassword="{Binding ConPassword,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Tag="Confirm password"/>
         </StackPanel>
 
-        <Button Grid.Row="7" Style="{StaticResource MainButton}" Content="Registration" Width="150" Command="{Binding RegistrationClick}"/>
+        <Button Grid.Row="7" Style="{StaticResource MainButton}" Content="Registration" Width="150" Command="{Binding RegistrationClick}" CommandParameter="{Binding ElementName=RegistrationPage}"/>
         <TextBlock Margin="0,10" Grid.Row="8" HorizontalAlignment="Center">
                 <Hyperlink  FontFamily="Calibri" FontSize="14" Command="{Binding SignInClick}" CommandParameter="{Binding ElementName=RegistrationPage}"><TextBlock Text="Back to sign in"/></Hyperlink>
             </TextBlock>

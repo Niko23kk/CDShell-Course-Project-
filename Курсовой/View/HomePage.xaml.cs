@@ -21,23 +21,6 @@ namespace Курсовой.View
         public HomePage()
         {
             InitializeComponent();
-            //var products = GetProjects();
-            //ListViewProducts.ItemsSource = products;
         }
-
-        //private List<Project> GetProjects()
-        //{
-        //    //return new List<Project>()
-        //    //{
-        //    //    new Project(1,new DateTime(2020,10,12,6,30,30),"New",true),
-        //    //    new Project(1,new DateTime(2020,10,12,6,30,30),"New",true),
-        //    //    new Project(1,new DateTime(2020,10,12,6,30,30),"New",true),
-        //    //    new Project(1,new DateTime(2020,10,12,6,30,30),"New",true),
-        //    //    new Project(1,new DateTime(2020,10,12,6,30,30),"New",false),
-        //    //    new Project(1,new DateTime(2020,10,12,6,30,30),"New",false),
-        //    //    new Project(1,new DateTime(2020,10,12,6,30,30),"New",true)
-        //    //};
-
-        //}
     }
 }

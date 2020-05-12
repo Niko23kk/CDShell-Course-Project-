@@ -63,12 +63,10 @@
                 <ControlTemplate TargetType="{x:Type PasswordBox}">
                     <Grid Background="#B2E8E8E8" >
                         <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
-                        <!--<TextBlock Name="Placeholder" Text="{Binding Path=Tag, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" Padding="5" Margin="5,2" FontSize="16"/>-->
+                        <TextBlock Name="Placeholder" Text="{Binding Path=Tag, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" Padding="5" Margin="5,2" FontSize="16"/>
                         <Separator Name="Underline" Margin="0,3,0,0" VerticalAlignment="Bottom"/>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="true">
-                        </Trigger>
                         <Trigger Property="IsFocused" Value="true">
                             <Setter Property="Foreground" Value="Gray"/>
                             <Setter Property="Visibility" TargetName="Underline" Value="Hidden"/>
@@ -135,17 +133,22 @@
         </Setter>
     </Style>
 
-    <Style TargetType="TextBlock" x:Key="MainMenu">
-        <Setter Property="Foreground" Value="#FF3D3D3D"/>
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="true">
-                <Setter Property="Foreground" Value="#FF66C3D0"/>
-            </Trigger>
-        </Style.Triggers>
+    <Style TargetType="ListBoxItem" x:Key="NoStyleBoxItem">
+        <Setter Property="Button.Foreground" Value="black" />
+        <Setter Property="Width" Value="185"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <Border>
+                        <ContentPresenter Name="Content" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style TargetType="Button" x:Key="MenuButton">
-        <Setter Property="Button.Foreground" Value="{x:Null}" />
+        <Setter Property="Foreground" Value="#FF3D3D3D"/>
         <Setter Property="Width" Value="300"/>
         <Setter Property="Height" Value="80"/>
         <Setter Property="Template">
@@ -156,9 +159,11 @@
                         <Separator VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="300" Margin="0"/>
                     </Grid>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Foreground" Value="#FF66C3D0"/>
+                        </Trigger>
                         <Trigger Property="IsPressed" Value="true">
                             <Setter Property="FontSize" Value="20" />
-                            <Setter Property="Foreground" Value="Gray"/>
                             <Setter Property="FontWeight" Value="Bold"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
@@ -172,9 +177,25 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Grid>
+                    <Border Background="White">
                         <ContentPresenter Name="Content" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter Property="FontSize" Value="20" />
+                            <Setter Property="FontWeight" Value="Bold"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="Button" x:Key="NoStyleButtonWithoutWhite">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <ContentPresenter Name="Content" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsPressed" Value="true">
                             <Setter Property="FontSize" Value="20" />

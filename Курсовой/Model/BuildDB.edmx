@@ -9,22 +9,36 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
-          <Property Name="Title" Type="nvarchar" MaxLength="20" />
-          <Property Name="Type" Type="nvarchar" MaxLength="20" />
-          <Property Name="Info" Type="nvarchar" MaxLength="1" />
-          <Property Name="Price" Type="money" />
-          <Property Name="Front view" Type="binary" MaxLength="1" />
-          <Property Name="Side view" Type="binary" MaxLength="1" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TitleEng" Type="nvarchar" MaxLength="20" />
+          <Property Name="TypeEng" Type="nvarchar" MaxLength="20" />
+          <Property Name="TitleRu" Type="nvarchar" MaxLength="20" />
+          <Property Name="TypeRu" Type="nvarchar" MaxLength="20" />
+          <Property Name="Price" Type="numeric" Precision="12" Scale="2" />
+          <Property Name="Front view" Type="varbinary(max)" />
+          <Property Name="Side view" Type="varbinary(max)" />
+          <Property Name="Size" Type="int" />
+          <Property Name="ID User" Type="int" />
         </EntityType>
         <EntityType Name="Project">
           <Key>
             <PropertyRef Name="ID Project" />
           </Key>
           <Property Name="ID Project" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Date of change" Type="date" />
-          <Property Name="Project name" Type="nvarchar" MaxLength="15" />
+          <Property Name="Date of change" Type="datetime" />
+          <Property Name="Project name" Type="nvarchar" MaxLength="25" />
           <Property Name="Status" Type="int" />
+          <Property Name="Preview" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -35,7 +49,11 @@
           <Property Name="Surname" Type="nvarchar" MaxLength="25" />
           <Property Name="Email" Type="nvarchar" MaxLength="30" />
           <Property Name="Login" Type="nvarchar" MaxLength="25" />
-          <Property Name="Password" Type="varbinary" MaxLength="50" />
+          <Property Name="Password" Type="varbinary" MaxLength="20" />
+          <Property Name="Language" Type="nvarchar" MaxLength="20" />
+          <Property Name="Them" Type="nvarchar" MaxLength="20" />
+          <Property Name="Type" Type="nvarchar" MaxLength="10" />
+          <Property Name="Photo" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="UserProject">
           <Key>
@@ -49,14 +67,26 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
-          <Property Name="ID Project" Type="int" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID UP" Type="int" />
           <Property Name="Element ID" Type="int" />
-          <Property Name="PisitionX" Type="int" />
+          <Property Name="PositionX" Type="int" />
           <Property Name="PositionY" Type="int" />
-          <Property Name="PositionZ" Type="int" />
+          <Property Name="Rotate" Type="int" />
         </EntityType>
-        <Association Name="FK__UserProje__ID Pr__7F2BE32F">
+        <Association Name="FK__Elements__ID Use__00DF2177">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Elements" Type="Self.Elements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID User" />
+            </Principal>
+            <Dependent Role="Elements">
+              <PropertyRef Name="ID User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserProje__ID Pr__7E02B4CC">
           <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
           <End Role="UserProject" Type="Self.UserProject" Multiplicity="*" />
           <ReferentialConstraint>
@@ -68,7 +98,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__UserProje__ID Us__7E37BEF6">
+        <Association Name="FK__UserProje__ID Us__7D0E9093">
           <End Role="User" Type="Self.User" Multiplicity="0..1" />
           <End Role="UserProject" Type="Self.UserProject" Multiplicity="*" />
           <ReferentialConstraint>
@@ -80,7 +110,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__WorkField__Eleme__04E4BC85">
+        <Association Name="FK__WorkField__Eleme__04AFB25B">
           <End Role="Elements" Type="Self.Elements" Multiplicity="0..1" />
           <End Role="WorkField" Type="Self.WorkField" Multiplicity="*" />
           <ReferentialConstraint>
@@ -92,38 +122,43 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__WorkField__ID Pr__03F0984C">
-          <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+        <Association Name="FK__WorkField__ID UP__03BB8E22">
+          <End Role="UserProject" Type="Self.UserProject" Multiplicity="0..1" />
           <End Role="WorkField" Type="Self.WorkField" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Project">
-              <PropertyRef Name="ID Project" />
+            <Principal Role="UserProject">
+              <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="WorkField">
-              <PropertyRef Name="ID Project" />
+              <PropertyRef Name="ID UP" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="Хранилище BuildModelContainer">
           <EntitySet Name="Elements" EntityType="Self.Elements" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserProject" EntityType="Self.UserProject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WorkField" EntityType="Self.WorkField" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__UserProje__ID Pr__7F2BE32F" Association="Self.FK__UserProje__ID Pr__7F2BE32F">
+          <AssociationSet Name="FK__Elements__ID Use__00DF2177" Association="Self.FK__Elements__ID Use__00DF2177">
+            <End Role="User" EntitySet="User" />
+            <End Role="Elements" EntitySet="Elements" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserProje__ID Pr__7E02B4CC" Association="Self.FK__UserProje__ID Pr__7E02B4CC">
             <End Role="Project" EntitySet="Project" />
             <End Role="UserProject" EntitySet="UserProject" />
           </AssociationSet>
-          <AssociationSet Name="FK__UserProje__ID Us__7E37BEF6" Association="Self.FK__UserProje__ID Us__7E37BEF6">
+          <AssociationSet Name="FK__UserProje__ID Us__7D0E9093" Association="Self.FK__UserProje__ID Us__7D0E9093">
             <End Role="User" EntitySet="User" />
             <End Role="UserProject" EntitySet="UserProject" />
           </AssociationSet>
-          <AssociationSet Name="FK__WorkField__Eleme__04E4BC85" Association="Self.FK__WorkField__Eleme__04E4BC85">
+          <AssociationSet Name="FK__WorkField__Eleme__04AFB25B" Association="Self.FK__WorkField__Eleme__04AFB25B">
             <End Role="Elements" EntitySet="Elements" />
             <End Role="WorkField" EntitySet="WorkField" />
           </AssociationSet>
-          <AssociationSet Name="FK__WorkField__ID Pr__03F0984C" Association="Self.FK__WorkField__ID Pr__03F0984C">
-            <End Role="Project" EntitySet="Project" />
+          <AssociationSet Name="FK__WorkField__ID UP__03BB8E22" Association="Self.FK__WorkField__ID UP__03BB8E22">
+            <End Role="UserProject" EntitySet="UserProject" />
             <End Role="WorkField" EntitySet="WorkField" />
           </AssociationSet>
         </EntityContainer>
@@ -136,25 +171,39 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="Title" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Type" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Info" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
-          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="Front_view" Type="Binary" MaxLength="1" FixedLength="true" />
-          <Property Name="Side_view" Type="Binary" MaxLength="1" FixedLength="true" />
-          <NavigationProperty Name="WorkField" Relationship="Self.FK__WorkField__Eleme__04E4BC85" FromRole="Elements" ToRole="WorkField" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TitleEng" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TypeEng" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TitleRu" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TypeRu" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="Front_view" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Side_view" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Size" Type="Int32" />
+          <Property Name="ID_User" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Elements__ID_Use__00DF2177" FromRole="Elements" ToRole="User" />
+          <NavigationProperty Name="WorkField" Relationship="Self.FK__WorkField__Eleme__04AFB25B" FromRole="Elements" ToRole="WorkField" />
         </EntityType>
         <EntityType Name="Project">
           <Key>
             <PropertyRef Name="ID_Project" />
           </Key>
           <Property Name="ID_Project" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Date_of_change" Type="DateTime" Precision="0" />
-          <Property Name="Project_name" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Date_of_change" Type="DateTime" Precision="3" />
+          <Property Name="Project_name" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" />
-          <NavigationProperty Name="UserProject" Relationship="Self.FK__UserProje__ID_Pr__7F2BE32F" FromRole="Project" ToRole="UserProject" />
-          <NavigationProperty Name="WorkField" Relationship="Self.FK__WorkField__ID_Pr__03F0984C" FromRole="Project" ToRole="WorkField" />
+          <Property Name="Preview" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="UserProject" Relationship="Self.FK__UserProje__ID_Pr__7E02B4CC" FromRole="Project" ToRole="UserProject" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -165,8 +214,13 @@
           <Property Name="Surname" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Login" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="Binary" MaxLength="50" FixedLength="false" />
-          <NavigationProperty Name="UserProject" Relationship="Self.FK__UserProje__ID_Us__7E37BEF6" FromRole="User" ToRole="UserProject" />
+          <Property Name="Password" Type="Binary" MaxLength="20" FixedLength="false" />
+          <Property Name="Language" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Them" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Elements" Relationship="Self.FK__Elements__ID_Use__00DF2177" FromRole="User" ToRole="Elements" />
+          <NavigationProperty Name="UserProject" Relationship="Self.FK__UserProje__ID_Us__7D0E9093" FromRole="User" ToRole="UserProject" />
         </EntityType>
         <EntityType Name="UserProject">
           <Key>
@@ -175,23 +229,36 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ID_User" Type="Int32" />
           <Property Name="ID_Project" Type="Int32" />
-          <NavigationProperty Name="Project" Relationship="Self.FK__UserProje__ID_Pr__7F2BE32F" FromRole="UserProject" ToRole="Project" />
-          <NavigationProperty Name="User" Relationship="Self.FK__UserProje__ID_Us__7E37BEF6" FromRole="UserProject" ToRole="User" />
+          <NavigationProperty Name="Project" Relationship="Self.FK__UserProje__ID_Pr__7E02B4CC" FromRole="UserProject" ToRole="Project" />
+          <NavigationProperty Name="User" Relationship="Self.FK__UserProje__ID_Us__7D0E9093" FromRole="UserProject" ToRole="User" />
+          <NavigationProperty Name="WorkField" Relationship="Self.FK__WorkField__ID_UP__03BB8E22" FromRole="UserProject" ToRole="WorkField" />
         </EntityType>
         <EntityType Name="WorkField">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="ID_Project" Type="Int32" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_UP" Type="Int32" />
           <Property Name="Element_ID" Type="Int32" />
-          <Property Name="PisitionX" Type="Int32" />
+          <Property Name="PositionX" Type="Int32" />
           <Property Name="PositionY" Type="Int32" />
-          <Property Name="PositionZ" Type="Int32" />
-          <NavigationProperty Name="Elements" Relationship="Self.FK__WorkField__Eleme__04E4BC85" FromRole="WorkField" ToRole="Elements" />
-          <NavigationProperty Name="Project" Relationship="Self.FK__WorkField__ID_Pr__03F0984C" FromRole="WorkField" ToRole="Project" />
+          <Property Name="Rotate" Type="Int32" />
+          <NavigationProperty Name="Elements" Relationship="Self.FK__WorkField__Eleme__04AFB25B" FromRole="WorkField" ToRole="Elements" />
+          <NavigationProperty Name="UserProject" Relationship="Self.FK__WorkField__ID_UP__03BB8E22" FromRole="WorkField" ToRole="UserProject" />
         </EntityType>
-        <Association Name="FK__WorkField__Eleme__04E4BC85">
+        <Association Name="FK__Elements__ID_Use__00DF2177">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Elements" Type="Self.Elements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID_User" />
+            </Principal>
+            <Dependent Role="Elements">
+              <PropertyRef Name="ID_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__WorkField__Eleme__04AFB25B">
           <End Role="Elements" Type="Self.Elements" Multiplicity="0..1" />
           <End Role="WorkField" Type="Self.WorkField" Multiplicity="*" />
           <ReferentialConstraint>
@@ -203,7 +270,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__UserProje__ID_Pr__7F2BE32F">
+        <Association Name="FK__UserProje__ID_Pr__7E02B4CC">
           <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
           <End Role="UserProject" Type="Self.UserProject" Multiplicity="*" />
           <ReferentialConstraint>
@@ -215,19 +282,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__WorkField__ID_Pr__03F0984C">
-          <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
-          <End Role="WorkField" Type="Self.WorkField" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Project">
-              <PropertyRef Name="ID_Project" />
-            </Principal>
-            <Dependent Role="WorkField">
-              <PropertyRef Name="ID_Project" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__UserProje__ID_Us__7E37BEF6">
+        <Association Name="FK__UserProje__ID_Us__7D0E9093">
           <End Role="User" Type="Self.User" Multiplicity="0..1" />
           <End Role="UserProject" Type="Self.UserProject" Multiplicity="*" />
           <ReferentialConstraint>
@@ -239,27 +294,44 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="BuildEntities2" annotation:LazyLoadingEnabled="true">
+        <Association Name="FK__WorkField__ID_UP__03BB8E22">
+          <End Role="UserProject" Type="Self.UserProject" Multiplicity="0..1" />
+          <End Role="WorkField" Type="Self.WorkField" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProject">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WorkField">
+              <PropertyRef Name="ID_UP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BuildEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Elements" EntityType="Self.Elements" />
           <EntitySet Name="Project" EntityType="Self.Project" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="User" EntityType="Self.User" />
           <EntitySet Name="UserProject" EntityType="Self.UserProject" />
           <EntitySet Name="WorkField" EntityType="Self.WorkField" />
-          <AssociationSet Name="FK__WorkField__Eleme__04E4BC85" Association="Self.FK__WorkField__Eleme__04E4BC85">
+          <AssociationSet Name="FK__Elements__ID_Use__00DF2177" Association="Self.FK__Elements__ID_Use__00DF2177">
+            <End Role="User" EntitySet="User" />
+            <End Role="Elements" EntitySet="Elements" />
+          </AssociationSet>
+          <AssociationSet Name="FK__WorkField__Eleme__04AFB25B" Association="Self.FK__WorkField__Eleme__04AFB25B">
             <End Role="Elements" EntitySet="Elements" />
             <End Role="WorkField" EntitySet="WorkField" />
           </AssociationSet>
-          <AssociationSet Name="FK__UserProje__ID_Pr__7F2BE32F" Association="Self.FK__UserProje__ID_Pr__7F2BE32F">
+          <AssociationSet Name="FK__UserProje__ID_Pr__7E02B4CC" Association="Self.FK__UserProje__ID_Pr__7E02B4CC">
             <End Role="Project" EntitySet="Project" />
             <End Role="UserProject" EntitySet="UserProject" />
           </AssociationSet>
-          <AssociationSet Name="FK__WorkField__ID_Pr__03F0984C" Association="Self.FK__WorkField__ID_Pr__03F0984C">
-            <End Role="Project" EntitySet="Project" />
-            <End Role="WorkField" EntitySet="WorkField" />
-          </AssociationSet>
-          <AssociationSet Name="FK__UserProje__ID_Us__7E37BEF6" Association="Self.FK__UserProje__ID_Us__7E37BEF6">
+          <AssociationSet Name="FK__UserProje__ID_Us__7D0E9093" Association="Self.FK__UserProje__ID_Us__7D0E9093">
             <End Role="User" EntitySet="User" />
             <End Role="UserProject" EntitySet="UserProject" />
+          </AssociationSet>
+          <AssociationSet Name="FK__WorkField__ID_UP__03BB8E22" Association="Self.FK__WorkField__ID_UP__03BB8E22">
+            <End Role="UserProject" EntitySet="UserProject" />
+            <End Role="WorkField" EntitySet="WorkField" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -267,17 +339,20 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище BuildModelContainer" CdmEntityContainer="BuildEntities2">
+        <EntityContainerMapping StorageEntityContainer="Хранилище BuildModelContainer" CdmEntityContainer="BuildEntities">
           <EntitySetMapping Name="Elements">
             <EntityTypeMapping TypeName="BuildModel.Elements">
               <MappingFragment StoreEntitySet="Elements">
                 <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="Info" ColumnName="Info" />
+                <ScalarProperty Name="TitleEng" ColumnName="TitleEng" />
+                <ScalarProperty Name="TypeEng" ColumnName="TypeEng" />
+                <ScalarProperty Name="TitleRu" ColumnName="TitleRu" />
+                <ScalarProperty Name="TypeRu" ColumnName="TypeRu" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Front_view" ColumnName="Front view" />
                 <ScalarProperty Name="Side_view" ColumnName="Side view" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="ID_User" ColumnName="ID User" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -288,6 +363,18 @@
                 <ScalarProperty Name="Date_of_change" ColumnName="Date of change" />
                 <ScalarProperty Name="Project_name" ColumnName="Project name" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Preview" ColumnName="Preview" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="BuildModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -300,6 +387,10 @@
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Login" ColumnName="Login" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="Them" ColumnName="Them" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -316,11 +407,11 @@
             <EntityTypeMapping TypeName="BuildModel.WorkField">
               <MappingFragment StoreEntitySet="WorkField">
                 <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="ID_Project" ColumnName="ID Project" />
+                <ScalarProperty Name="ID_UP" ColumnName="ID UP" />
                 <ScalarProperty Name="Element_ID" ColumnName="Element ID" />
-                <ScalarProperty Name="PisitionX" ColumnName="PisitionX" />
+                <ScalarProperty Name="PositionX" ColumnName="PositionX" />
                 <ScalarProperty Name="PositionY" ColumnName="PositionY" />
-                <ScalarProperty Name="PositionZ" ColumnName="PositionZ" />
+                <ScalarProperty Name="Rotate" ColumnName="Rotate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

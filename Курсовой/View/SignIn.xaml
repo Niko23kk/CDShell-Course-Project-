@@ -50,7 +50,7 @@
             </TextBlock.Style>
         </TextBlock>
 
-        <PasswordBox Name="Password" Grid.Row="4" MinWidth="300" Height="35" ff:Secure.BoundPassword="{Binding Password,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+        <PasswordBox Name="Password" Grid.Row="4" MinWidth="300" Height="35" ff:Secure.BoundPassword="{Binding Password,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Tag="Password"/>
 
         <Button Grid.Row="6" Style="{StaticResource MainButton}" Content="Sign in" Width="150" Command="{Binding SignInClick}" CommandParameter="{Binding ElementName=SignInPage}"/>
         

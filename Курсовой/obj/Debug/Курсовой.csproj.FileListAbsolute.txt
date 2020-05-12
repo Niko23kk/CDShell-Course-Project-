@@ -37,4 +37,8 @@ D:\Учеба\4_сем\Курсач\Курсовой\Курсовой\obj\Debug\
 D:\Учеба\4_сем\Курсач\Курсовой\Курсовой\obj\Debug\View\SignInWindow.baml
 D:\Учеба\4_сем\Курсач\Курсовой\Курсовой\obj\Debug\View\NewTextureWindow.g.cs
 D:\Учеба\4_сем\Курсач\Курсовой\Курсовой\obj\Debug\View\NewTextureWindow.baml
+D:\Учеба\4_сем\Курсач\Курсовой\Курсовой\obj\Debug\View\WorkSpace.g.cs
+D:\Учеба\4_сем\Курсач\Курсовой\Курсовой\obj\Debug\View\WorkSpace.baml
 D:\Учеба\4_сем\Курсач\Курсовой\Курсовой\obj\Debug\Курсовой.csprojAssemblyReference.cache
+D:\Учеба\4_сем\Курсач\Курсовой\Курсовой\obj\Debug\View\SaveProject.g.cs
+D:\Учеба\4_сем\Курсач\Курсовой\Курсовой\obj\Debug\View\SaveProject.baml

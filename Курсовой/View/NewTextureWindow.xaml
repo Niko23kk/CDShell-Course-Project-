@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:Курсовой.View"
         mc:Ignorable="d"
         Title="CD SHELL" Height="650" Width="500" ResizeMode="NoResize"
-        Style="{StaticResource WindowStyle}">
+        Style="{StaticResource WindowStyle}" Icon="pack://application:,,,/Resourses/Logo.png" WindowStartupLocation="CenterOwner">
     <Window.DataContext>
         <vm:NewTextureViewModel/>
     </Window.DataContext>
@@ -30,8 +30,8 @@
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
             <RowDefinition Height="100"/>
+            <RowDefinition Height="20"/>
             <RowDefinition Height="100"/>
             <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
@@ -41,28 +41,42 @@
         </Grid.ColumnDefinitions>
 
         <TextBlock Grid.Row="1" Text="Title" FontSize="20" Margin="0,0,20,0" HorizontalAlignment="Right"/>
-        <TextBox Text="{Binding Title}" Grid.Row="1" Grid.Column="1" Width="200" HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="4.8,2.2,0,18.6"/>
+        <TextBox Name="Title" Text="{Binding Title}" Grid.Row="1" Grid.Column="1" Width="200" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35"/>
+        <TextBlock IsHitTestVisible="False" Grid.Row="3" FontSize="16" Text="Login" Width="300"  TextAlignment="Left" Height="35" Padding="7" FontFamily="Calibri" Foreground="#9E9E9E">
+            <TextBlock.Style>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Text, ElementName=Title}" Value="">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
 
-        <TextBlock Grid.Row="2" Text="Info" FontSize="20" Margin="0,0,20,0" HorizontalAlignment="Right"/>
-        <TextBox Text="{Binding Info}" Grid.Row="2" Grid.Column="1" Width="200" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBlock Grid.Row="2" Text="Price" FontSize="20" Margin="0,0,20,0" HorizontalAlignment="Right"/>
+        <TextBox Text="{Binding Price}" Grid.Row="2" Grid.Column="1" Width="200" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35"/>
 
-        <TextBlock Grid.Row="3" Text="Price" FontSize="20" Margin="0,0,20,0" HorizontalAlignment="Right"/>
-        <TextBox Text="{Binding Price}" Grid.Row="3" Grid.Column="1" Width="200" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBlock Grid.Row="3" Text="Size" FontSize="20" Margin="0,0,20,0" HorizontalAlignment="Right"/>
+        <TextBox Text="{Binding Size}" Grid.Row="3" Grid.Column="1" Width="50" Height="35" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
-        <TextBlock Grid.Row="4" Text="Size" FontSize="20" Margin="0,0,20,0" HorizontalAlignment="Right"/>
-        <TextBox Text="{Binding SizeX}" Grid.Row="4" Grid.Column="1" Width="50" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <TextBox Text="{Binding SizeY}" Grid.Row="4" Grid.Column="1" Width="50" Height="30" Margin="100,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBlock Grid.Row="4" Text="Front image" FontSize="20" Margin="0,0,20,0" HorizontalAlignment="Right"/>
+        <StackPanel Grid.Column="1" Grid.Row="4" Orientation="Horizontal">
+            <Button Content="Choose" Style="{StaticResource MainButton}" IsEnabled="True" Height="40" VerticalAlignment="Top" Width="100" HorizontalAlignment="Left" Command="{Binding FrontImageClick}"/>
+            <Border Margin="20,0" CornerRadius="10" Background="#33828080">
+                <Image VerticalAlignment="Top" Source="{Binding FrontImage}" Height="90" Width="90" AllowDrop="True"/>
+            </Border>
+        </StackPanel>
 
-        <TextBlock Grid.Row="5" Text="Title" FontSize="20" Margin="0,0,20,0" HorizontalAlignment="Right"/>
-        <Canvas Background="#B2E8E8E8" Grid.Row="5" Grid.Column="1" VerticalAlignment="Top" Height="80" Width="200" HorizontalAlignment="Left">
-            <Image Name="FrontView" Height="80" Width="80" AllowDrop="True" />
-        </Canvas>
+        <TextBlock Grid.Row="6" Text="Side image" FontSize="20" Margin="0,0,20,0" HorizontalAlignment="Right"/>
+        <StackPanel Grid.Column="1" Grid.Row="6" Orientation="Horizontal">
+            <Button Content="Choose" Style="{StaticResource MainButton}" IsEnabled="True" Height="40" VerticalAlignment="Top" Width="100" HorizontalAlignment="Left" Command="{Binding SideImageClick}"/>
+            <Border Margin="20,0" CornerRadius="10"  Background="#33828080">
+                <Image VerticalAlignment="Top" Source="{Binding SideImage}" Height="90" Width="90" AllowDrop="True"/>
+            </Border>
+        </StackPanel>
 
-        <TextBlock Grid.Row="6" Text="Title" FontSize="20" Margin="0,0,20,0" HorizontalAlignment="Right"/>
-        <Canvas Background="#B2E8E8E8" Grid.Row="6" Grid.Column="1" VerticalAlignment="Top" Width="200" Height="80" HorizontalAlignment="Left">
-            <Image Name="SideView" Height="80" Width="80" AllowDrop="True"  />
-        </Canvas>
-
-        <Button Grid.Row="7" Grid.ColumnSpan="2" Margin="0,50,0,0" Width="150" Style="{StaticResource MainButton}" Content="Add"/>
+        <Button Grid.Row="7" Grid.ColumnSpan="2" Margin="0,50,0,0" Width="150" Style="{StaticResource MainButton}" Content="Add" Command="{Binding AddTextureClick}"/>
     </Grid>
 </Window>

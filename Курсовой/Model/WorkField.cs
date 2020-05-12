@@ -15,13 +15,13 @@ namespace Курсовой.Model
     public partial class WorkField
     {
         public int ID { get; set; }
-        public Nullable<int> ID_Project { get; set; }
+        public Nullable<int> ID_UP { get; set; }
         public Nullable<int> Element_ID { get; set; }
-        public Nullable<int> PisitionX { get; set; }
+        public Nullable<int> PositionX { get; set; }
         public Nullable<int> PositionY { get; set; }
-        public Nullable<int> PositionZ { get; set; }
+        public Nullable<int> Rotate { get; set; }
     
         public virtual Elements Elements { get; set; }
-        public virtual Project Project { get; set; }
+        public virtual UserProject UserProject { get; set; }
     }
 }

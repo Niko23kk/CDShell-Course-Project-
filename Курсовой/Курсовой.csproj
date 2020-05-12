@@ -69,45 +69,54 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Clases\CommandZoom.cs" />
     <Compile Include="Clases\DelegateCommand.cs" />
     <Compile Include="Clases\Secure.cs" />
     <Compile Include="Clases\WindowFunction.cs" />
+    <Compile Include="Model\BuildDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BuildDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\BuildDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BuildDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\BuildDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BuildDB.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Model\CurrentUserID.cs" />
-    <Compile Include="Model\Database.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Database.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Database.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Database.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Database.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Database.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Model\Elements.cs">
-      <DependentUpon>Database.tt</DependentUpon>
+      <DependentUpon>BuildDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\HomeElements.cs" />
+    <Compile Include="Model\Memento.cs" />
     <Compile Include="Model\Project.cs">
-      <DependentUpon>Database.tt</DependentUpon>
+      <DependentUpon>BuildDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Repository.cs" />
+    <Compile Include="Model\sysdiagrams.cs">
+      <DependentUpon>BuildDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\User.cs">
-      <DependentUpon>Database.tt</DependentUpon>
+      <DependentUpon>BuildDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\UserProject.cs">
-      <DependentUpon>Database.tt</DependentUpon>
+      <DependentUpon>BuildDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\WorkField.cs">
-      <DependentUpon>Database.tt</DependentUpon>
+      <DependentUpon>BuildDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\SaveProjectViewModel.cs" />
+    <Compile Include="ViewModel\WorkSpaceViewModel.cs" />
     <Compile Include="ViewModel\HomePageViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\NewTextureViewModel.cs" />
     <Compile Include="ViewModel\RegistrateViewModel.cs" />
+    <Compile Include="ViewModel\SettingsPageViewModel.cs" />
     <Compile Include="ViewModel\SignInVIewModel.cs" />
     <Compile Include="ViewModel\SignInWindowViewModel.cs" />
     <Compile Include="View\HomePage.xaml.cs">
@@ -122,6 +131,9 @@
     <Compile Include="View\Registration.xaml.cs">
       <DependentUpon>Registration.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\SaveProject.xaml.cs">
+      <DependentUpon>SaveProject.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
@@ -130,6 +142,9 @@
     </Compile>
     <Compile Include="View\SignInWindow.xaml.cs">
       <DependentUpon>SignInWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\WorkSpace.xaml.cs">
+      <DependentUpon>WorkSpace.xaml</DependentUpon>
     </Compile>
     <Page Include="View\HomePage.xaml">
       <SubType>Designer</SubType>
@@ -166,6 +181,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\SaveProject.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\SettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -175,6 +194,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\SignInWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\WorkSpace.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -197,12 +220,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Model\Database.edmx">
+    <EntityDeploy Include="Model\BuildDB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Database.Designer.cs</LastGenOutput>
+      <LastGenOutput>BuildDB.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Model\Database.edmx.diagram">
-      <DependentUpon>Database.edmx</DependentUpon>
+    <None Include="Model\BuildDB.edmx.diagram">
+      <DependentUpon>BuildDB.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -211,10 +234,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resourses\Images\BackgroundWindow.jpg" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resourses\Logo.png" />
@@ -229,16 +251,43 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Model\Database.Context.tt">
+    <Resource Include="Resourses\Images\BadroomIcon.png" />
+    <Resource Include="Resourses\Images\BathroomIcon.png" />
+    <Resource Include="Resourses\Images\DecorIcon.png" />
+    <Resource Include="Resourses\Images\GardenIcon.png" />
+    <Resource Include="Resourses\Images\KitchenIcon.png" />
+    <Resource Include="Resourses\Images\LivingRoomIcon.png" />
+    <Resource Include="Resourses\Images\TechniqueIcon.png" />
+    <Resource Include="Resourses\Images\UserIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resourses\Images\Photo.png" />
+    <Resource Include="Resourses\Images\Left.png" />
+    <Resource Include="Resourses\Images\Right.png" />
+    <Resource Include="Resourses\Images\Save.png" />
+    <Resource Include="Resourses\Images\Share.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resourses\Images\SaveAs.png" />
+    <Resource Include="Resourses\Images\Delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Model\BuildDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Database.edmx</DependentUpon>
-      <LastGenOutput>Database.Context.cs</LastGenOutput>
+      <DependentUpon>BuildDB.edmx</DependentUpon>
+      <LastGenOutput>BuildDB.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Model\Database.tt">
+    <Content Include="Model\BuildDB.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Database.edmx</DependentUpon>
-      <LastGenOutput>Database.cs</LastGenOutput>
+      <DependentUpon>BuildDB.edmx</DependentUpon>
+      <LastGenOutput>BuildDB.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resourses\Images\Grass.jpg" />
+    <Resource Include="Resourses\Images\Preview.png" />
+    <Resource Include="Resourses\Images\Build.png" />
+    <Resource Include="Resourses\Images\Back.png" />
+    <Resource Include="Resourses\Images\Forward.png" />
+    <Content Include="Resourses\Images\MoreInfo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

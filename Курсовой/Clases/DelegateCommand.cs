@@ -33,29 +33,4 @@ namespace Курсовой.Clases
             this.execute(parameter);
         }
     }
-
-    class Com : ICommand
-    {
-        private Action<object> execute;
-        private Func<object, bool> canExecute;
-
-        public event EventHandler CanExecuteChanged
-        {
-            add { CommandManager.RequerySuggested += value; }
-            remove { CommandManager.RequerySuggested -= value; }
-        }
-        public Com(Action<object> execute, Func<object, bool> canExecute = null)
-        {
-            this.execute = execute;
-            this.canExecute = canExecute;
-        }
-        public bool CanExecute(object paramater)
-        {
-            return this.canExecute == null || this.canExecute(paramater);
-        }
-        public void Execute(object parameter)
-        {
-            this.execute(parameter);
-        }
-    }
 }

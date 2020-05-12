@@ -19,8 +19,6 @@ namespace Курсовой.View
 {
     public partial class Registration : Page
     {
-        MainWindow MainWindow;
-
         public Registration()
         {
             InitializeComponent();

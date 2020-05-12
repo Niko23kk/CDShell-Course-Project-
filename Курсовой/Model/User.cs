@@ -17,6 +17,7 @@ namespace Курсовой.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
+            this.Elements = new HashSet<Elements>();
             this.UserProject = new HashSet<UserProject>();
         }
     
@@ -26,7 +27,13 @@ namespace Курсовой.Model
         public string Email { get; set; }
         public string Login { get; set; }
         public byte[] Password { get; set; }
+        public string Language { get; set; }
+        public string Them { get; set; }
+        public string Type { get; set; }
+        public byte[] Photo { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Elements> Elements { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserProject> UserProject { get; set; }
     }
