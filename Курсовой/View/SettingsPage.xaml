@@ -41,31 +41,31 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="1" Text="Language" VerticalAlignment="Top" FontSize="20" HorizontalAlignment="Right" Margin="10,0"/>
+        <TextBlock Grid.Row="1" Text="{DynamicResource _Language}" VerticalAlignment="Top" FontSize="20" HorizontalAlignment="Right" Margin="10,0"/>
         <ComboBox Text="{Binding Language}" Grid.Row="1" Grid.Column="1" FontSize="20" Height="30" VerticalAlignment="Top" Margin="0 0 20 0" HorizontalAlignment="Left" MinWidth="200">
             <ComboBoxItem Content="English"/>
             <ComboBoxItem Content="Русский"/>
         </ComboBox>
 
-        <TextBlock Grid.Row="2" Text="Them" VerticalAlignment="Top" FontSize="20" HorizontalAlignment="Right" Margin="10,0"/>
+        <TextBlock Grid.Row="2" Text="{DynamicResource _Them}" VerticalAlignment="Top" FontSize="20" HorizontalAlignment="Right" Margin="10,0"/>
         <ComboBox Text="{Binding Them}" Grid.Row="2" Grid.Column="1" FontSize="20" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" MinWidth="200" Margin="0 0 20 0">
-            <ComboBoxItem Content="Default"/>
-            <ComboBoxItem Content="Black"/>
+            <ComboBoxItem Content="{DynamicResource _DefaultThem}"/>
+            <ComboBoxItem Content="{DynamicResource _DarkThem}"/>
         </ComboBox>
 
-        <TextBlock TextWrapping="Wrap" Grid.Row="3" Text="Change password" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10,0"/>
+        <TextBlock TextWrapping="Wrap" Grid.Row="3" Text="{DynamicResource _ChangePas}" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10,0"/>
         <PasswordBox Grid.Row="3" Grid.Column="1" Name="OldPassword" MinWidth="200" Height="35" HorizontalAlignment="Left" VerticalAlignment="Top" 
-                     ff:Secure.BoundPassword="{Binding Password,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Tag="Current password"/>
+                     ff:Secure.BoundPassword="{Binding Password,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Tag="{DynamicResource _Password}"/>
 
         <PasswordBox Grid.Row="4" Grid.Column="1" Name="NewPassword" MinWidth="200" Height="35" HorizontalAlignment="Left" VerticalAlignment="Top" 
-                     ff:Secure.BoundPassword="{Binding NewPassword,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Tag="New password"/>
+                     ff:Secure.BoundPassword="{Binding NewPassword,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Tag="{DynamicResource _NewPas}"/>
 
-        <Button Content="Choose" Style="{StaticResource MainButton}" HorizontalAlignment="Right" Margin="10 0" Grid.Row="5" Grid.Column="0" Height="40" VerticalAlignment="Top" Width="100" Command="{Binding ChooseAvatar}"/>
+        <Button Content="{DynamicResource _Choose}" Style="{StaticResource MainButton}" HorizontalAlignment="Right" Margin="10 0" Grid.Row="5" Grid.Column="0" Height="40" VerticalAlignment="Top" Width="100" Command="{Binding ChooseAvatar}"/>
         <Border CornerRadius="10" Background="#33828080" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left">
             <Image VerticalAlignment="Top" Source="{Binding Avatar}" Width="200" Height="200" AllowDrop="True"/>
         </Border>
 
-        <Button Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0 20 0 50" Height="50" Style="{StaticResource MainButton}" Content="Save" Width="150" Command="{Binding SaveClick}"/>
+        <Button Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0 20 0 50" Height="50" Style="{StaticResource MainButton}" Content="{DynamicResource _Save}" Width="150" Command="{Binding SaveClick}"/>
 
     </Grid>
 </Page>

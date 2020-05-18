@@ -12,7 +12,8 @@ using System.Windows;
 using System.Windows.Documents;
 using Microsoft.Win32;
 using System.Windows.Controls;
-
+using System.Windows.Media.Imaging;
+using System.IO;
 
 namespace Курсовой.ViewModel
 {
@@ -124,15 +125,37 @@ namespace Курсовой.ViewModel
                         if (check)
                         {
                             DBRepository<Elements> dBRepository = new DBRepository<Elements>(new BuildEntities());
+                            byte[] data;
+                            JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+                            encoder.Frames.Add(BitmapFrame.Create(new BitmapImage(new Uri(FrontImage))));
+                            using (MemoryStream ms = new MemoryStream())
+                            {
+                                encoder.Save(ms);
+                                data = ms.ToArray();
+                            }
+
+                            byte[] data1;
+                            JpegBitmapEncoder encoder1 = new JpegBitmapEncoder();
+                            encoder1.Frames.Add(BitmapFrame.Create(new BitmapImage(new Uri(SideImage))));
+                            using (MemoryStream ms = new MemoryStream())
+                            {
+                                encoder1.Save(ms);
+                                data1 = ms.ToArray();
+                            }
+
                             Elements element = new Elements
                             {
                                 ID_User = CurrentUserID.getInstance().ID,
-                                TitleEng = Title,
+                                Title = Title,
                                 Price = Price,
-                                Size=Size
+                                Type="User",
+                                Size=Size,
+                                Front_view=data,
+                                Side_view=data1
                             };
-                            dBRepository.CreateTexture(element, FrontImage, SideImage);
-                            MessageBox.Show("Texture add");
+                            dBRepository.Create(element);
+                            MessageBox.Show("Object add");
+                            dBRepository.Dispose();
                         }
                     }
                     catch

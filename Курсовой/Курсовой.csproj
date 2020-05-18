@@ -110,6 +110,16 @@
     <Compile Include="Model\WorkField.cs">
       <DependentUpon>BuildDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Style\UserControl1.xaml.cs">
+      <DependentUpon>UserControl1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\AdminElementsPageViewModel.cs" />
+    <Compile Include="ViewModel\AdminProjectPageViewModel.cs" />
+    <Compile Include="ViewModel\AdminUserPageViewModel.cs" />
+    <Compile Include="ViewModel\AdminViewModel.cs" />
+    <Compile Include="ViewModel\LoadingViewModel.cs" />
+    <Compile Include="ViewModel\LoginPageViewModel.cs" />
+    <Compile Include="ViewModel\RecoveryViewModel.cs" />
     <Compile Include="ViewModel\SaveProjectViewModel.cs" />
     <Compile Include="ViewModel\WorkSpaceViewModel.cs" />
     <Compile Include="ViewModel\HomePageViewModel.cs" />
@@ -119,14 +129,35 @@
     <Compile Include="ViewModel\SettingsPageViewModel.cs" />
     <Compile Include="ViewModel\SignInVIewModel.cs" />
     <Compile Include="ViewModel\SignInWindowViewModel.cs" />
+    <Compile Include="View\Admin.xaml.cs">
+      <DependentUpon>Admin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AdminElementsPage.xaml.cs">
+      <DependentUpon>AdminElementsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AdminProjectPage.xaml.cs">
+      <DependentUpon>AdminProjectPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AdminUserPage.xaml.cs">
+      <DependentUpon>AdminUserPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\InfoPage.xaml.cs">
       <DependentUpon>InfoPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Loading.xaml.cs">
+      <DependentUpon>Loading.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\NewTextureWindow.xaml.cs">
       <DependentUpon>NewTextureWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Recovery.xaml.cs">
+      <DependentUpon>Recovery.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Registration.xaml.cs">
       <DependentUpon>Registration.xaml</DependentUpon>
@@ -146,11 +177,51 @@
     <Compile Include="View\WorkSpace.xaml.cs">
       <DependentUpon>WorkSpace.xaml</DependentUpon>
     </Compile>
+    <Page Include="Resourses\EngLanguage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resourses\DefaultThem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resourses\RuLanguage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Style\UserControl1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Admin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AdminElementsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AdminProjectPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AdminUserPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\HomePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\InfoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Loading.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\LoginPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -174,6 +245,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\NewTextureWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Recovery.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -272,6 +347,14 @@
     <Resource Include="Resourses\Images\Delete.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resourses\Images\Grass.jpg" />
+    <Resource Include="Resourses\Images\Preview.png" />
+    <Resource Include="Resourses\Images\Build.png" />
+    <Resource Include="Resourses\Images\Back.png" />
+    <Resource Include="Resourses\Images\Forward.png" />
+    <Resource Include="Resourses\Images\Lock.png" />
+    <Resource Include="Resourses\Images\Unlock.png" />
+    <Resource Include="Resourses\Images\Project.png" />
     <Content Include="Model\BuildDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>BuildDB.edmx</DependentUpon>
@@ -282,11 +365,6 @@
       <DependentUpon>BuildDB.edmx</DependentUpon>
       <LastGenOutput>BuildDB.cs</LastGenOutput>
     </Content>
-    <Resource Include="Resourses\Images\Grass.jpg" />
-    <Resource Include="Resourses\Images\Preview.png" />
-    <Resource Include="Resourses\Images\Build.png" />
-    <Resource Include="Resourses\Images\Back.png" />
-    <Resource Include="Resourses\Images\Forward.png" />
     <Content Include="Resourses\Images\MoreInfo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

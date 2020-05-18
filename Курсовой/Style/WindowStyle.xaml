@@ -3,11 +3,7 @@
                     x:Class="Whush.Demo.Styles.WindowStyle"
                     xmlns:local="clr-namespace:Курсовой">
 
-    <SolidColorBrush x:Key="TitleBarBackgroundBrush" Color="#FCD5A6" />
-    <SolidColorBrush x:Key="WindowBorderBrush" Color="#CFCFCF" />
-    <SolidColorBrush x:Key="WindowBorderBrushInactive" Color="#999999" />
-    <SolidColorBrush x:Key="WindowStatusForeground" Color="Black" />
-    <SolidColorBrush x:Key="WindowStatusForegroundInactive" Color="#FFFFFF" />
+
 
     <Style x:Key="WindowStyleTitleBarButton" TargetType="{x:Type Button}">
         <Setter Property="Focusable" Value="false" />
@@ -125,5 +121,29 @@
                 <Setter Property="WindowChrome.ResizeGripDirection" Value="BottomRight" />
             </Style>
         </Style.Resources>
+    </Style>
+
+
+    <Style x:Key="NoWindow" TargetType="{x:Type Window}">
+        <Setter Property="WindowStyle" Value="None" />
+        <Setter Property="AllowsTransparency" Value="true" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="ResizeMode" Value="CanResizeWithGrip" />
+        <EventSetter Event="Loaded" Handler="WindowLoaded" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Window}">
+                    <Border x:Name="PART_Container" Padding="0" >
+                        <Grid TextOptions.TextRenderingMode="ClearType" TextOptions.TextFormattingMode="Display">
+                            <Border x:Name="PART_Border" Width="Auto" Height="Auto" Background="{x:Null}" Padding="0">
+                                <DockPanel HorizontalAlignment="Stretch" Background="{x:Null}" VerticalAlignment="Stretch">
+                                    <ContentPresenter />
+                                </DockPanel>
+                            </Border>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 </ResourceDictionary>

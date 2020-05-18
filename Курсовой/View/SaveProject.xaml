@@ -6,7 +6,7 @@
         xmlns:vm="clr-namespace:Курсовой.ViewModel"
         xmlns:local="clr-namespace:Курсовой.View"
         mc:Ignorable="d"
-        Icon="pack://application:,,,/Resourses/Logo.png" Title="SaveProject" Height="270" Width="500" Style="{StaticResource WindowStyle}" WindowStartupLocation="CenterScreen">
+        Icon="pack://application:,,,/Resourses/Logo.png" Title="Save project" Height="270" Width="500" Style="{StaticResource WindowStyle}" WindowStartupLocation="CenterScreen">
     
     <Window.DataContext>
         <vm:SaveProjectViewModel/>
@@ -25,9 +25,9 @@
             <RowDefinition Height="80"/>
         </Grid.RowDefinitions>
         
-        <TextBlock TextWrapping="Wrap" Grid.Row="1" Text="Project name" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10,0"/>
+        <TextBlock TextWrapping="Wrap" Grid.Row="1" Text="{DynamicResource _ProjectName}" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10,0"/>
         <TextBox Name="ProjectName" Text="{Binding Name}" Grid.Row="1" Grid.Column="1" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0" Height="35"/>
-        <TextBlock IsHitTestVisible="False" Grid.Row="1" Grid.Column="1" FontSize="16" Text="Login" Width="300"  TextAlignment="Left" Height="35" Padding="7" FontFamily="Calibri" Foreground="#9E9E9E">
+        <TextBlock IsHitTestVisible="False" Grid.Row="1" Grid.Column="1" FontSize="16" Text="{DynamicResource _ProjectName}" Width="300"  TextAlignment="Left" Height="35" Margin="10 0" Padding="7" FontFamily="Calibri" Foreground="#9E9E9E">
             <TextBlock.Style>
                 <Style TargetType="{x:Type TextBlock}">
                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -40,10 +40,10 @@
             </TextBlock.Style>
         </TextBlock>
 
-        <TextBlock TextWrapping="Wrap" Grid.Row="3" Text="Finished" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10,0"/>
+        <TextBlock TextWrapping="Wrap" Grid.Row="3" Text="{DynamicResource _Finished}" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10,0"/>
         <CheckBox Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" IsChecked="{Binding Finish,Mode=TwoWay}" IsEnabled="True" Margin="10,0" Height="20" Width="20" Padding="20"/>
 
-        <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" Height="50" Style="{StaticResource MainButton}" Command="{Binding SaveClick}" Content="Save" Width="150"/>
+        <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" Height="50" Style="{StaticResource MainButton}" Command="{Binding SaveClick}" Content="{DynamicResource _Save}" Width="150"/>
 
     </Grid>
 </Window>

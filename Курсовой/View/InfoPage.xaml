@@ -28,9 +28,8 @@
             <RowDefinition Height="80"/>
         </Grid.RowDefinitions>
         
-        <TextBlock Style="{StaticResource StyleInfoPage}" Grid.Row="1" Text="Course project"/>
-        <TextBlock Style="{StaticResource StyleInfoPage}" Grid.Row="2" Text="Author: Nikolaenkov Alexsey"/>
-        <TextBlock Style="{StaticResource StyleInfoPage}" Grid.Row="3" Text="Application name: CD SHELL"/>
-        <TextBlock Style="{StaticResource StyleInfoPage}" Grid.Row="4" Text=""/>
+        <TextBlock Style="{StaticResource StyleInfoPage}" Grid.Row="1" Text="{DynamicResource _InfoCourse}"/>
+        <TextBlock Style="{StaticResource StyleInfoPage}" Grid.Row="2" Text="{DynamicResource _InfoAuthur}"/>
+        <TextBlock Style="{StaticResource StyleInfoPage}" Grid.Row="3" Text="{DynamicResource _InfoApp}"/>
     </Grid>
 </Page>

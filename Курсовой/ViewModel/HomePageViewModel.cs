@@ -35,7 +35,7 @@ namespace Курсовой.ViewModel
             SecondName = user.Surname;
             Login = user.Login;
             Email = user.Email;
-
+            dBUser.Dispose();
             if (user.Photo != null)
             {
                 MemoryStream strmImg = new MemoryStream(user.Photo);
@@ -61,6 +61,8 @@ namespace Курсовой.ViewModel
                     }
                 }
             }
+            dBUserProject.Dispose();
+            dBProject.Dispose();
         }
 
         private ObservableCollection<Project> projectsCurentUser = new ObservableCollection<Project>();
@@ -133,7 +135,7 @@ namespace Курсовой.ViewModel
                 return new DelegateCommand(obj =>
                 {
                     NewTextureWindow window = new NewTextureWindow();
-                    window.Show();
+                    window.ShowDialog();
                 });
             }
         }
@@ -172,17 +174,21 @@ namespace Курсовой.ViewModel
                 return new DelegateCommand(obj =>
                 {
                     var windows = Application.Current.Windows;
+                    Loading loadingwin = new Loading("Waiting...");
+                    loadingwin.Show();
+                    loadingwin.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                     MainWindowViewModel t = null;
                     foreach (var item in windows)
                     {
                         t = ((item as Window).DataContext as MainWindowViewModel);
                     }
-                    DBRepository<UserProject> dB = new DBRepository<UserProject>(new BuildEntities());
-                    CurrentUserID.ProjectID = dB.GetAll().Where(s=>s.ID_Project== ((obj as FrameworkElement).DataContext as Project).ID_Project).First().ID;
+                    DBRepository<UserProject> dBRepository = new DBRepository<UserProject>(new BuildEntities());
+                    CurrentUserID.ProjectID = dBRepository.GetAll().Where(s=>s.ID_Project== ((obj as FrameworkElement).DataContext as Project).ID_Project).First().ID;
                     t.MainPage = "WorkSpace.xaml";
                     t.ClosePanelButtonVisible = Visibility.Collapsed;
                     t.BurgerButtonVisible = Visibility.Visible;
                     t.LeftPanelWidth = new GridLength(0);
+                    dBRepository.Dispose();
                 });
             }
         }
@@ -209,7 +215,6 @@ namespace Курсовой.ViewModel
                             ProjectsCurentUser.Clear();
 
                             var userProjects = dBUP.GetAll().Where(s => s.ID_User == CurrentUserID.getInstance().ID);
-                            ObservableCollection<Project> projectsCurentUserList = new ObservableCollection<Project>();
                             foreach (var item in dBProject.GetAll().OrderByDescending(s => s.Date_of_change))
                             {
                                 foreach (var item1 in userProjects)
@@ -220,9 +225,12 @@ namespace Курсовой.ViewModel
                                     }
                                 }
                             }
+                            dBUP.Dispose();
+                            dBProject.Dispose();
+                            dbWorkField.Dispose();
                         }
                         catch
-                        { MessageBox.Show("q"); }
+                        { }
                     }
                 });
             }
@@ -243,58 +251,61 @@ namespace Курсовой.ViewModel
 
                         if (openFile.ShowDialog() == true)
                         {
-                            List<(int? ID_UP, int? Element_ID, int? PositionX, int? PositionY, int? Rotate)> upload = new List<(int? ID_UP, int? Element_ID, int? PositionX, int? PositionY, int? Rotate)>();
-                            XmlSerializer serializer = new XmlSerializer(typeof(List<(int? ID_UP, int? Element_ID, int? PositionX, int? PositionY, int? Rotate)>));
-                            StreamReader file = new StreamReader(openFile.FileName);
-                            upload = (List<(int? ID_UP, int? Element_ID, int? PositionX, int? PositionY, int? Rotate)>)serializer.Deserialize(file);
-                            List<WorkField> save = new List<WorkField>();
-
-                            DBRepository<Project> dbProject = new DBRepository<Project>(new BuildEntities());
-                            DBRepository<UserProject> dbUP = new DBRepository<UserProject>(new BuildEntities());
-                            DBRepository<WorkField> dbField = new DBRepository<WorkField>(new BuildEntities());
-                            Project project = new Project
+                            try
                             {
-                                Project_name = openFile.FileName.Substring(openFile.FileName.ToString().LastIndexOf(@"\") + 1, openFile.FileName.Length - openFile.FileName.ToString().LastIndexOf('.')-1),
-                                Date_of_change = DateTime.Now,
-                                Status = 0
-                            };
-                            dbProject.Create(project);
+                                List<(int? ID_UP, int? Element_ID, int? PositionX, int? PositionY, int? Rotate)> upload = new List<(int? ID_UP, int? Element_ID, int? PositionX, int? PositionY, int? Rotate)>();
+                                XmlSerializer serializer = new XmlSerializer(typeof(List<(int? ID_UP, int? Element_ID, int? PositionX, int? PositionY, int? Rotate)>));
+                                StreamReader file = new StreamReader(openFile.FileName);
+                                upload = (List<(int? ID_UP, int? Element_ID, int? PositionX, int? PositionY, int? Rotate)>)serializer.Deserialize(file);
+                                List<WorkField> save = new List<WorkField>();
 
-                            UserProject userProject = new UserProject
-                            {
-                                ID_User = CurrentUserID.getInstance().ID,
-                                ID_Project = dbProject.GetAll().OrderBy(s => s.Date_of_change).Last().ID_Project
-                            };
-                            dbUP.Create(userProject);
-
-                            foreach (var item in upload)
-                            {
-                                save.Add(new WorkField
+                                DBRepository<Project> dbProject = new DBRepository<Project>(new BuildEntities());
+                                DBRepository<UserProject> dbUP = new DBRepository<UserProject>(new BuildEntities());
+                                DBRepository<WorkField> dbField = new DBRepository<WorkField>(new BuildEntities());
+                                Project project = new Project
                                 {
-                                    ID_UP = dbUP.GetAll().OrderBy(s=>s.ID).Last().ID,
-                                    Element_ID = item.Element_ID,
-                                    PositionX = item.PositionX,
-                                    PositionY = item.PositionY,
-                                    Rotate=item.Rotate
-                                });
-                            }
+                                    Project_name = openFile.FileName.Substring(openFile.FileName.ToString().LastIndexOf(@"\") + 1, openFile.FileName.Length - openFile.FileName.ToString().LastIndexOf('.') - 1),
+                                    Date_of_change = DateTime.Now,
+                                    Status = 0
+                                };
+                                dbProject.Create(project);
 
-                            dbField.AddCollection(save);
-                            ProjectsCurentUser.Clear();
-                            var userProjects = dbUP.GetAll().Where(s => s.ID_User == CurrentUserID.getInstance().ID);
-                            ObservableCollection<Project> projectsCurentUserList = new ObservableCollection<Project>();
-                            foreach (var item in dbProject.GetAll().OrderByDescending(s => s.Date_of_change))
-                            {
-                                foreach (var item1 in userProjects)
+                                UserProject userProject = new UserProject
                                 {
-                                    if (item1.ID_Project == item.ID_Project)
+                                    ID_User = CurrentUserID.getInstance().ID,
+                                    ID_Project = dbProject.GetAll().OrderBy(s => s.Date_of_change).Last().ID_Project
+                                };
+                                dbUP.Create(userProject);
+
+                                foreach (var item in upload)
+                                {
+                                    save.Add(new WorkField
                                     {
-                                        ProjectsCurentUser.Add(item);
+                                        ID_UP = dbUP.GetAll().OrderBy(s => s.ID).Last().ID,
+                                        Element_ID = item.Element_ID,
+                                        PositionX = item.PositionX,
+                                        PositionY = item.PositionY,
+                                        Rotate = item.Rotate
+                                    });
+                                }
+
+                                dbField.AddCollection(save);
+                                ProjectsCurentUser.Clear();
+                                var userProjects = dbUP.GetAll().Where(s => s.ID_User == CurrentUserID.getInstance().ID);
+                                ObservableCollection<Project> projectsCurentUserList = new ObservableCollection<Project>();
+                                foreach (var item in dbProject.GetAll().OrderByDescending(s => s.Date_of_change))
+                                {
+                                    foreach (var item1 in userProjects)
+                                    {
+                                        if (item1.ID_Project == item.ID_Project)
+                                        {
+                                            ProjectsCurentUser.Add(item);
+                                        }
                                     }
                                 }
+                                MessageBox.Show("Project was loaded");
                             }
-
-                            MessageBox.Show("Project was loaded");
+                            catch { }
                         }
                     }
                     catch

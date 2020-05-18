@@ -22,7 +22,18 @@ namespace Курсовой.ViewModel
             DBRepository<User> dBRepository = new DBRepository<User>(new BuildEntities());
             User user=dBRepository.GetAll().Where(s => s.ID_User == CurrentUserID.getInstance().ID).First();
             LoginCurrenUser = user.Login;
-            FirstCharLoginCurrenUser = user.Name[0].ToString()+user.Surname[0].ToString();
+            if (user.Language == null || user.Language == "English")
+            {
+                ResourceDictionary resourceDict = Application.LoadComponent(new Uri("/Resourses/EngLanguage.xaml", UriKind.RelativeOrAbsolute)) as ResourceDictionary;
+                Application.Current.Resources.MergedDictionaries.Add(resourceDict);
+            }
+            else
+            {
+                ResourceDictionary resourceDict = Application.LoadComponent(new Uri("/Resourses/RuLanguage.xaml", UriKind.RelativeOrAbsolute)) as ResourceDictionary;
+                Application.Current.Resources.MergedDictionaries.Add(resourceDict);
+            }
+            FirstCharLoginCurrenUser = user.Name.ToUpper().First().ToString()+user.Surname.ToUpper().First().ToString();
+            dBRepository.Dispose();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

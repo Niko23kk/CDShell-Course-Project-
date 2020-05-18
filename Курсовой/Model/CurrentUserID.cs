@@ -8,7 +8,7 @@ namespace Курсовой.Model
 {
     class CurrentUserID
     {
-        private static CurrentUserID instance=new CurrentUserID(1);
+        private static CurrentUserID instance;
         public int ID;
         public static int ProjectID;
 

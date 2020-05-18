@@ -1,0 +1,124 @@
+﻿<Page x:Class="Курсовой.View.AdminProjectPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:vm="clr-namespace:Курсовой.ViewModel"
+      xmlns:local="clr-namespace:Курсовой.View"
+      mc:Ignorable="d" 
+      Title="AdminProjectPage">
+    
+    <Grid>
+        <Grid.Background>
+            <ImageBrush  ImageSource="pack://application:,,,/Resourses/Images/Background.jpg" Stretch="UniformToFill">
+                <ImageBrush.RelativeTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleY="0" AngleX="0"/>
+                        <RotateTransform Angle="0"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </ImageBrush.RelativeTransform>
+            </ImageBrush>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="50"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="{DynamicResource _Projects}" Grid.ColumnSpan="3" FontSize="32" TextWrapping="Wrap" Padding="10" Margin="30,10"/>
+
+        <Grid Grid.Column="3" Grid.ColumnSpan="2"  HorizontalAlignment="Center">
+            <TextBox  Text="{Binding Find,UpdateSourceTrigger=PropertyChanged}" Name="Find" Width="200"/>
+            <TextBlock IsHitTestVisible="False" FontSize="16" Text="{DynamicResource _Find}" Width="200"  TextAlignment="Left" Height="35" Padding="7" FontFamily="Calibri" Foreground="#9E9E9E">
+                <TextBlock.Style>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Text, ElementName=Find}" Value="">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+        </Grid>
+
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource _Login}" HorizontalAlignment="Left" FontSize="16" Margin="25 0 10 5"/>
+        <TextBlock Grid.Row="1" Grid.Column="1" Text="{DynamicResource _ProjectName}" HorizontalAlignment="Left" FontSize="16" Margin="10 0 10 5"/>
+        <TextBlock Grid.Row="1" Grid.Column="2" Text="{DynamicResource _DateOfChange}" HorizontalAlignment="Left" FontSize="16" Margin="10 0 10 5"/>
+        <TextBlock Grid.Row="1" Grid.Column="3" Text="{DynamicResource _ProjectID}" HorizontalAlignment="Left" FontSize="16" Margin="10 0 10 5"/>
+
+        <ScrollViewer Grid.Row="2" Grid.ColumnSpan="7" Name="ScrollContainer" ScrollViewer.CanContentScroll="False" VerticalScrollBarVisibility="Hidden" Height="auto">
+            <ItemsControl x:Name="ListViewProducts" Margin="10,0" ItemsSource="{Binding Projects,Mode=TwoWay}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="50"/>
+                            </Grid.ColumnDefinitions>
+                            <Border Name="SelectedProject" Margin="2" CornerRadius="10" BorderThickness="1" BorderBrush="Gray">
+                                <Border.InputBindings>
+                                    <MouseBinding MouseAction="LeftClick" Command="{Binding DataContext.ChooseUser, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}" CommandParameter="{Binding ElementName=SelectedProject}"/>
+                                </Border.InputBindings>
+                                <Border.Background>
+                                    <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                                        <GradientStop Color="#FFBDF6FF" Offset="1"/>
+                                        <GradientStop Color="#FFA2F1FC" Offset="0"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                                <Grid Margin="15" VerticalAlignment="Center">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" HorizontalAlignment="Left" Text="{Binding User.Login}" TextWrapping="Wrap" FontSize="16"/>
+                                    <TextBlock Grid.Column="1" HorizontalAlignment="Left" Text="{Binding Project.Project_name}" TextWrapping="Wrap" FontSize="16"/>
+                                    <TextBlock Grid.Column="2" HorizontalAlignment="Left" Text="{Binding Project.Date_of_change}" TextWrapping="Wrap" FontSize="16"/>
+                                    <TextBlock Grid.Column="3" HorizontalAlignment="Left" Text="{Binding Project.ID_Project}" TextWrapping="Wrap" FontSize="16"/>
+                                </Grid>
+                            </Border>
+
+                            <Border Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="50" Background="#B2E8E8E8" Padding="10">
+                                <Image  Source="pack://application:,,,/Resourses/Images/Preview.png" Width="25"/>
+                                <Border.ToolTip>
+                                    <Image Source="{Binding Project.Preview}" Width="250" Height="250"/>
+                                </Border.ToolTip>
+                            </Border>
+
+                            <Border Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="50" Background="#B2E8E8E8" Padding="10">
+                                <Image  Source="pack://application:,,,/Resourses/Images/SaveAs.png" Width="25" ToolTip="{DynamicResource _SaveAs}"/>
+                                <Border.InputBindings>
+                                    <MouseBinding MouseAction="LeftClick"  Command="{Binding DataContext.SaveAs, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}" CommandParameter="{Binding ElementName=SelectedProject}"/>
+                                </Border.InputBindings>
+                            </Border>
+
+                            <Border Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="50" Background="#B2E8E8E8" Padding="10">
+                                <Image  Source="pack://application:,,,/Resourses/Images/Delete.png" Width="25" ToolTip="{DynamicResource _Delete}"/>
+                                <Border.InputBindings>
+                                    <MouseBinding MouseAction="LeftClick"  Command="{Binding DataContext.DeleteProject, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}" CommandParameter="{Binding ElementName=SelectedProject}"/>
+                                </Border.InputBindings>
+                            </Border>
+                            
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</Page>

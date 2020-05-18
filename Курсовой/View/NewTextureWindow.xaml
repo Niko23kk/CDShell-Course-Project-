@@ -40,9 +40,9 @@
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Row="1" Text="Title" FontSize="20" Margin="0,0,20,0" HorizontalAlignment="Right"/>
+        <TextBlock Grid.Row="1" Text="{DynamicResource _Title}" FontSize="20" Margin="0,0,20,0" HorizontalAlignment="Right"/>
         <TextBox Name="Title" Text="{Binding Title}" Grid.Row="1" Grid.Column="1" Width="200" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35"/>
-        <TextBlock IsHitTestVisible="False" Grid.Row="3" FontSize="16" Text="Login" Width="300"  TextAlignment="Left" Height="35" Padding="7" FontFamily="Calibri" Foreground="#9E9E9E">
+        <TextBlock IsHitTestVisible="False" Grid.Row="1" Grid.Column="1" FontSize="16" Text="{DynamicResource _Title}" Width="200"  HorizontalAlignment="Left" Height="35" Padding="7" Margin="2 0 " FontFamily="Calibri" Foreground="#9E9E9E">
             <TextBlock.Style>
                 <Style TargetType="{x:Type TextBlock}">
                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -55,28 +55,28 @@
             </TextBlock.Style>
         </TextBlock>
 
-        <TextBlock Grid.Row="2" Text="Price" FontSize="20" Margin="0,0,20,0" HorizontalAlignment="Right"/>
+        <TextBlock Grid.Row="2" Text="{DynamicResource _Price}" FontSize="20" Margin="0,0,20,0" HorizontalAlignment="Right"/>
         <TextBox Text="{Binding Price}" Grid.Row="2" Grid.Column="1" Width="200" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35"/>
 
-        <TextBlock Grid.Row="3" Text="Size" FontSize="20" Margin="0,0,20,0" HorizontalAlignment="Right"/>
+        <TextBlock Grid.Row="3" Text="{DynamicResource _Size}" FontSize="20" Margin="0,0,20,0" HorizontalAlignment="Right"/>
         <TextBox Text="{Binding Size}" Grid.Row="3" Grid.Column="1" Width="50" Height="35" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
-        <TextBlock Grid.Row="4" Text="Front image" FontSize="20" Margin="0,0,20,0" HorizontalAlignment="Right"/>
+        <TextBlock Grid.Row="4" Text="{DynamicResource _FrontView}" FontSize="20" Margin="0,0,20,0" HorizontalAlignment="Right"/>
         <StackPanel Grid.Column="1" Grid.Row="4" Orientation="Horizontal">
-            <Button Content="Choose" Style="{StaticResource MainButton}" IsEnabled="True" Height="40" VerticalAlignment="Top" Width="100" HorizontalAlignment="Left" Command="{Binding FrontImageClick}"/>
+            <Button Content="{DynamicResource _Choose}" Style="{StaticResource MainButton}" IsEnabled="True" Height="40" VerticalAlignment="Top" Width="100" HorizontalAlignment="Left" Command="{Binding FrontImageClick}"/>
             <Border Margin="20,0" CornerRadius="10" Background="#33828080">
                 <Image VerticalAlignment="Top" Source="{Binding FrontImage}" Height="90" Width="90" AllowDrop="True"/>
             </Border>
         </StackPanel>
 
-        <TextBlock Grid.Row="6" Text="Side image" FontSize="20" Margin="0,0,20,0" HorizontalAlignment="Right"/>
+        <TextBlock Grid.Row="6" Text="{DynamicResource _SideView}" FontSize="20" Margin="0,0,20,0" HorizontalAlignment="Right"/>
         <StackPanel Grid.Column="1" Grid.Row="6" Orientation="Horizontal">
-            <Button Content="Choose" Style="{StaticResource MainButton}" IsEnabled="True" Height="40" VerticalAlignment="Top" Width="100" HorizontalAlignment="Left" Command="{Binding SideImageClick}"/>
+            <Button Content="{DynamicResource _Choose}" Style="{StaticResource MainButton}" IsEnabled="True" Height="40" VerticalAlignment="Top" Width="100" HorizontalAlignment="Left" Command="{Binding SideImageClick}"/>
             <Border Margin="20,0" CornerRadius="10"  Background="#33828080">
                 <Image VerticalAlignment="Top" Source="{Binding SideImage}" Height="90" Width="90" AllowDrop="True"/>
             </Border>
         </StackPanel>
 
-        <Button Grid.Row="7" Grid.ColumnSpan="2" Margin="0,50,0,0" Width="150" Style="{StaticResource MainButton}" Content="Add" Command="{Binding AddTextureClick}"/>
+        <Button Grid.Row="7" Grid.ColumnSpan="2" Margin="0,50,0,0" Width="150" Style="{StaticResource MainButton}" Content="{DynamicResource _Add}" Command="{Binding AddTextureClick}"/>
     </Grid>
 </Window>

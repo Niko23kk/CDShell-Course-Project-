@@ -8,14 +8,12 @@ using System.Data.Entity;
 
 namespace Курсовой.Model
 {
-    public interface IRepository<IEntity> where IEntity : class
+    public interface IRepository<IEntity>:IDisposable where IEntity : class
     {
         void Create(IEntity item);
-        void CreateTexture(Elements item,string front,string side);
         IEntity FindById(int id);
         void AddCollection(IEnumerable<IEntity> entities);
         void RemoveCollection(IEnumerable<IEntity> entities);
-        void UpdateAvatar(User user, string Image);
         IEnumerable<IEntity> GetAll();
         void Remove(IEntity item);
         void Update(IEntity item);
@@ -35,14 +33,6 @@ namespace Курсовой.Model
         public void Create(IEntity item)
         {
             dbSet.Add(item);
-            context.SaveChanges();
-        }
-
-        public void CreateTexture(Elements item,string front,string side)
-        {
-            context.Database.ExecuteSqlCommand($"insert into Elements (TitleEng,TypeEng,TitleRu,TypeRu,Price,[Front view],[Side view],Size)"+
-                $@" values('{item.TitleEng}', 'User','{item.TitleEng}', 'Пользователь',{item.Price}, (SELECT * FROM OPENROWSET(BULK N'{front}', SINGLE_BLOB)"+
-                $@"as [Front view]), (SELECT * FROM OPENROWSET(BULK N'{side}', SINGLE_BLOB) as [Side view]),{item.Size})");
             context.SaveChanges();
         }
 
@@ -66,12 +56,6 @@ namespace Курсовой.Model
                 }
                 context.SaveChanges();
             }
-        }
-
-        public void UpdateAvatar(User user, string Image)
-        {
-            context.Database.ExecuteSqlCommand($"update [User] set photo=(SELECT * FROM OPENROWSET(BULK N'{Image}', SINGLE_BLOB) as [Photo]) where [ID User]={user.ID_User}");
-            context.SaveChanges();
         }
 
         public IEntity FindById(int id)
@@ -111,6 +95,26 @@ namespace Курсовой.Model
         {
             context.Entry(item).State = EntityState.Modified;
             context.SaveChanges();
+        }
+
+        private bool disposed = false;
+
+        public virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    context.Dispose();
+                }
+            }
+            this.disposed = true;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

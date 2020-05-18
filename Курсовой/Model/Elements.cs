@@ -21,10 +21,8 @@ namespace Курсовой.Model
         }
     
         public int ID { get; set; }
-        public string TitleEng { get; set; }
-        public string TypeEng { get; set; }
-        public string TitleRu { get; set; }
-        public string TypeRu { get; set; }
+        public string Title { get; set; }
+        public string Type { get; set; }
         public Nullable<decimal> Price { get; set; }
         public byte[] Front_view { get; set; }
         public byte[] Side_view { get; set; }

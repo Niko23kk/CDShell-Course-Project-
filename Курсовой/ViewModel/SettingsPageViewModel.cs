@@ -14,6 +14,8 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using System.Security.Cryptography;
 using Microsoft.Win32;
+using System.Windows.Media.Imaging;
+using System.IO;
 
 namespace Курсовой.ViewModel
 {
@@ -82,7 +84,7 @@ namespace Курсовой.ViewModel
             }
         }
 
-        private string avatar;
+        private string avatar="";
         public string Avatar
         {
             get
@@ -131,6 +133,39 @@ namespace Курсовой.ViewModel
                         {
                             user.Them = Them;
                         }
+                        if (Avatar != "")
+                        {
+                            byte[] data;
+                            JpegBitmapEncoder encoder1 = new JpegBitmapEncoder();
+                            encoder1.Frames.Add(BitmapFrame.Create(new BitmapImage(new Uri(Avatar))));
+                            using (MemoryStream ms = new MemoryStream())
+                            {
+                                encoder1.Save(ms);
+                                data = ms.ToArray();
+                            }
+                            user.Photo = data;
+                        }
+                        if (Them != "")
+                        {
+                            switch (Them)
+                            {
+                                case "Стандартная":
+                                    {
+                                        Them = "Default";
+                                        return;
+                                    }
+                                case "Темная":
+                                    {
+                                        Them = "Dark";
+                                        return;
+                                    }
+                            }
+                            user.Them = Them;
+                        }
+                        if (Language != "")
+                        {
+                            user.Language = Language;
+                        }
                         if (Password != null && NewPassword != null)
                         {
                             if (Password.Length > 0 && NewPassword.Length > 0)
@@ -148,11 +183,19 @@ namespace Курсовой.ViewModel
                             }
                         }
                         dBRepository.Update(user);
-                        if (Avatar != "")
+                        Application.Current.Resources.Remove(Application.Current.Resources.Contains("Language"));
+                        if(user.Language==null || user.Language.Contains("Eng"))
                         {
-                            dBRepository.UpdateAvatar(user, Avatar);
+                            ResourceDictionary resourceDict = Application.LoadComponent(new Uri("/Resourses/EngLanguage.xaml", UriKind.RelativeOrAbsolute)) as ResourceDictionary;
+                            Application.Current.Resources.MergedDictionaries.Add(resourceDict);
+                        }
+                        else
+                        {
+                            ResourceDictionary resourceDict = Application.LoadComponent(new Uri("/Resourses/RuLanguage.xaml", UriKind.RelativeOrAbsolute)) as ResourceDictionary;
+                            Application.Current.Resources.MergedDictionaries.Add(resourceDict);
                         }
                         MessageBox.Show("Data was saved");
+                        dBRepository.Dispose();
                     }
                     catch
                     {

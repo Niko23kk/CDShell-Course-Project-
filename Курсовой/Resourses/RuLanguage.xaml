@@ -1,0 +1,87 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Курсовой.Resourses"
+                    xmlns:lang="clr-namespace:System;assembly=mscorlib">
+    <!--Admin-->
+    <lang:String x:Key="_User">Работяги</lang:String>
+    <lang:String x:Key="_Projects">Проекты</lang:String>
+    <lang:String x:Key="_Elements">Объекты</lang:String>
+    <lang:String x:Key="_LogOff">Выйти</lang:String>
+    <lang:String x:Key="_Title">Название</lang:String>
+    <lang:String x:Key="_Type">Тип</lang:String>
+    <lang:String x:Key="_FrontView">Основной вид</lang:String>
+    <lang:String x:Key="_SideView">Вид сверху</lang:String>
+    <lang:String x:Key="_Find">Поиск</lang:String>
+    <lang:String x:Key="_Delete">Удалить</lang:String>
+    <lang:String x:Key="_ChangeInfo">Изменить данные</lang:String>
+    <lang:String x:Key="_Price">Цена</lang:String>
+    <lang:String x:Key="_Size">Размер</lang:String>
+    <lang:String x:Key="_LivingRoom">Гостинная</lang:String>
+    <lang:String x:Key="_Bedroom">Спальня</lang:String>
+    <lang:String x:Key="_Kitchen">Кухня</lang:String>
+    <lang:String x:Key="_Garden">Сад</lang:String>
+    <lang:String x:Key="_Bathroom">Ванная</lang:String>
+    <lang:String x:Key="_Tecgnique">Техника</lang:String>
+    <lang:String x:Key="_Decoration">Интерьер</lang:String>
+    <lang:String x:Key="_Build">Постройка</lang:String>
+    <lang:String x:Key="_Choose">Выбрать</lang:String>
+    <lang:String x:Key="_Update">Изменить</lang:String>
+    <lang:String x:Key="_Create">Создать</lang:String>
+    <lang:String x:Key="_CreateUpdate">Создать/Изменить</lang:String>
+    <lang:String x:Key="_Login">Логин</lang:String>
+    <lang:String x:Key="_ProjectName">Имя проекта</lang:String>
+    <lang:String x:Key="_DateOfChange">Дата изменения</lang:String>
+    <lang:String x:Key="_ProjectID">ИД проекта</lang:String>
+    <lang:String x:Key="_SaveAs">Сохранить как</lang:String>
+    <lang:String x:Key="_FirstName">Имя</lang:String>
+    <lang:String x:Key="_SecondName">Фамилия</lang:String>
+    <lang:String x:Key="_Email">Email</lang:String>
+    <lang:String x:Key="_Language">Язык</lang:String>
+    <lang:String x:Key="_Them">Тема</lang:String>
+    <lang:String x:Key="_DefaultThem">Стандартная</lang:String>
+    <lang:String x:Key="_DarkThem">Темная</lang:String>
+    <lang:String x:Key="_NewLogin">Новый логин</lang:String>
+    <lang:String x:Key="_Password">Пароль</lang:String>
+    <lang:String x:Key="_ConPassword">Повтор пароля</lang:String>
+    <lang:String x:Key="_AdminStatus">Статус администратора</lang:String>
+    <!---->
+    <lang:String x:Key="_LastPtojects">Последние проекты</lang:String>
+    <lang:String x:Key="_NewProject">Создать проект</lang:String>
+    <lang:String x:Key="_NewObject">Создать объект</lang:String>
+    <lang:String x:Key="_LoadProject">Загрузить проект</lang:String>
+    <!---->
+    <lang:String x:Key="_InfoCourse">Курсовой проект</lang:String>
+    <lang:String x:Key="_InfoAuthur">Автор: Николенков Алексей</lang:String>
+    <lang:String x:Key="_InfoApp">Название приложения: CD SHELL</lang:String>
+    <!---->
+    <lang:String x:Key="_PasswordRec">Восстановление пароля</lang:String>
+    <lang:String x:Key="_GetCode">Получить код</lang:String>
+    <lang:String x:Key="_BackSign">Вернутся ко входу</lang:String>
+    <!--home-->
+    <lang:String x:Key="_Home">Дом</lang:String>
+    <lang:String x:Key="_Settings">Настройки</lang:String>
+    <lang:String x:Key="_Info">Инфо</lang:String>
+    <lang:String x:Key="_Add">Добавить</lang:String>
+    <lang:String x:Key="_Change">Изменить</lang:String>
+    <lang:String x:Key="_Registration">Регистрация</lang:String>
+    <!---->
+    <lang:String x:Key="_Name">Имя</lang:String>
+    <lang:String x:Key="_Finished">Завершен</lang:String>
+    <lang:String x:Key="_Save">Сохранить</lang:String>
+    <!---->
+    <lang:String x:Key="_RegClick">Если вы еще не зарегистрированны</lang:String>
+    <lang:String x:Key="_ClickMe">Нажмите сюда</lang:String>
+    <lang:String x:Key="_ForgotPas">Если вы забыла пароль</lang:String>
+    <lang:String x:Key="_Code">Код</lang:String>
+    <lang:String x:Key="_ChangePas">Изменение пароля</lang:String>
+    <lang:String x:Key="_NewPas">Новый пароль</lang:String>
+    <lang:String x:Key="_SignIn">Вход</lang:String>
+    <!---->
+    <lang:String x:Key="_Photo">Скрин</lang:String>
+    <lang:String x:Key="_Share">Поделится</lang:String>
+    <lang:String x:Key="_Undo">Отменить</lang:String>
+    <lang:String x:Key="_Redo">Вернуть</lang:String>
+    <lang:String x:Key="_Left">Лева</lang:String>
+    <lang:String x:Key="_Right">Право</lang:String>
+    <lang:String x:Key="_Block">Блокировать</lang:String>
+</ResourceDictionary>

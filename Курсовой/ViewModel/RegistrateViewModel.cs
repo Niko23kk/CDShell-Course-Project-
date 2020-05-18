@@ -200,7 +200,7 @@ namespace Курсовой.ViewModel
 
                     if (check)
                     {
-                        DBRepository<User> db = new DBRepository<User>(new BuildEntities());
+                        DBRepository<User> dBRepository = new DBRepository<User>(new BuildEntities());
                         SHA1 sHA1 = new SHA1CryptoServiceProvider();
                         User user = new User
                         {
@@ -213,7 +213,7 @@ namespace Курсовой.ViewModel
                         };
                         try
                         {
-                            db.Create(user);
+                            dBRepository.Create(user);
                             MessageBox.Show("Registration was successful");
                             (obj as Page).NavigationService.Navigate(new Uri("pack://application:,,,/View/SignIn.xaml"), UriKind.RelativeOrAbsolute);
                         }
@@ -221,6 +221,8 @@ namespace Курсовой.ViewModel
                         {
                             MessageBox.Show("This Login is busy");
                         }
+                        dBRepository.Dispose();
+
                     }
                 });
             }

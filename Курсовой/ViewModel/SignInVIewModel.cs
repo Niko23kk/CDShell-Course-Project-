@@ -25,15 +25,13 @@ namespace Курсовой.ViewModel
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
-
-        User user = new User();
+        
         private string login="";
         public string Login
         {
             get { return login; }
             set
             {
-                user.Login = value;
                 login = value;
                 OnPropertyChanged();
 
@@ -85,35 +83,40 @@ namespace Курсовой.ViewModel
                     {
                         MessageBox.Show("Input your Password (minimal lenght 5)");
                     }
-                    if(Password=="админ" && Login=="админ")
-                    {
-                        MainWindow mainWindow = new MainWindow();
-                        mainWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-                        mainWindow.Show();
-                        Application.Current.MainWindow.Close();
-                    }
                     if (check)
                     {
                         try
                         {
                             SHA1 sHA1 = new SHA1CryptoServiceProvider();
-                            DBRepository<User> db = new DBRepository<User>(new BuildEntities());
-                            User user = db.GetAll().Where(s => s.Login == Login).First();
+                            DBRepository<User> dBRepository = new DBRepository<User>(new BuildEntities());
+                            User user = dBRepository.GetAll().Where(s => s.Login == Login).First();
                             if (user != null)
                             {
                                 if (user.Password.SequenceEqual(sHA1.ComputeHash(Encoding.ASCII.GetBytes(Password))))
                                 {
-                                    CurrentUserID.getInstance(user.ID_User);
-                                    MainWindow mainWindow = new MainWindow();
-                                    mainWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-                                    mainWindow.Show();
-                                    Application.Current.MainWindow.Close();
+                                    if (user.Type == "User")
+                                    {
+                                        CurrentUserID.getInstance(user.ID_User);
+                                        MainWindow mainWindow = new MainWindow();
+                                        mainWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                                        mainWindow.Show();
+                                        Application.Current.MainWindow.Close();
+                                    }
+                                    else if(user.Type=="Admin")
+                                    {
+                                        CurrentUserID.getInstance(user.ID_User);
+                                        Admin mainWindow = new Admin();
+                                        mainWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                                        mainWindow.Show();
+                                        Application.Current.MainWindow.Close();
+                                    }
                                 }
                                 else
                                     MessageBox.Show("Error in password =(");
                             }
                             else
                                 MessageBox.Show("We not found account =(");
+                            dBRepository.Dispose();
                         }
                         catch
                         {
@@ -131,6 +134,17 @@ namespace Курсовой.ViewModel
                 return new DelegateCommand(obj =>
                 {
                     (obj as Page).NavigationService.Navigate(new Uri("pack://application:,,,/View/Registration.xaml"), UriKind.RelativeOrAbsolute);
+                });
+            }
+        }
+
+        public ICommand NewPassword
+        {
+            get
+            {
+                return new DelegateCommand(obj =>
+                {
+                    (obj as Page).NavigationService.Navigate(new Uri("pack://application:,,,/View/LoginPage.xaml"), UriKind.RelativeOrAbsolute);
                 });
             }
         }
