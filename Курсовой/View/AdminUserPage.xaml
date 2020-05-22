@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:ff="clr-namespace:Курсовой.Clases"
+      xmlns:ff="clr-namespace:Курсовой.Classes"
       xmlns:vm="clr-namespace:Курсовой.ViewModel"
       xmlns:local="clr-namespace:Курсовой.View"
       mc:Ignorable="d" 
@@ -13,19 +13,7 @@
         <vm:AdminUserPageViewModel/>
     </Page.DataContext>
 
-    <Grid>
-        <Grid.Background>
-            <ImageBrush  ImageSource="pack://application:,,,/Resourses/Images/Background.jpg" Stretch="UniformToFill">
-                <ImageBrush.RelativeTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform AngleY="0" AngleX="0"/>
-                        <RotateTransform Angle="0"/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </ImageBrush.RelativeTransform>
-            </ImageBrush>
-        </Grid.Background>
+    <Grid Background="{DynamicResource BackgroundImage}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="340"/>
@@ -44,12 +32,12 @@
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            
-            <TextBlock Text="{DynamicResource _User}" Grid.ColumnSpan="3" FontSize="32" TextWrapping="Wrap" Padding="10" Margin="30,10"/>
+
+            <TextBlock Style="{DynamicResource TextBl}" Text="{DynamicResource _User}" Grid.ColumnSpan="3" FontSize="32" TextWrapping="Wrap" Padding="10" Margin="30,10"/>
 
             <Grid Grid.Column="3" Grid.ColumnSpan="2" HorizontalAlignment="Center">
                 <TextBox Text="{Binding Find,UpdateSourceTrigger=PropertyChanged}" Name="Find" Width="200"/>
-                <TextBlock IsHitTestVisible="False" FontSize="16" Text="{DynamicResource _Find}" Width="200"  TextAlignment="Left" Height="35" Padding="7" FontFamily="Calibri" Foreground="#9E9E9E">
+                <TextBlock IsHitTestVisible="False" FontSize="16" Text="{DynamicResource _Find}" Width="200"  TextAlignment="Left" Height="35" Padding="7" FontFamily="Calibri" Foreground="{DynamicResource ForegroundTextBox}">
                     <TextBlock.Style>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="Visibility" Value="Collapsed"/>
@@ -63,10 +51,10 @@
                 </TextBlock>
             </Grid>
 
-            <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource _FirstName}" HorizontalAlignment="Left" FontSize="16" Margin="25 0 10 5"/>
-            <TextBlock Grid.Row="1" Grid.Column="1" Text="{DynamicResource _SecondName}" HorizontalAlignment="Left" FontSize="16" Margin="10 0 10 5"/>
-            <TextBlock Grid.Row="1" Grid.Column="2" Text="{DynamicResource _Login}" HorizontalAlignment="Left" FontSize="16" Margin="10 0 10 5"/>
-            <TextBlock Grid.Row="1" Grid.Column="3" Text="{DynamicResource _Email}" HorizontalAlignment="Left" FontSize="16" Margin="10 0 10 5"/>
+            <TextBlock Style="{DynamicResource TextBl}" Grid.Row="1" Grid.Column="0" Text="{DynamicResource _FirstName}" HorizontalAlignment="Left" FontSize="16" Margin="25 0 10 5"/>
+            <TextBlock Style="{DynamicResource TextBl}" Grid.Row="1" Grid.Column="1" Text="{DynamicResource _SecondName}" HorizontalAlignment="Left" FontSize="16" Margin="10 0 10 5"/>
+            <TextBlock Style="{DynamicResource TextBl}" Grid.Row="1" Grid.Column="2" Text="{DynamicResource _Login}" HorizontalAlignment="Left" FontSize="16" Margin="10 0 10 5"/>
+            <TextBlock Style="{DynamicResource TextBl}" Grid.Row="1" Grid.Column="3" Text="{DynamicResource _Email}" HorizontalAlignment="Left" FontSize="16" Margin="10 0 10 5"/>
 
             <ScrollViewer Grid.Row="2" Grid.ColumnSpan="6" Name="ScrollContainer" ScrollViewer.CanContentScroll="False" VerticalScrollBarVisibility="Hidden" Height="auto">
                 <ItemsControl x:Name="ListViewProducts" Margin="10,0" ItemsSource="{Binding Users,Mode=TwoWay}">
@@ -78,16 +66,10 @@
                                     <ColumnDefinition Width="50"/>
                                     <ColumnDefinition Width="50"/>
                                 </Grid.ColumnDefinitions>
-                                <Border Name="SelectedProject" Margin="2" CornerRadius="10" BorderThickness="1" BorderBrush="Gray">
+                                <Border Name="SelectedProject" Margin="2" Background="{DynamicResource Gradient}" CornerRadius="10" BorderThickness="1" BorderBrush="Gray">
                                     <Border.InputBindings>
                                         <MouseBinding MouseAction="LeftClick" Command="{Binding DataContext.ChooseUser, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}" CommandParameter="{Binding ElementName=SelectedProject}"/>
                                     </Border.InputBindings>
-                                    <Border.Background>
-                                        <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
-                                            <GradientStop Color="#FFBDF6FF" Offset="1"/>
-                                            <GradientStop Color="#FFA2F1FC" Offset="0"/>
-                                        </LinearGradientBrush>
-                                    </Border.Background>
                                     <Grid Margin="15" VerticalAlignment="Center">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*"/>
@@ -95,10 +77,10 @@
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" HorizontalAlignment="Left" Text="{Binding Name}" TextWrapping="Wrap" FontSize="16"/>
-                                        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Text="{Binding Surname}" TextWrapping="Wrap" FontSize="16"/>
-                                        <TextBlock Grid.Column="2" HorizontalAlignment="Left" Text="{Binding Login}" TextWrapping="Wrap" FontSize="16"/>
-                                        <TextBlock Grid.Column="3" HorizontalAlignment="Left" Text="{Binding Email}" TextWrapping="Wrap" FontSize="16"/>
+                                        <TextBlock Style="{DynamicResource TextBl}" Grid.Column="0" HorizontalAlignment="Left" Text="{Binding Name}" TextWrapping="Wrap" FontSize="16"/>
+                                        <TextBlock Style="{DynamicResource TextBl}" Grid.Column="1" HorizontalAlignment="Left" Text="{Binding Surname}" TextWrapping="Wrap" FontSize="16"/>
+                                        <TextBlock Style="{DynamicResource TextBl}" Grid.Column="2" HorizontalAlignment="Left" Text="{Binding Login}" TextWrapping="Wrap" FontSize="16"/>
+                                        <TextBlock Style="{DynamicResource TextBl}" Grid.Column="3" HorizontalAlignment="Left" Text="{Binding Email}" TextWrapping="Wrap" FontSize="16"/>
                                     </Grid>
                                 </Border>
 
@@ -124,29 +106,12 @@
 
         <ScrollViewer Grid.Row="1" Grid.Column="1" ScrollViewer.CanContentScroll="False" VerticalScrollBarVisibility="Hidden" Height="auto">
             <StackPanel  Margin="10,10,20,30" >
-                <TextBlock Text="{DynamicResource _ChangeInfo}" FontSize="32" TextWrapping="Wrap" Padding="10" Margin="0,10" HorizontalAlignment="Center"/>
+                <TextBlock Style="{DynamicResource TextBl}" Text="{DynamicResource _ChangeInfo}" FontSize="32" TextWrapping="Wrap" Padding="10" Margin="0,10" HorizontalAlignment="Center"/>
 
-                <TextBlock Text="{DynamicResource _Login}" HorizontalAlignment="Center" FontSize="26" Margin="0 0 0 5"/>
+                <TextBlock Style="{DynamicResource TextBl}" Text="{DynamicResource _Login}" HorizontalAlignment="Center" FontSize="26" Margin="0 0 0 5"/>
                 <Grid>
                     <TextBox Name="Login" Text="{Binding Login, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False" MinWidth="300" Height="35"/>
-                    <TextBlock IsHitTestVisible="False" FontSize="16" Text="{DynamicResource _Login}" Width="300"  TextAlignment="Left" Height="35" Padding="7" FontFamily="Calibri" Foreground="#9E9E9E">
-                        <TextBlock.Style>
-                            <Style TargetType="{x:Type TextBlock}">
-                                <Setter Property="Visibility" Value="Collapsed"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Text, ElementName=Login}" Value="">
-                                        <Setter Property="Visibility" Value="Visible"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </TextBlock.Style>
-                    </TextBlock>
-                </Grid>
-                
-                <TextBlock Text="{DynamicResource _FirstName}" HorizontalAlignment="Center" FontSize="26" Margin="0 0 0 5"/>
-                <Grid>
-                    <TextBox Name="FirstName" Text="{Binding FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MinWidth="300" Height="35"/>
-                    <TextBlock IsHitTestVisible="False" Grid.Row="3" FontSize="16" Text="{DynamicResource _FirstName}" Width="300"  TextAlignment="Left" Height="35" Padding="7" FontFamily="Calibri" Foreground="#9E9E9E">
+                    <TextBlock IsHitTestVisible="False" FontSize="16" Text="{DynamicResource _Login}" Width="300"  TextAlignment="Left" Height="35" Padding="7" FontFamily="Calibri" Foreground="{DynamicResource ForegroundTextBox}">
                         <TextBlock.Style>
                             <Style TargetType="{x:Type TextBlock}">
                                 <Setter Property="Visibility" Value="Collapsed"/>
@@ -160,10 +125,27 @@
                     </TextBlock>
                 </Grid>
 
-                <TextBlock Text="{DynamicResource _SecondName}" HorizontalAlignment="Center" FontSize="26" Margin="0 0 0 5"/>
+                <TextBlock Style="{DynamicResource TextBl}" Text="{DynamicResource _FirstName}" HorizontalAlignment="Center" FontSize="26" Margin="0 0 0 5"/>
+                <Grid>
+                    <TextBox Name="FirstName" Text="{Binding FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MinWidth="300" Height="35"/>
+                    <TextBlock IsHitTestVisible="False" Grid.Row="3" FontSize="16" Text="{DynamicResource _FirstName}" Width="300"  TextAlignment="Left" Height="35" Padding="7" FontFamily="Calibri" Foreground="{DynamicResource ForegroundTextBox}">
+                        <TextBlock.Style>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Text, ElementName=Login}" Value="">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </Grid>
+
+                <TextBlock Style="{DynamicResource TextBl}" Text="{DynamicResource _SecondName}" HorizontalAlignment="Center" FontSize="26" Margin="0 0 0 5"/>
                 <Grid>
                     <TextBox Name="SecondName" Text="{Binding SecondName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MinWidth="300" Height="35"/>
-                    <TextBlock IsHitTestVisible="False" FontSize="16" Text="{DynamicResource _SecondName}" Width="300"  TextAlignment="Left" Height="35" Padding="7" FontFamily="Calibri" Foreground="#9E9E9E">
+                    <TextBlock IsHitTestVisible="False" FontSize="16" Text="{DynamicResource _SecondName}" Width="300"  TextAlignment="Left" Height="35" Padding="7" FontFamily="Calibri" Foreground="{DynamicResource ForegroundTextBox}">
                         <TextBlock.Style>
                             <Style TargetType="{x:Type TextBlock}">
                                 <Setter Property="Visibility" Value="Collapsed"/>
@@ -177,10 +159,10 @@
                     </TextBlock>
                 </Grid>
 
-                <TextBlock Text="{DynamicResource _Email}" HorizontalAlignment="Center" FontSize="26" Margin="0 0 0 5"/>
+                <TextBlock Style="{DynamicResource TextBl}" Text="{DynamicResource _Email}" HorizontalAlignment="Center" FontSize="26" Margin="0 0 0 5"/>
                 <Grid>
                     <TextBox Name="Email" Text="{Binding Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MinWidth="300" Height="35"/>
-                    <TextBlock IsHitTestVisible="False" FontSize="16" Text="{DynamicResource _Email}" Width="300"  TextAlignment="Left" Height="35" Padding="7" FontFamily="Calibri" Foreground="#9E9E9E">
+                    <TextBlock IsHitTestVisible="False" FontSize="16" Text="{DynamicResource _Email}" Width="300"  TextAlignment="Left" Height="35" Padding="7" FontFamily="Calibri" Foreground="{DynamicResource ForegroundTextBox}">
                         <TextBlock.Style>
                             <Style TargetType="{x:Type TextBlock}">
                                 <Setter Property="Visibility" Value="Collapsed"/>
@@ -203,23 +185,23 @@
                         <RowDefinition Height="30"/>
                         <RowDefinition Height="50"/>
                     </Grid.RowDefinitions>
-                    <TextBlock Text="{DynamicResource _Language}" HorizontalAlignment="Center" FontSize="26" />
+                    <TextBlock Style="{DynamicResource TextBl}" Text="{DynamicResource _Language}" HorizontalAlignment="Center" FontSize="26" />
                     <ComboBox Grid.Row="1" Text="{Binding Language}" FontSize="24" Width="145" Height="35" Margin="5,0">
                         <ComboBoxItem Content="English" FontSize="18"/>
                         <ComboBoxItem Content="Русский" FontSize="18"/>
                     </ComboBox>
 
-                    <TextBlock Grid.Column="1" Text="{DynamicResource _Them}" HorizontalAlignment="Center" FontSize="26"/>
+                    <TextBlock Style="{DynamicResource TextBl}" Grid.Column="1" Text="{DynamicResource _Them}" HorizontalAlignment="Center" FontSize="26"/>
                     <ComboBox Grid.Row="1" Grid.Column="1" Text="{Binding Them}" FontSize="24" Width="145" Height="35" Margin="5,0">
                         <ComboBoxItem Content="{DynamicResource _DefaultThem}" FontSize="18"/>
                         <ComboBoxItem Content="{DynamicResource _DarkThem}" FontSize="18"/>
                     </ComboBox>
                 </Grid>
 
-                <TextBlock Text="{DynamicResource _NewLogin}" HorizontalAlignment="Center" FontSize="26" Margin="0 0 0 5"/>
+                <TextBlock Style="{DynamicResource TextBl}" Text="{DynamicResource _NewLogin}" HorizontalAlignment="Center" FontSize="26" Margin="0 0 0 5"/>
                 <Grid>
                     <TextBox Name="NewLogin" Text="{Binding NewLogin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MinWidth="300" Height="35"/>
-                    <TextBlock IsHitTestVisible="False" Grid.Row="3" FontSize="16" Text="{DynamicResource _NewLogin}" Width="300"  TextAlignment="Left" Height="35" Padding="7" FontFamily="Calibri" Foreground="#9E9E9E">
+                    <TextBlock IsHitTestVisible="False" Grid.Row="3" FontSize="16" Text="{DynamicResource _NewLogin}" Width="300"  TextAlignment="Left" Height="35" Padding="7" FontFamily="Calibri" Foreground="{DynamicResource ForegroundTextBox}">
                         <TextBlock.Style>
                             <Style TargetType="{x:Type TextBlock}">
                                 <Setter Property="Visibility" Value="Collapsed"/>
@@ -233,11 +215,11 @@
                     </TextBlock>
                 </Grid>
 
-                <TextBlock Text="{DynamicResource _Password}" HorizontalAlignment="Center" FontSize="26" Margin="0 0 0 5"/>
+                <TextBlock Style="{DynamicResource TextBl}" Text="{DynamicResource _Password}" HorizontalAlignment="Center" FontSize="26" Margin="0 0 0 5"/>
                 <PasswordBox Name="Password" Grid.Row="4" MinWidth="300" Height="35" ff:Secure.BoundPassword="{Binding Password,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Tag="{DynamicResource _Password}"/>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 5 0 0">
-                    <TextBlock Text="{DynamicResource _AdminStatus}" HorizontalAlignment="Center" FontSize="26" Margin="0 0 0 5"/>
+                    <TextBlock Style="{DynamicResource TextBl}" Text="{DynamicResource _AdminStatus}" HorizontalAlignment="Center" FontSize="26" Margin="0 0 0 5"/>
                     <CheckBox Grid.Column="2" HorizontalAlignment="Left" IsChecked="{Binding AdminStatus}" Margin="10,0" Height="20" Width="20" Padding="20"/>
                 </StackPanel>
 

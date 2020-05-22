@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Windows.Input;
 using System.Windows;
-using Курсовой.Clases;
+using Курсовой.Classes;
 using Курсовой.Model;
 using Курсовой.View;
 

@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Курсовой.Model;
-using Курсовой.Clases;
+using Курсовой.Classes;
 using Курсовой.ViewModel;
 using System.Windows.Input;
 using System.Windows;
@@ -39,7 +39,7 @@ namespace Курсовой.ViewModel
                     OnPropertyChanged();
                 }
                 else
-                    MessageBox.Show("Check your First name (max lenght 25)");
+                    CustomMessageBox.Show("Error", "Check your First name (max lenght 25)", MessageBoxButton.OK);
             }
         }
 
@@ -55,7 +55,7 @@ namespace Курсовой.ViewModel
                     OnPropertyChanged();
                 }
                 else
-                    MessageBox.Show("Check your Second name (max lenght 25)");
+                    CustomMessageBox.Show("Error", "Check your Second name (max lenght 25)", MessageBoxButton.OK);
             }
         }
 
@@ -71,7 +71,7 @@ namespace Курсовой.ViewModel
                     OnPropertyChanged();
                 }
                 else
-                    MessageBox.Show("Check your email (max lenght 30)");
+                    CustomMessageBox.Show("Error", "Check your email (max lenght 30)", MessageBoxButton.OK);
             }
         }
 
@@ -87,7 +87,7 @@ namespace Курсовой.ViewModel
                     OnPropertyChanged();
                 }
                 else
-                    MessageBox.Show("Check your Login (max lenght 25)");
+                    CustomMessageBox.Show("Error", "Check your Login (max lenght 25)", MessageBoxButton.OK);
             }
         }
 
@@ -155,45 +155,45 @@ namespace Курсовой.ViewModel
                     bool check = true;
                     if (FirstName.Length == 0)
                     {
-                        MessageBox.Show("Input your First name");
+                        CustomMessageBox.Show("Error", "Input your First name", MessageBoxButton.OK);
                         check = false;
                     }
                     if (SecondName.Length == 0)
                     {
-                        MessageBox.Show("Input your Second name");
+                        CustomMessageBox.Show("Error", "Input your Second name", MessageBoxButton.OK);
                         check = false;
                     }
                     if (!Regex.IsMatch(Email, @"^[-a-z0-9!#$%&'*+/=?^_`{|}~]+(\.[-a-z0-9!#$%&'*+/=?^_`{|}~]+)*@([a-z0-9]([-a-z0-9]{0,61}[a-z0-9])?\.)"+
                         "*(aero|arpa|asia|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel|[a-z][a-z])$"))
                     {
-                        MessageBox.Show("Uncorrectly format");
+                        CustomMessageBox.Show("Error", "Uncorrectly format in email", MessageBoxButton.OK);
                         check = false;
                     }
                     if (Login.Length == 0)
                     {
-                        MessageBox.Show("Input your Login");
+                        CustomMessageBox.Show("Error", "Input your login", MessageBoxButton.OK);
                         check = false;
                     }
                     try
                     {
                         if (Password.Length <5)
                         {
-                            MessageBox.Show("Check your Password (minimal lenght 5)");
+                            CustomMessageBox.Show("Error", "Check your Password (minimal lenght 5)", MessageBoxButton.OK);
                             check = false;
                         }
                         if (ConPassword.Length <5)
                         {
-                            MessageBox.Show("Check you Confirm Password (minimal lenght 5)");
+                            CustomMessageBox.Show("Error", "Check you Confirm Password (minimal lenght 5)", MessageBoxButton.OK);
                             check = false;
                         }
                     }
                     catch
                     {
-                        MessageBox.Show("Input Password and Confirm Password");
+                        CustomMessageBox.Show("Error", "Input Password and Confirm Password", MessageBoxButton.OK);
                     }
                     if (Password != ConPassword)
                     {
-                        MessageBox.Show("Password and Confirm Password are different");
+                        CustomMessageBox.Show("Error", "Password and Confirm Password are different", MessageBoxButton.OK);
                         check = false;
                     }
 
@@ -214,12 +214,12 @@ namespace Курсовой.ViewModel
                         try
                         {
                             dBRepository.Create(user);
-                            MessageBox.Show("Registration was successful");
+                            CustomMessageBox.Show("Event", "Registration was successful", MessageBoxButton.OK);
                             (obj as Page).NavigationService.Navigate(new Uri("pack://application:,,,/View/SignIn.xaml"), UriKind.RelativeOrAbsolute);
                         }
                         catch
                         {
-                            MessageBox.Show("This Login is busy");
+                            CustomMessageBox.Show("Error", "This Login is busy", MessageBoxButton.OK);
                         }
                         dBRepository.Dispose();
 

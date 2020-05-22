@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Курсовой.Model;
-using Курсовой.Clases;
+using Курсовой.Classes;
 using Курсовой.View;
 using System.ComponentModel;
 using System.Windows.Input;
@@ -45,12 +45,16 @@ namespace Курсовой.ViewModel
             {
                 try
                 {
+                    if(value<0)
+                    {
+                        throw new Exception();
+                    }
                     price = value;
                     OnPropertyChanged();
                 }
                 catch
                 {
-                    MessageBox.Show("It is a not number");
+                    CustomMessageBox.Show("Error", "It is not a number", MessageBoxButton.OK);
                 }
             }
         }
@@ -63,12 +67,16 @@ namespace Курсовой.ViewModel
             {
                 try
                 {
+                    if (value < 0)
+                    {
+                        throw new Exception();
+                    }
                     size = value;
                     OnPropertyChanged();
                 }
                 catch
                 {
-                    MessageBox.Show("It is a not number");
+                    CustomMessageBox.Show("Error", "It is not a number", MessageBoxButton.OK);
                 }
             }
         }
@@ -108,17 +116,17 @@ namespace Курсовой.ViewModel
 
                         if (Title.Length == 0 || Title.Length > 25)
                         {
-                            MessageBox.Show("Input title (max lenght 25)");
+                            CustomMessageBox.Show("Error", "Input title (max lenght 25)", MessageBoxButton.OK);
                             check = false;
                         }
                         if (Price == 0)
                         {
-                            MessageBox.Show("Input price");
+                            CustomMessageBox.Show("Error", "Input price", MessageBoxButton.OK);
                             check = false;
                         }
                         if (Size == 0 || Size < 5)
                         {
-                            MessageBox.Show("Uncorrect size");
+                            CustomMessageBox.Show("Error", "Uncorrect size", MessageBoxButton.OK);
                             check = false;
                         }
 
@@ -154,13 +162,13 @@ namespace Курсовой.ViewModel
                                 Side_view=data1
                             };
                             dBRepository.Create(element);
-                            MessageBox.Show("Object add");
+                            CustomMessageBox.Show("Event", "Object add", MessageBoxButton.OK);
                             dBRepository.Dispose();
                         }
                     }
                     catch
                     {
-                        MessageBox.Show("Oop error, sorry =(");
+                        CustomMessageBox.Show("Error", "Oop error, sorry =(", MessageBoxButton.OK);
                     }
                 });
             }

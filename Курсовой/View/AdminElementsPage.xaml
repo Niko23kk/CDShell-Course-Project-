@@ -12,19 +12,7 @@
         <vm:AdminElementsPageViewModel/>
     </Page.DataContext>
 
-    <Grid>
-        <Grid.Background>
-            <ImageBrush  ImageSource="pack://application:,,,/Resourses/Images/Background.jpg" Stretch="UniformToFill">
-                <ImageBrush.RelativeTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform AngleY="0" AngleX="0"/>
-                        <RotateTransform Angle="0"/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </ImageBrush.RelativeTransform>
-            </ImageBrush>
-        </Grid.Background>
+    <Grid Background="{DynamicResource BackgroundImage}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="340"/>
@@ -43,11 +31,11 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Text="{DynamicResource _Elements}" Grid.ColumnSpan="3" FontSize="32" TextWrapping="Wrap" Padding="10" Margin="30,10"/>
+            <TextBlock Style="{DynamicResource TextBl}" Text="{DynamicResource _Elements}" Grid.ColumnSpan="3" FontSize="32" TextWrapping="Wrap" Padding="10" Margin="30,10"/>
 
             <Grid Grid.Column="3" Grid.ColumnSpan="2" HorizontalAlignment="Center">
                 <TextBox Text="{Binding Find,UpdateSourceTrigger=PropertyChanged}" Name="Find" Width="200"/>
-                <TextBlock IsHitTestVisible="False" FontSize="16" Text="{DynamicResource _Find}" Width="200"  TextAlignment="Left" Height="35" Padding="7" FontFamily="Calibri" Foreground="#9E9E9E">
+                <TextBlock IsHitTestVisible="False" FontSize="16" Text="{DynamicResource _Find}" Width="200"  TextAlignment="Left" Height="35" Padding="7" FontFamily="Calibri" Foreground="{DynamicResource ForegroundTextBox}">
                     <TextBlock.Style>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="Visibility" Value="Collapsed"/>
@@ -61,10 +49,10 @@
                 </TextBlock>
             </Grid>
 
-            <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource _Title}" HorizontalAlignment="Left" FontSize="16" Margin="25 0 10 5"/>
-            <TextBlock Grid.Row="1" Grid.Column="1" Text="{DynamicResource _Type}" HorizontalAlignment="Left" FontSize="16" Margin="10 0 10 5"/>
-            <TextBlock Grid.Row="1" Grid.Column="2" Text="{DynamicResource _FrontView}" HorizontalAlignment="Left" FontSize="16" Margin="10 0 10 5"/>
-            <TextBlock Grid.Row="1" Grid.Column="3" Text="{DynamicResource _SideView}" HorizontalAlignment="Left" FontSize="16" Margin="10 0 10 5"/>
+            <TextBlock Style="{DynamicResource TextBl}" Grid.Row="1" Grid.Column="0" Text="{DynamicResource _Title}" HorizontalAlignment="Left" FontSize="16" Margin="25 0 10 5"/>
+            <TextBlock Style="{DynamicResource TextBl}" Grid.Row="1" Grid.Column="1" Text="{DynamicResource _Type}" HorizontalAlignment="Left" FontSize="16" Margin="10 0 10 5"/>
+            <TextBlock Style="{DynamicResource TextBl}" Grid.Row="1" Grid.Column="2" Text="{DynamicResource _FrontView}" HorizontalAlignment="Left" FontSize="16" Margin="10 0 10 5"/>
+            <TextBlock Style="{DynamicResource TextBl}" Grid.Row="1" Grid.Column="3" Text="{DynamicResource _SideView}" HorizontalAlignment="Left" FontSize="16" Margin="10 0 10 5"/>
 
             <ScrollViewer Grid.Row="2" Grid.ColumnSpan="6" Name="ScrollContainer" ScrollViewer.CanContentScroll="False" VerticalScrollBarVisibility="Hidden" Height="auto">
                 <ItemsControl Margin="10,0" ItemsSource="{Binding AllElements,Mode=TwoWay}">
@@ -76,16 +64,10 @@
                                     <ColumnDefinition Width="135*"/>
                                     <ColumnDefinition Width="50"/>
                                 </Grid.ColumnDefinitions>
-                                <Border Name="SelectedProject" Margin="2,2,1.8,2" CornerRadius="10" BorderThickness="1" BorderBrush="Gray" Grid.ColumnSpan="2">
+                                <Border Name="SelectedProject" Margin="2,2,1.8,2" CornerRadius="10" Background="{DynamicResource Gradient}" BorderThickness="1" BorderBrush="Gray" Grid.ColumnSpan="2">
                                     <Border.InputBindings>
                                         <MouseBinding MouseAction="LeftClick" Command="{Binding DataContext.SelectElement, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}" CommandParameter="{Binding ElementName=SelectedProject}"/>
                                     </Border.InputBindings>
-                                    <Border.Background>
-                                        <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
-                                            <GradientStop Color="#FFBDF6FF" Offset="1"/>
-                                            <GradientStop Color="#FFA2F1FC" Offset="0"/>
-                                        </LinearGradientBrush>
-                                    </Border.Background>
                                     <Grid Margin="15" VerticalAlignment="Center">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*"/>
@@ -93,8 +75,8 @@
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" HorizontalAlignment="Left" Text="{Binding Title}" TextWrapping="Wrap" FontSize="16"/>
-                                        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Text="{Binding Type}" TextWrapping="Wrap" FontSize="16"/>
+                                        <TextBlock Style="{DynamicResource TextBl}" Grid.Column="0" HorizontalAlignment="Left" Text="{Binding Title}" TextWrapping="Wrap" FontSize="16"/>
+                                        <TextBlock Style="{DynamicResource TextBl}" Grid.Column="1" HorizontalAlignment="Left" Text="{Binding Type}" TextWrapping="Wrap" FontSize="16"/>
                                         <Image Grid.Column="2" Source="{Binding Front_view}" Height="40"/>
                                         <Image Grid.Column="3" Source="{Binding Side_view}" Height="40"/>
                                     </Grid>
@@ -115,12 +97,12 @@
 
         <ScrollViewer Grid.Row="1" Grid.Column="1" ScrollViewer.CanContentScroll="False" VerticalScrollBarVisibility="Hidden" Height="auto">
             <StackPanel  Margin="10,10,20,30" >
-                <TextBlock Text="{DynamicResource _ChangeInfo}" FontSize="32" TextWrapping="Wrap" Padding="10" Margin="0,10" HorizontalAlignment="Center"/>
+                <TextBlock Style="{DynamicResource TextBl}" Text="{DynamicResource _ChangeInfo}" FontSize="32" TextWrapping="Wrap" Padding="10" Margin="0,10" HorizontalAlignment="Center"/>
 
-                <TextBlock Text="{DynamicResource _Title}" HorizontalAlignment="Center" FontSize="26" Margin="0 0 0 5"/>
+                <TextBlock Style="{DynamicResource TextBl}" Text="{DynamicResource _Title}" HorizontalAlignment="Center" FontSize="26" Margin="0 0 0 5"/>
                 <Grid>
                     <TextBox Name="Title" Text="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MinWidth="300" Height="35"/>
-                    <TextBlock IsHitTestVisible="False" FontSize="16" Text="{DynamicResource _Title}" Width="300"  TextAlignment="Left" Height="35" Padding="9 7" FontFamily="Calibri" Foreground="#9E9E9E">
+                    <TextBlock IsHitTestVisible="False" FontSize="16" Text="{DynamicResource _Title}" Width="300"  TextAlignment="Left" Height="35" Padding="9 7" FontFamily="Calibri" Foreground="{DynamicResource ForegroundTextBox}">
                         <TextBlock.Style>
                             <Style TargetType="{x:Type TextBlock}">
                                 <Setter Property="Visibility" Value="Collapsed"/>
@@ -135,7 +117,7 @@
                 </Grid>
 
                 <TextBlock Text="{DynamicResource _Type}" HorizontalAlignment="Center" FontSize="26" Margin="0 0 0 5"/>
-                <ComboBox Text="{Binding Type}" FontSize="24" Width="300" Height="35">
+                <ComboBox Text="{Binding Type}" FontSize="18" Width="300" Height="35">
                     <ComboBoxItem Content="{DynamicResource _LivingRoom}" FontSize="18"/>
                     <ComboBoxItem Content="{DynamicResource _Bedroom}" FontSize="18"/>
                     <ComboBoxItem Content="{DynamicResource _Kitchen}" FontSize="18"/>
@@ -158,7 +140,7 @@
                     <TextBlock Text="{DynamicResource _Price}" Grid.Column="0" HorizontalAlignment="Center" FontSize="26" />
                     <Grid Grid.Column="0" Grid.Row="1">
                         <TextBox Name="Prise" Text="{Binding Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MinWidth="145" Height="35"/>
-                        <TextBlock IsHitTestVisible="False" FontSize="16" Text="Prise" Width="145"  TextAlignment="Left" Height="35" Padding="7" FontFamily="Calibri" Foreground="#9E9E9E">
+                        <TextBlock IsHitTestVisible="False" FontSize="16" Text="Prise" Width="145"  TextAlignment="Left" Height="35" Padding="7" FontFamily="Calibri" Foreground="{DynamicResource ForegroundTextBlock}">
                             <TextBlock.Style>
                                 <Style TargetType="{x:Type TextBlock}">
                                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -175,7 +157,7 @@
                     <TextBlock Text="{DynamicResource _Size}" Grid.Column="1" HorizontalAlignment="Center" FontSize="26"/>
                     <Grid Grid.Column="1" Grid.Row="1">
                         <TextBox Name="Size" Text="{Binding Size, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MinWidth="145" Height="35"/>
-                        <TextBlock IsHitTestVisible="False" FontSize="16" Text="Size" Width="145"  TextAlignment="Left" Height="35" Padding="7" FontFamily="Calibri" Foreground="#9E9E9E">
+                        <TextBlock IsHitTestVisible="False" FontSize="16" Text="Size" Width="145"  TextAlignment="Left" Height="35" Padding="7" FontFamily="Calibri" Foreground="{DynamicResource ForegroundTextBox}">
                             <TextBlock.Style>
                                 <Style TargetType="{x:Type TextBlock}">
                                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -198,7 +180,7 @@
                         <ColumnDefinition Width="145"/>
                     </Grid.ColumnDefinitions>
                     
-                    <Button Content="{DynamicResource _Choose}" Style="{StaticResource MainButton}" IsEnabled="True" Height="40" VerticalAlignment="Top" Width="100" HorizontalAlignment="Center" Command="{Binding FrontImageClick}"/>
+                    <Button Content="{DynamicResource _Choose}"  Style="{StaticResource MainButton}" IsEnabled="True" Height="40" VerticalAlignment="Top" Width="100" HorizontalAlignment="Center" Command="{Binding FrontImageClick}"/>
                     <Border Grid.Column="1" Margin="20,0" CornerRadius="10" Background="#33828080">
                         <Image VerticalAlignment="Top" Source="{Binding FrontView}" Height="90" Width="90" AllowDrop="True"/>
                     </Border>

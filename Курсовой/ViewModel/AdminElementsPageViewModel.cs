@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Курсовой.Model;
-using Курсовой.Clases;
+using Курсовой.Classes;
 using Курсовой.ViewModel;
 using Курсовой.View;
 using System.Windows.Input;
@@ -60,7 +60,7 @@ namespace Курсовой.ViewModel
                 window.Close();
             }
             dBRepository.Dispose();
-            MessageBox.Show("Warning:remember that any of your changes affect customer projects, be careful");
+            CustomMessageBox.Show("Warning","Warning: remember that any of your changes affect customer projects, be careful", MessageBoxButton.OK);
         }
 
         private string title="";
@@ -384,7 +384,7 @@ namespace Курсовой.ViewModel
                         Side_view = data1
                     };
                     dBRepository.Update(element);
-                    MessageBox.Show("Element was update");
+                    CustomMessageBox.Show("Event", "Element update", MessageBoxButton.OK);
                     AllElements.Clear();
                     foreach (var item in dBRepository.GetAll())
                     {
@@ -473,7 +473,7 @@ namespace Курсовой.ViewModel
                         Side_view = data1
                     };
                     dBRepository.Create(element);
-                    MessageBox.Show("Element was created");
+                    CustomMessageBox.Show("Event", "Element was created", MessageBoxButton.OK);
                     AllElements.Clear();
                     foreach (var item in dBRepository.GetAll())
                     {
@@ -492,18 +492,21 @@ namespace Курсовой.ViewModel
                 {
                     try
                     {
-                        DBRepository<Elements> dBElements = new DBRepository<Elements>(new BuildEntities());
-                        DBRepository<WorkField> dBField = new DBRepository<WorkField>(new BuildEntities());
-                        dBField.RemoveCollection(dBField.GetAll().Where(s => s.Element_ID == ((obj as FrameworkElement).DataContext as Elements).ID));
-                        dBElements.Remove((obj as FrameworkElement).DataContext as Elements);
-                        MessageBox.Show("Element was deleted");
-                        AllElements.Clear();
-                        foreach (var item in dBElements.GetAll())
+                        if (CustomMessageBox.Show("Deleted", "Deleted element?", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                         {
-                            AllElements.Add(item);
+                            DBRepository<Elements> dBElements = new DBRepository<Elements>(new BuildEntities());
+                            DBRepository<WorkField> dBField = new DBRepository<WorkField>(new BuildEntities());
+                            dBField.RemoveCollection(dBField.GetAll().Where(s => s.Element_ID == ((obj as FrameworkElement).DataContext as Elements).ID));
+                            dBElements.Remove((obj as FrameworkElement).DataContext as Elements);
+                            CustomMessageBox.Show("Event", "Element was deleted", MessageBoxButton.OK);
+                            AllElements.Clear();
+                            foreach (var item in dBElements.GetAll())
+                            {
+                                AllElements.Add(item);
+                            }
+                            dBElements.Dispose();
+                            dBField.Dispose();
                         }
-                        dBElements.Dispose();
-                        dBField.Dispose();
                     }
                     catch { }
                 });

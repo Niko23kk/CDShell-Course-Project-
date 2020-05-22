@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Курсовой.Model;
-using Курсовой.Clases;
+using Курсовой.Classes;
 using System.ComponentModel;
 using System.Windows.Input;
 using System.Windows;

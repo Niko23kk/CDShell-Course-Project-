@@ -12,7 +12,7 @@
         <vm:SaveProjectViewModel/>
     </Window.DataContext>
     
-    <Grid>
+    <Grid Background="{DynamicResource MainColor}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="3*"/>
@@ -24,10 +24,10 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="80"/>
         </Grid.RowDefinitions>
-        
-        <TextBlock TextWrapping="Wrap" Grid.Row="1" Text="{DynamicResource _ProjectName}" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10,0"/>
+
+        <TextBlock Style="{DynamicResource TextBl}" TextWrapping="Wrap" Grid.Row="1" Text="{DynamicResource _ProjectName}" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10,0"/>
         <TextBox Name="ProjectName" Text="{Binding Name}" Grid.Row="1" Grid.Column="1" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0" Height="35"/>
-        <TextBlock IsHitTestVisible="False" Grid.Row="1" Grid.Column="1" FontSize="16" Text="{DynamicResource _ProjectName}" Width="300"  TextAlignment="Left" Height="35" Margin="10 0" Padding="7" FontFamily="Calibri" Foreground="#9E9E9E">
+        <TextBlock IsHitTestVisible="False" Grid.Row="1" Grid.Column="1" FontSize="16" Text="{DynamicResource _ProjectName}" Width="300"  TextAlignment="Left" Height="35" Margin="10 0" Padding="7" FontFamily="Calibri" Foreground="{DynamicResource ForegroundTextBox}">
             <TextBlock.Style>
                 <Style TargetType="{x:Type TextBlock}">
                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -40,7 +40,7 @@
             </TextBlock.Style>
         </TextBlock>
 
-        <TextBlock TextWrapping="Wrap" Grid.Row="3" Text="{DynamicResource _Finished}" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10,0"/>
+        <TextBlock Style="{DynamicResource TextBl}" TextWrapping="Wrap" Grid.Row="3" Text="{DynamicResource _Finished}" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10,0"/>
         <CheckBox Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" IsChecked="{Binding Finish,Mode=TwoWay}" IsEnabled="True" Margin="10,0" Height="20" Width="20" Padding="20"/>
 
         <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" Height="50" Style="{StaticResource MainButton}" Command="{Binding SaveClick}" Content="{DynamicResource _Save}" Width="150"/>

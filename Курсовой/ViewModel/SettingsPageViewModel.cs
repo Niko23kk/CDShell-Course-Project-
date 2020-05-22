@@ -6,7 +6,8 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Курсовой.Model;
-using Курсовой.Clases;
+using Курсовой.Classes;
+using Курсовой.View;
 using Курсовой.ViewModel;
 using System.Windows.Input;
 using System.Windows;
@@ -65,6 +66,14 @@ namespace Курсовой.ViewModel
             }
             set
             {
+                foreach (var item in Application.Current.Windows)
+                {
+                    try
+                    {
+                        (((((item as Window).Content as Grid).FindName("Frame") as Frame).Content as Page).FindName("OldPassword") as PasswordBox).Tag = "";
+                    }
+                    catch { }
+                }
                 password = value;
                 OnPropertyChanged();
             }
@@ -79,6 +88,14 @@ namespace Курсовой.ViewModel
             }
             set
             {
+                foreach (var item in Application.Current.Windows)
+                {
+                    try
+                    {
+                        (((((item as Window).Content as Grid).FindName("Frame") as Frame).Content as Page).FindName("NewPassword") as PasswordBox).Tag = "";
+                    }
+                    catch { }
+                }
                 newpassword = value;
                 OnPropertyChanged();
             }
@@ -176,10 +193,13 @@ namespace Курсовой.ViewModel
                                     if (NewPassword.Length >= 5)
                                         user.Password = sHA1.ComputeHash(Encoding.ASCII.GetBytes(NewPassword));
                                     else
-                                        MessageBox.Show("Password must be at least 5 characters");
+                                        CustomMessageBox.Show("Error", "Password must be at least 5 characters", MessageBoxButton.OK);
                                 }
                                 else
-                                    MessageBox.Show("Invalid password");
+                                {
+                                    CustomMessageBox.Show("Error", "Invalid password", MessageBoxButton.OK);
+                                    return;
+                                }
                             }
                         }
                         dBRepository.Update(user);
@@ -194,12 +214,22 @@ namespace Курсовой.ViewModel
                             ResourceDictionary resourceDict = Application.LoadComponent(new Uri("/Resourses/RuLanguage.xaml", UriKind.RelativeOrAbsolute)) as ResourceDictionary;
                             Application.Current.Resources.MergedDictionaries.Add(resourceDict);
                         }
-                        MessageBox.Show("Data was saved");
+                        if (user.Them == null || user.Them == "Default")
+                        {
+                            ResourceDictionary resourceDict = Application.LoadComponent(new Uri("/Resourses/DefaultThem.xaml", UriKind.RelativeOrAbsolute)) as ResourceDictionary;
+                            Application.Current.Resources.MergedDictionaries.Add(resourceDict);
+                        }
+                        else
+                        {
+                            ResourceDictionary resourceDict = Application.LoadComponent(new Uri("/Resourses/BlackThem.xaml", UriKind.RelativeOrAbsolute)) as ResourceDictionary;
+                            Application.Current.Resources.MergedDictionaries.Add(resourceDict);
+                        }
+                        CustomMessageBox.Show("Event", "Data was saved", MessageBoxButton.OK);
                         dBRepository.Dispose();
                     }
                     catch
                     {
-                        MessageBox.Show("Ops error, sory =(");
+                        CustomMessageBox.Show("Error", "Ops error, sory =(", MessageBoxButton.OK);
                     }
 
                 });

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Windows.Input;
-using Курсовой.Clases;
+using Курсовой.Classes;
 using System.Windows;
 
 namespace Курсовой.ViewModel

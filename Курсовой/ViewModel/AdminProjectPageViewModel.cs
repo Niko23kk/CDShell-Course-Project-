@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Курсовой.Model;
-using Курсовой.Clases;
+using Курсовой.Classes;
 using Курсовой.View;
 using Курсовой.ViewModel;
 using System.Windows.Input;
@@ -155,7 +155,7 @@ namespace Курсовой.ViewModel
                                 XmlSerializer serializer = new XmlSerializer(typeof(List<(int? ID_UP, int? Element_ID, int? PositionX, int? PositionY, int? Rotate)>));
                                 StreamWriter file = new StreamWriter(openFile.FileName);
                                 serializer.Serialize(file, save);
-                                MessageBox.Show("Project save");
+                                CustomMessageBox.Show("Event", "Project save", MessageBoxButton.OK);
                                 dBFiled.Dispose();
                                 dBUP.Dispose();
                             }
@@ -174,23 +174,26 @@ namespace Курсовой.ViewModel
                 {
                     try
                     {
-                        DBRepository<Project> dBProject = new DBRepository<Project>(new BuildEntities());
-                        DBRepository<User> dBUser = new DBRepository<User>(new BuildEntities());
-                        DBRepository<UserProject> dbUP = new DBRepository<UserProject>(new BuildEntities());
-                        dbUP.Remove(dbUP.GetAll().First(s=>s.ID_Project== ((obj as FrameworkElement).DataContext as UserProj).Project.ID_Project));
-                        dBProject.Remove(((obj as FrameworkElement).DataContext as UserProj).Project);
-                        Projects.Clear();
-                        if (CurUser == null)
+                        if (CustomMessageBox.Show("Deleted", "Deleted project?", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                         {
-                            foreach (var item in dbUP.GetAll())
+                            DBRepository<Project> dBProject = new DBRepository<Project>(new BuildEntities());
+                            DBRepository<User> dBUser = new DBRepository<User>(new BuildEntities());
+                            DBRepository<UserProject> dbUP = new DBRepository<UserProject>(new BuildEntities());
+                            dbUP.Remove(dbUP.GetAll().First(s => s.ID_Project == ((obj as FrameworkElement).DataContext as UserProj).Project.ID_Project));
+                            dBProject.Remove(((obj as FrameworkElement).DataContext as UserProj).Project);
+                            Projects.Clear();
+                            if (CurUser == null)
                             {
-                                Projects.Add(new UserProj(dBUser.GetAll().First(s => s.ID_User == item.ID_User), dBProject.GetAll().First(s => s.ID_Project == item.ID_Project)));
+                                foreach (var item in dbUP.GetAll())
+                                {
+                                    Projects.Add(new UserProj(dBUser.GetAll().First(s => s.ID_User == item.ID_User), dBProject.GetAll().First(s => s.ID_Project == item.ID_Project)));
+                                }
                             }
+                            CustomMessageBox.Show("Event", "Project has been deleted", MessageBoxButton.OK);
+                            dBProject.Dispose();
+                            dbUP.Dispose();
+                            dBUser.Dispose();
                         }
-                        MessageBox.Show("Project has been deleted");
-                        dBProject.Dispose();
-                        dbUP.Dispose();
-                        dBUser.Dispose();
                     }
                     catch
                     { }

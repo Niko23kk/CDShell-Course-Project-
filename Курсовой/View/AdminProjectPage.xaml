@@ -7,20 +7,8 @@
       xmlns:local="clr-namespace:Курсовой.View"
       mc:Ignorable="d" 
       Title="AdminProjectPage">
-    
-    <Grid>
-        <Grid.Background>
-            <ImageBrush  ImageSource="pack://application:,,,/Resourses/Images/Background.jpg" Stretch="UniformToFill">
-                <ImageBrush.RelativeTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform AngleY="0" AngleX="0"/>
-                        <RotateTransform Angle="0"/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </ImageBrush.RelativeTransform>
-            </ImageBrush>
-        </Grid.Background>
+
+    <Grid Background="{DynamicResource BackgroundImage}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
@@ -36,7 +24,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="{DynamicResource _Projects}" Grid.ColumnSpan="3" FontSize="32" TextWrapping="Wrap" Padding="10" Margin="30,10"/>
+        <TextBlock Style="{DynamicResource TextBl}" Text="{DynamicResource _Projects}" Grid.ColumnSpan="3" FontSize="32" TextWrapping="Wrap" Padding="10" Margin="30,10"/>
 
         <Grid Grid.Column="3" Grid.ColumnSpan="2"  HorizontalAlignment="Center">
             <TextBox  Text="{Binding Find,UpdateSourceTrigger=PropertyChanged}" Name="Find" Width="200"/>
@@ -54,10 +42,10 @@
             </TextBlock>
         </Grid>
 
-        <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource _Login}" HorizontalAlignment="Left" FontSize="16" Margin="25 0 10 5"/>
-        <TextBlock Grid.Row="1" Grid.Column="1" Text="{DynamicResource _ProjectName}" HorizontalAlignment="Left" FontSize="16" Margin="10 0 10 5"/>
-        <TextBlock Grid.Row="1" Grid.Column="2" Text="{DynamicResource _DateOfChange}" HorizontalAlignment="Left" FontSize="16" Margin="10 0 10 5"/>
-        <TextBlock Grid.Row="1" Grid.Column="3" Text="{DynamicResource _ProjectID}" HorizontalAlignment="Left" FontSize="16" Margin="10 0 10 5"/>
+        <TextBlock Style="{DynamicResource TextBl}" Grid.Row="1" Grid.Column="0" Text="{DynamicResource _Login}" HorizontalAlignment="Left" FontSize="16" Margin="25 0 10 5"/>
+        <TextBlock Style="{DynamicResource TextBl}" Grid.Row="1" Grid.Column="1" Text="{DynamicResource _ProjectName}" HorizontalAlignment="Left" FontSize="16" Margin="10 0 10 5"/>
+        <TextBlock Style="{DynamicResource TextBl}" Grid.Row="1" Grid.Column="2" Text="{DynamicResource _DateOfChange}" HorizontalAlignment="Left" FontSize="16" Margin="10 0 10 5"/>
+        <TextBlock Style="{DynamicResource TextBl}" Grid.Row="1" Grid.Column="3" Text="{DynamicResource _ProjectID}" HorizontalAlignment="Left" FontSize="16" Margin="10 0 10 5"/>
 
         <ScrollViewer Grid.Row="2" Grid.ColumnSpan="7" Name="ScrollContainer" ScrollViewer.CanContentScroll="False" VerticalScrollBarVisibility="Hidden" Height="auto">
             <ItemsControl x:Name="ListViewProducts" Margin="10,0" ItemsSource="{Binding Projects,Mode=TwoWay}">
@@ -87,10 +75,10 @@
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
-                                    <TextBlock Grid.Column="0" HorizontalAlignment="Left" Text="{Binding User.Login}" TextWrapping="Wrap" FontSize="16"/>
-                                    <TextBlock Grid.Column="1" HorizontalAlignment="Left" Text="{Binding Project.Project_name}" TextWrapping="Wrap" FontSize="16"/>
-                                    <TextBlock Grid.Column="2" HorizontalAlignment="Left" Text="{Binding Project.Date_of_change}" TextWrapping="Wrap" FontSize="16"/>
-                                    <TextBlock Grid.Column="3" HorizontalAlignment="Left" Text="{Binding Project.ID_Project}" TextWrapping="Wrap" FontSize="16"/>
+                                    <TextBlock Style="{DynamicResource TextBl}" Grid.Column="0" HorizontalAlignment="Left" Text="{Binding User.Login}" TextWrapping="Wrap" FontSize="16"/>
+                                    <TextBlock Style="{DynamicResource TextBl}" Grid.Column="1" HorizontalAlignment="Left" Text="{Binding Project.Project_name}" TextWrapping="Wrap" FontSize="16"/>
+                                    <TextBlock Style="{DynamicResource TextBl}" Grid.Column="2" HorizontalAlignment="Left" Text="{Binding Project.Date_of_change}" TextWrapping="Wrap" FontSize="16"/>
+                                    <TextBlock Style="{DynamicResource TextBl}" Grid.Column="3" HorizontalAlignment="Left" Text="{Binding Project.ID_Project}" TextWrapping="Wrap" FontSize="16"/>
                                 </Grid>
                             </Border>
 

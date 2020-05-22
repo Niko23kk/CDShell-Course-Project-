@@ -11,19 +11,7 @@
         <vm:LoginPageViewModel/>
     </Page.DataContext>
 
-    <Grid ShowGridLines="True" RenderTransformOrigin="0.5,0.5">
-        <Grid.Background>
-            <ImageBrush  ImageSource="pack://application:,,,/Resourses/Images/Background.jpg" Stretch="UniformToFill">
-                <ImageBrush.RelativeTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform AngleY="0" AngleX="0"/>
-                        <RotateTransform Angle="0"/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </ImageBrush.RelativeTransform>
-            </ImageBrush>
-        </Grid.Background>
+    <Grid Background="{DynamicResource BackgroundImage}">
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="100"/>
@@ -34,10 +22,10 @@
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="1" Text="{DynamicResource _PasswordRec}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="32" FontWeight="Bold" Foreground="#9E9E9E"/>
+        <TextBlock Grid.Row="1" Text="{DynamicResource _PasswordRec}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="32" FontWeight="Bold" Foreground="{DynamicResource Header}"/>
 
         <TextBox Name="Login" Text="{Binding Login, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" MinWidth="300" Height="35"/>
-        <TextBlock IsHitTestVisible="False" Grid.Row="3" FontSize="16" Text="{DynamicResource _Login}" Width="300"  TextAlignment="Left" Height="35" Padding="7" FontFamily="Calibri" Foreground="#9E9E9E">
+        <TextBlock IsHitTestVisible="False" Grid.Row="3" FontSize="16" Text="{DynamicResource _Login}" Width="300"  TextAlignment="Left" Height="35" Padding="7" FontFamily="Calibri" Foreground="{DynamicResource ForegroundTextBox}">
             <TextBlock.Style>
                 <Style TargetType="{x:Type TextBlock}">
                     <Setter Property="Visibility" Value="Collapsed"/>

@@ -7,7 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Globalization;
 
-namespace Курсовой.Clases
+namespace Курсовой.Classes
 {
     public static class Secure
     {

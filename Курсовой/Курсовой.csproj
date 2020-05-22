@@ -69,10 +69,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Clases\CommandZoom.cs" />
-    <Compile Include="Clases\DelegateCommand.cs" />
-    <Compile Include="Clases\Secure.cs" />
-    <Compile Include="Clases\WindowFunction.cs" />
+    <Compile Include="Classes\DelegateCommand.cs" />
+    <Compile Include="Classes\Secure.cs" />
+    <Compile Include="Classes\WindowFunction.cs" />
     <Compile Include="Model\BuildDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -104,14 +103,12 @@
     <Compile Include="Model\User.cs">
       <DependentUpon>BuildDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\UserProj.cs" />
     <Compile Include="Model\UserProject.cs">
       <DependentUpon>BuildDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\WorkField.cs">
       <DependentUpon>BuildDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Style\UserControl1.xaml.cs">
-      <DependentUpon>UserControl1.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\AdminElementsPageViewModel.cs" />
     <Compile Include="ViewModel\AdminProjectPageViewModel.cs" />
@@ -140,6 +137,9 @@
     </Compile>
     <Compile Include="View\AdminUserPage.xaml.cs">
       <DependentUpon>AdminUserPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CustomMessageBox.xaml.cs">
+      <DependentUpon>CustomMessageBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
@@ -177,6 +177,10 @@
     <Compile Include="View\WorkSpace.xaml.cs">
       <DependentUpon>WorkSpace.xaml</DependentUpon>
     </Compile>
+    <Page Include="Resourses\BlackThem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resourses\EngLanguage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -186,10 +190,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resourses\RuLanguage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Style\UserControl1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -206,6 +206,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AdminUserPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CustomMessageBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -295,6 +299,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="ClassDiagram.cd" />
     <EntityDeploy Include="Model\BuildDB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>BuildDB.Designer.cs</LastGenOutput>
@@ -320,7 +325,7 @@
     <Resource Include="Resourses\Images\add.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resourses\Images\Background.jpg" />
+    <Resource Include="Resourses\Images\BackgroundDefault.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -355,6 +360,7 @@
     <Resource Include="Resourses\Images\Lock.png" />
     <Resource Include="Resourses\Images\Unlock.png" />
     <Resource Include="Resourses\Images\Project.png" />
+    <Resource Include="Resourses\Images\BackgroundBlack.jpg" />
     <Content Include="Model\BuildDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>BuildDB.edmx</DependentUpon>

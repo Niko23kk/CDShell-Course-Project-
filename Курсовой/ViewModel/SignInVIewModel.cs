@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Курсовой.Model;
-using Курсовой.Clases;
+using Курсовой.Classes;
 using Курсовой.ViewModel;
 using System.Windows.Input;
 using System.Windows;
@@ -69,19 +69,19 @@ namespace Курсовой.ViewModel
                     bool check = true;
                     if (Login.Length == 0)
                     {
-                        MessageBox.Show("Input your Login");
+                        CustomMessageBox.Show("Error", "Input your Login", MessageBoxButton.OK);
                         check = false;
                     }
                     try
                     {
                         if (Password.Length < 5)
                         {
-                            MessageBox.Show("Input your Password (minimal lenght 5)");
+                            CustomMessageBox.Show("Error","Input your Password (minimal lenght 5)", MessageBoxButton.OK);
                         }
                     }
                     catch
                     {
-                        MessageBox.Show("Input your Password (minimal lenght 5)");
+                        CustomMessageBox.Show("Error", "Input your Password (minimal lenght 5)", MessageBoxButton.OK);
                     }
                     if (check)
                     {
@@ -112,15 +112,15 @@ namespace Курсовой.ViewModel
                                     }
                                 }
                                 else
-                                    MessageBox.Show("Error in password =(");
+                                    CustomMessageBox.Show("Error", "Error in password =(", MessageBoxButton.OK);
                             }
                             else
-                                MessageBox.Show("We not found account =(");
+                                CustomMessageBox.Show("Error", "We not found account =(", MessageBoxButton.OK);
                             dBRepository.Dispose();
                         }
                         catch
                         {
-                            MessageBox.Show("We not found account =(");
+                            CustomMessageBox.Show("Error", "We not found account =(", MessageBoxButton.OK);
                         }
                     }
                 });

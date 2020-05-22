@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:Курсовой.ViewModel"
-        xmlns:cont="clr-namespace:Курсовой.Clases"
+        xmlns:cont="clr-namespace:Курсовой.Classes"
         xmlns:local="clr-namespace:Курсовой"
         mc:Ignorable="d"
         Title="CD Shell" Width="1000" Height="800" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen"
@@ -13,11 +13,12 @@
         <vm:MainWindowViewModel/>
     </Window.DataContext>
 
-    <Grid ShowGridLines="True" Background="White">
+    <Grid Background="{DynamicResource MainColor}">
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="1.8"/>
+            <RowDefinition Height="38.2"/>
+            <RowDefinition/>
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -25,7 +26,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="0" Grid.Row="1" Grid.RowSpan="2">
+        <Grid Grid.Column="0" Grid.Row="2" Grid.RowSpan="2" Margin="0,0,0,0.2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="100"/>
                 <RowDefinition Height="*"/>
@@ -36,89 +37,95 @@
                 <ColumnDefinition Width="200"/>
             </Grid.ColumnDefinitions>
             <Image Grid.Column="0" Source="pack://application:,,,/Resourses/Logo.png" Margin="20"/>
-            <TextBlock Grid.Column="1" FontSize="30" FontFamily="Futura Md BT" VerticalAlignment="Center" Text="CD SHELL" Foreground="#FF66C3D0"/>
+            <TextBlock Grid.Column="1" FontSize="30" FontFamily="Futura Md BT" VerticalAlignment="Center" Text="CD SHELL" Foreground="{DynamicResource LogoandButton}"/>
 
-            <ScrollViewer Grid.Row="1" Grid.ColumnSpan="2" Name="ScrollContainer" ScrollViewer.CanContentScroll="False" VerticalScrollBarVisibility="Hidden" Height="auto">
-                <StackPanel  Margin="0,40" >
-                    <Button Name="HomeButton" Style="{StaticResource MenuButton}" Command="{Binding HomeClick}">
-                        <StackPanel Background="White" Orientation="Horizontal" Width="240">
-                            <Viewbox Height="40" VerticalAlignment="Top">
-                                <Path Fill="{Binding ElementName=HomeButton,Path=Foreground}" Data="M15.45,7L14,5.551V2c0-0.55-0.45-1-1-1h-1c-0.55,0-1,0.45-1,1v0.553L9,0.555C8.727,0.297,8.477,
+            <ScrollViewer Grid.Row="1" Grid.ColumnSpan="2" Name="ScrollContainer" ScrollViewer.CanContentScroll="False" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden" Height="auto">
+                <Border Margin="0 0 0 5">
+                    <StackPanel  Margin="0,40" >
+                        <Button Name="HomeButton" Style="{StaticResource MenuButton}" Command="{Binding HomeClick}">
+                            <StackPanel Background="{DynamicResource MainColor}" Orientation="Horizontal" Width="240">
+                                <Viewbox Height="40" VerticalAlignment="Top">
+                                    <Path Fill="{Binding ElementName=HomeButton,Path=Foreground}" Data="M15.45,7L14,5.551V2c0-0.55-0.45-1-1-1h-1c-0.55,0-1,0.45-1,1v0.553L9,0.555C8.727,0.297,8.477,
                               0,8,0S7.273,0.297,7,0.555  L0.55,7C0.238,7.325,0,7.562,0,8c0,0.563,0.432,1,1,1h1v6c0,0.55,0.45,1,1,1h3v-5c0-0.55,0.45-1,
                               1-1h2c0.55,0,1,0.45,1,1v5h3  c0.55,0,1-0.45,1-1V9h1c0.568,0,1-0.437,1-1C16,7.562,15.762,7.325,15.45,7z"/>
-                            </Viewbox>
-                            <TextBlock Foreground="{Binding ElementName=HomeButton,Path=Foreground}"  Name="TextHome" FontFamily="Futura Md BT" VerticalAlignment="Center" Margin="30,5" FontSize="30" Text="{DynamicResource _Home}"/>
-                        </StackPanel>
-                    </Button>
+                                </Viewbox>
+                                <TextBlock Foreground="{Binding ElementName=HomeButton,Path=Foreground}"  Name="TextHome" FontFamily="Futura Md BT" VerticalAlignment="Center" Margin="30,5" FontSize="30" Text="{DynamicResource _Home}"/>
+                            </StackPanel>
+                        </Button>
 
-                    <Button Name="SettingsButton" Style="{StaticResource MenuButton}" Command="{Binding SettingsClick}">
-                        <StackPanel Background="White" Orientation="Horizontal" Width="240">
-                            <Viewbox Height="40" VerticalAlignment="Top">
-                                <Path Fill="{Binding ElementName=SettingsButton,Path=Foreground}" Data="M17.4,11 C17.4,10.7 17.5,10.4 17.5,10 C17.5,9.6 17.5,9.3 17.4,9 L19.5,7.3 C19.7,7.1 19.7,6.9 19.6,6.7
+                        <Button Name="SettingsButton" Style="{StaticResource MenuButton}" Command="{Binding SettingsClick}">
+                            <StackPanel Background="{DynamicResource MainColor}" Orientation="Horizontal" Width="240">
+                                <Viewbox Height="40" VerticalAlignment="Top">
+                                    <Path Fill="{Binding ElementName=SettingsButton,Path=Foreground}" Data="M17.4,11 C17.4,10.7 17.5,10.4 17.5,10 C17.5,9.6 17.5,9.3 17.4,9 L19.5,7.3 C19.7,7.1 19.7,6.9 19.6,6.7
                               L17.6,3.2 C17.5,3.1 17.3,3 17,3.1 L14.5,4.1 C14,3.7 13.4,3.4 12.8,3.1 L12.4,0.5 C12.5,0.2 12.2,0 12,0 L8,0 C7.8,0 7.5,0.2
                               7.5,0.4 L7.1,3.1 C6.5,3.3 6,3.7 5.4,4.1 L3,3.1 C2.7,3 2.5,3.1 2.3,3.3 L0.3,6.8 C0.2,6.9 0.3,7.2 0.5,7.4 L2.6,9 C2.6,9.3
                               2.5,9.6 2.5,10 C2.5,10.4 2.5,10.7 2.6,11 L0.5,12.7 C0.3,12.9 0.3,13.1 0.4,13.3 L2.4,16.8 C2.5,16.9 2.7,17 3,16.9 L5.5,15.9
                               C6,16.3 6.6,16.6 7.2,16.9 L7.6,19.5 C7.6,19.7 7.8,19.9 8.1,19.9 L12.1,19.9 C12.3,19.9 12.6,19.7 12.6,19.5 L13,16.9 C13.6,16.6
                               14.2,16.3 14.7,15.9 L17.2,16.9 C17.4,17 17.7,16.9 17.8,16.7 L19.8,13.2 C19.9,13 19.9,12.7 19.7,12.6 L17.4,11 L17.4,11 Z M10,13.5
                               C8.1,13.5 6.5,11.9 6.5,10 C6.5,8.1 8.1,6.5 10,6.5 C11.9,6.5 13.5,8.1 13.5,10 C13.5,11.9 11.9,13.5 10,13.5 L10,13.5 Z"/>
-                            </Viewbox>
-                            <TextBlock Foreground="{Binding ElementName=SettingsButton,Path=Foreground}" Name="TextSetting" FontFamily="Futura Md BT" VerticalAlignment="Center" Margin="30,5" FontSize="30" Text="{DynamicResource _Settings}"/>
-                        </StackPanel>
-                    </Button>
+                                </Viewbox>
+                                <TextBlock Foreground="{Binding ElementName=SettingsButton,Path=Foreground}" Name="TextSetting" FontFamily="Futura Md BT" VerticalAlignment="Center" Margin="30,5" FontSize="30" Text="{DynamicResource _Settings}"/>
+                            </StackPanel>
+                        </Button>
 
-                    <Button Name="InfoButton" Style="{StaticResource MenuButton}" Command="{Binding InfoClick}">
-                        <StackPanel Background="White" Orientation="Horizontal" Width="240">
-                            <Viewbox Height="40" VerticalAlignment="Top">
-                                <Path Fill="{Binding ElementName=InfoButton,Path=Foreground}" Data=" M16 0 A16 16 0 0 1 16 32 A16 16 0 0 1 16 0 M19 15 L13 15 L13 26 L19 26 z M16 6 A3 3 0 0 0 16 12 A3
+                        <Button Name="InfoButton" Style="{StaticResource MenuButton}" Command="{Binding InfoClick}">
+                            <StackPanel Background="{DynamicResource MainColor}" Orientation="Horizontal" Width="240">
+                                <Viewbox Height="40" VerticalAlignment="Top">
+                                    <Path Fill="{Binding ElementName=InfoButton,Path=Foreground}" Data=" M16 0 A16 16 0 0 1 16 32 A16 16 0 0 1 16 0 M19 15 L13 15 L13 26 L19 26 z M16 6 A3 3 0 0 0 16 12 A3
                               3 0 0 0 16 6 "/>
-                            </Viewbox>
-                            <TextBlock Foreground="{Binding ElementName=InfoButton,Path=Foreground}" Name="TextInfo" FontFamily="Futura Md BT" VerticalAlignment="Center" Margin="30,5" FontSize="30" Text="{DynamicResource _Info}"/>
-                        </StackPanel>
-                    </Button>
+                                </Viewbox>
+                                <TextBlock Foreground="{Binding ElementName=InfoButton,Path=Foreground}" Name="TextInfo" FontFamily="Futura Md BT" VerticalAlignment="Center" Margin="30,5" FontSize="30" Text="{DynamicResource _Info}"/>
+                            </StackPanel>
+                        </Button>
 
-                    <Button Name="LogoffButton" Style="{StaticResource MenuButton}"  Command="{Binding LogoffClick}" CommandParameter="{Binding ElementName=MainWindowName}">
-                        <StackPanel Orientation="Horizontal" Width="240" Background="White">
-                            <Viewbox Height="40" VerticalAlignment="Top">
-                                <Path Fill="{Binding ElementName=TextLogoff,Path=Foreground}" Data="M21,24a1,1,0,0,0-1,1v3H6V4H20V7a1,1,0,0,0,2,0V3a1,1,0,0,0-1-1H5A1,1,0,0,0,4,3V29a1,1,0,0,0,1,1H21a1,1,
+                        <Button Name="LogoffButton" Style="{StaticResource MenuButton}"  Command="{Binding LogoffClick}" CommandParameter="{Binding ElementName=MainWindowName}">
+                            <StackPanel Orientation="Horizontal" Width="240" Background="{DynamicResource MainColor}">
+                                <Viewbox Height="40" VerticalAlignment="Top">
+                                    <Path Fill="{Binding ElementName=TextLogoff,Path=Foreground}" Data="M21,24a1,1,0,0,0-1,1v3H6V4H20V7a1,1,0,0,0,2,0V3a1,1,0,0,0-1-1H5A1,1,0,0,0,4,3V29a1,1,0,0,0,1,1H21a1,1,
                                   0,0,0,1-1V25A1,1,0,0,0,21,24Z M27,15H19.08l2.7-3.37a1,1,0,1,0-1.56-1.25l-4,5a.44.44,0,0,0-.08.15.41.41,0,0,0-.07.11,1,1,0,0,0,
                                   0,.72.41.41,0,0,0,.07.11.6.6,0,0,0,.08.16l4,5A1,1,0,0,0,21,22a1,1,0,0,0,.63-.22,1,1,0,0,0,.15-1.4L19.08,17H27a1,1,0,0,0,0-2Z"/>
-                            </Viewbox>
-                            <TextBlock Foreground="{Binding ElementName=LogoffButton,Path=Foreground}" Name="TextLogoff" FontFamily="Futura Md BT" VerticalAlignment="Center" Margin="30,5" FontSize="30" Text="{DynamicResource _LogOff}" />
-                        </StackPanel>
-                    </Button>
+                                </Viewbox>
+                                <TextBlock Foreground="{Binding ElementName=LogoffButton,Path=Foreground}" Name="TextLogoff" FontFamily="Futura Md BT" VerticalAlignment="Center" Margin="30,5" FontSize="30" Text="{DynamicResource _LogOff}" />
+                            </StackPanel>
+                        </Button>
 
-                </StackPanel>
+                    </StackPanel>
+                </Border>
             </ScrollViewer>
         </Grid>
 
         <!--Button burger and close-->
 
-        <Button Style="{StaticResource NoStyleButton}" Grid.Row="0" Grid.Column="0" Width="45" Height="40" Margin="0,0,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Command="{Binding CloseButtonClick}">
+        <Button Style="{StaticResource NoStyleButton}" Grid.Row="0" Grid.Column="0" Width="45" Height="40" Margin="0,0,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Command="{Binding CloseButtonClick}" Grid.RowSpan="2">
             <Viewbox Visibility="{Binding ClosePanelButtonVisible}" Name="ClosePanelButton" Margin="10,0" VerticalAlignment="Top" Height="30" HorizontalAlignment="Right">
-                <Path Fill="#FF3D3D3D" Data="M437.5,386.6L306.9,256l130.6-130.6c14.1-14.1,14.1-36.8,0-50.9c-14.1-14.1-36.8-14.1-50.9,0L256,205.1L125.4,74.5  c-14.1-14.1-36.8-14.1-50.9,0c-14.1,14.1-14.1,
+                <Path Fill="{DynamicResource ForegroundTextBlock}" Data="M437.5,386.6L306.9,256l130.6-130.6c14.1-14.1,14.1-36.8,0-50.9c-14.1-14.1-36.8-14.1-50.9,0L256,205.1L125.4,74.5  c-14.1-14.1-36.8-14.1-50.9,0c-14.1,14.1-14.1,
                     36.8,0,50.9L205.1,256L74.5,386.6c-14.1,14.1-14.1,36.8,0,50.9  c14.1,14.1,36.8,14.1,50.9,0L256,306.9l130.6,130.6c14.1,14.1,36.8,14.1,50.9,0C451.5,423.4,451.5,400.6,437.5,386.6z"/>
             </Viewbox>
         </Button>
+        <Separator Grid.Row="1" VerticalAlignment="Bottom" Margin="0 5 0 0" BorderBrush="Gray" BorderThickness="5"/>
 
-        <Button Style="{StaticResource NoStyleButton}" Grid.Row="0" Grid.Column="1" Width="45" Height="40" Margin="10,0,-55,0" VerticalAlignment="Top" HorizontalAlignment="Left" Command="{Binding BurgerButtonClick}">
+        <Button Style="{StaticResource NoStyleButton}" Grid.Row="0" Grid.Column="1" Width="45" Height="40" Margin="10,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Command="{Binding BurgerButtonClick}" Grid.RowSpan="2">
             <Viewbox Name="BurgerButton" Margin="10,0" Visibility="{Binding BurgerButtonVisible}" VerticalAlignment="Top" Height="30" HorizontalAlignment="Left">
-                <Path Fill="#FF3D3D3D" Data="M4,10h24c1.104,0,2-0.896,2-2s-0.896-2-2-2H4C2.896,6,2,6.896,2,8S2.896,10,4,10z M28,14H4c-1.104,0-2,0.896-2,2  s0.896,2,2,2h24c1.104,0,2-0.896,2-2S29.104,14,28,14z M28,
+                <Path Fill="{DynamicResource ForegroundTextBlock}" Data="M4,10h24c1.104,0,2-0.896,2-2s-0.896-2-2-2H4C2.896,6,2,6.896,2,8S2.896,10,4,10z M28,14H4c-1.104,0-2,0.896-2,2  s0.896,2,2,2h24c1.104,0,2-0.896,2-2S29.104,14,28,14z M28,
                   22H4c-1.104,0-2,0.896-2,2s0.896,2,2,2h24c1.104,0,2-0.896,2-2  S29.104,22,28,22z"/>
             </Viewbox>
         </Button>
 
-        <DockPanel Grid.Row="0" Grid.Column="1">
-            <Border DockPanel.Dock="Right" CornerRadius="10" Background="White" HorizontalAlignment="Right" Width="100" VerticalAlignment="Center" Height="32" Margin="5 0">
-                <TextBlock Text="{Binding LoginCurrenUser}" Margin="0 2 0 0" FontSize="20" Foreground="#FF3D3D3D"/>
+        <DockPanel Grid.Row="0" Grid.Column="1" Grid.RowSpan="2">
+            <Border DockPanel.Dock="Right" CornerRadius="10" Background="{DynamicResource MainColor}" HorizontalAlignment="Right" Width="100" VerticalAlignment="Center" Height="32" Margin="5 0">
+                <TextBlock Text="{Binding LoginCurrenUser}" Margin="0 2 0 0" FontSize="20" Foreground="{DynamicResource ForegroundTextBlock}"/>
             </Border>
             <Border DockPanel.Dock="Right" CornerRadius="10" BorderThickness="1" BorderBrush="#FF3d3d3d" HorizontalAlignment="Right" Padding="5,0" VerticalAlignment="Center" Height="32" Margin="10 0">
-                <TextBlock Text="{Binding FirstCharLoginCurrenUser}" Margin="0 2 0 0" FontSize="20" Foreground="#FF3D3D3D"/>
+                <TextBlock Text="{Binding FirstCharLoginCurrenUser}" FontSize="20" Foreground="{DynamicResource ForegroundTextBlock}"/>
             </Border>
         </DockPanel>
 
         <!--frame-->
-        <Frame Name="Frame" Grid.Column="1" Grid.Row="1" NavigationUIVisibility="Hidden" Source="{Binding MainPage, Mode=OneWay}">
-        </Frame>
+        <Border Name="FrameBorder" Grid.Column="1" Grid.Row="2"  BorderThickness="1 1 0 1" BorderBrush="Gray">
+            <Frame Name="Frame" NavigationUIVisibility="Hidden" Source="{Binding MainPage, Mode=OneWay}">
+            </Frame>
+        </Border>
+        <Separator Grid.Row="2" VerticalAlignment="Bottom" BorderBrush="Gray" BorderThickness="5"/>
 
     </Grid>
 </Window>

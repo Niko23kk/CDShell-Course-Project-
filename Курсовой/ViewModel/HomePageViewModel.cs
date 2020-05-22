@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Курсовой.Model;
-using Курсовой.Clases;
+using Курсовой.Classes;
 using Курсовой.View;
 using System.ComponentModel;
 using System.Windows.Input;
@@ -161,7 +161,7 @@ namespace Курсовой.ViewModel
                     }
                     catch
                     {
-                        MessageBox.Show("Error =(");
+                        CustomMessageBox.Show("Error", "Error =(", MessageBoxButton.OK);
                     }
                 });
             }
@@ -199,8 +199,7 @@ namespace Курсовой.ViewModel
             {
                 return new DelegateCommand(obj =>
                 {
-                    MessageBoxResult result = MessageBox.Show("Delete project?", "CD SHELL", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
-                    if (result==MessageBoxResult.Yes)
+                    if (CustomMessageBox.Show("Delete", "Delete project?", MessageBoxButton.OK)==MessageBoxResult.Yes)
                     {
                         DBRepository<UserProject> dBUP = new DBRepository<UserProject>(new BuildEntities());
                         DBRepository<Project> dBProject = new DBRepository<Project>(new BuildEntities());
@@ -303,14 +302,14 @@ namespace Курсовой.ViewModel
                                         }
                                     }
                                 }
-                                MessageBox.Show("Project was loaded");
+                                CustomMessageBox.Show("Event", "Project was loaded", MessageBoxButton.OK);
                             }
                             catch { }
                         }
                     }
                     catch
                     {
-                        MessageBox.Show("Error =(");
+                        CustomMessageBox.Show("Error", "Error =(", MessageBoxButton.OK);
                     }
                 });
             }

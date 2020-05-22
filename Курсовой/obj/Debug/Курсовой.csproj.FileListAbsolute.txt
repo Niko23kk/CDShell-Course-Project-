@@ -57,6 +57,8 @@ D:\Учеба\4_сем\Курсач\Курсовой\Курсовой\obj\Debug\
 D:\Учеба\4_сем\Курсач\Курсовой\Курсовой\obj\Debug\View\Recovery.g.cs
 D:\Учеба\4_сем\Курсач\Курсовой\Курсовой\obj\Debug\View\Recovery.baml
 D:\Учеба\4_сем\Курсач\Курсовой\Курсовой\obj\Debug\Resourses\EngLanguage.baml
-D:\Учеба\4_сем\Курсач\Курсовой\Курсовой\obj\Debug\Style\UserControl1.g.cs
-D:\Учеба\4_сем\Курсач\Курсовой\Курсовой\obj\Debug\Style\UserControl1.baml
 D:\Учеба\4_сем\Курсач\Курсовой\Курсовой\obj\Debug\Resourses\RuLanguage.baml
+D:\Учеба\4_сем\Курсач\Курсовой\Курсовой\obj\Debug\Resourses\DefaultThem.baml
+D:\Учеба\4_сем\Курсач\Курсовой\Курсовой\obj\Debug\Resourses\BlackThem.baml
+D:\Учеба\4_сем\Курсач\Курсовой\Курсовой\obj\Debug\View\CustomMessageBox.g.cs
+D:\Учеба\4_сем\Курсач\Курсовой\Курсовой\obj\Debug\View\CustomMessageBox.baml

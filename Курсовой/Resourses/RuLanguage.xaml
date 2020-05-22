@@ -3,7 +3,7 @@
                     xmlns:local="clr-namespace:Курсовой.Resourses"
                     xmlns:lang="clr-namespace:System;assembly=mscorlib">
     <!--Admin-->
-    <lang:String x:Key="_User">Работяги</lang:String>
+    <lang:String x:Key="_Users">Работяги</lang:String>
     <lang:String x:Key="_Projects">Проекты</lang:String>
     <lang:String x:Key="_Elements">Объекты</lang:String>
     <lang:String x:Key="_LogOff">Выйти</lang:String>
@@ -76,6 +76,7 @@
     <lang:String x:Key="_ChangePas">Изменение пароля</lang:String>
     <lang:String x:Key="_NewPas">Новый пароль</lang:String>
     <lang:String x:Key="_SignIn">Вход</lang:String>
+    <lang:String x:Key="_User">Пользователь</lang:String>
     <!---->
     <lang:String x:Key="_Photo">Скрин</lang:String>
     <lang:String x:Key="_Share">Поделится</lang:String>

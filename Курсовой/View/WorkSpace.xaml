@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:vm="clr-namespace:Курсовой.ViewModel"
-      xmlns:cs="clr-namespace:Курсовой.Clases"
+      xmlns:cs="clr-namespace:Курсовой.Classes"
       xmlns:local="clr-namespace:Курсовой.View"
       mc:Ignorable="d" 
       Title="WorkSpace">
@@ -24,7 +24,7 @@
         <vm:WorkSpaceViewModel/>
     </Page.DataContext>
 
-    <Grid>
+    <Grid Background="{DynamicResource WorkField}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
             <ColumnDefinition Width="200"/>
@@ -34,76 +34,76 @@
 
         <ScrollViewer VerticalScrollBarVisibility="Hidden">
             <Border BorderThickness="0 0 1 0" BorderBrush="#FF3D3D3D">
-                <StackPanel Background="White">
+                <StackPanel Background="{DynamicResource WorkField}">
 
-                    <Button Style="{StaticResource NoStyleButton}" Height="90" Command="{Binding TypeClick}" CommandParameter="Living room">
-                        <StackPanel Background="White">
+                    <Button Style="{StaticResource NoStyleButtonWithoutWhite}" Height="90" Command="{Binding TypeClick}" CommandParameter="Living room">
+                        <StackPanel Background="{DynamicResource WorkField}">
                             <Image Source="pack://application:,,,/Resourses/Images/LivingRoomIcon.png" Height="45" Margin="0 2"/>
-                            <TextBlock Text="{DynamicResource _LivingRoom}" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="20" Margin="0 0 0 7" />
+                            <TextBlock Style="{DynamicResource WorkText}" Text="{DynamicResource _LivingRoom}" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="20" Margin="0 0 0 7" />
                             <Separator Width="100" VerticalAlignment="Bottom" Margin="0"/>
                         </StackPanel>
                     </Button>
 
-                    <Button Style="{StaticResource NoStyleButton}" Height="90" Command="{Binding TypeClick}" CommandParameter="Bedroom">
-                        <StackPanel Background="White">
+                    <Button Style="{StaticResource NoStyleButtonWithoutWhite}" Height="90" Command="{Binding TypeClick}" CommandParameter="Bedroom">
+                        <StackPanel Background="{DynamicResource WorkField}">
                             <Image Source="pack://application:,,,/Resourses/Images/BadroomIcon.png" Height="45" Width="100" Margin="0 2"/>
-                            <TextBlock Text="{DynamicResource _Bedroom}" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="20" Margin="0 0 0 7"/>
+                            <TextBlock Style="{DynamicResource WorkText}" Text="{DynamicResource _Bedroom}" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="20" Margin="0 0 0 7"/>
                             <Separator Width="100" VerticalAlignment="Bottom" Margin="0"/>
                         </StackPanel>
                     </Button>
 
-                    <Button Style="{StaticResource NoStyleButton}" Height="90" Command="{Binding TypeClick}" CommandParameter="Kitchen">
-                        <StackPanel Background="White">
+                    <Button Style="{StaticResource NoStyleButtonWithoutWhite}" Height="90" Command="{Binding TypeClick}" CommandParameter="Kitchen">
+                        <StackPanel Background="{DynamicResource WorkField}">
                             <Image Source="pack://application:,,,/Resourses/Images/KitchenIcon.png" Height="45" Margin="0 2"/>
-                            <TextBlock Text="{DynamicResource _Kitchen}" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="20" Margin="0 0 0 7"/>
+                            <TextBlock Style="{DynamicResource WorkText}" Text="{DynamicResource _Kitchen}" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="20" Margin="0 0 0 7"/>
                             <Separator Width="100" VerticalAlignment="Bottom" Margin="0"/>
                         </StackPanel>
                     </Button>
 
-                    <Button Style="{StaticResource NoStyleButton}" Height="90" Command="{Binding TypeClick}" CommandParameter="Bathroom">
-                        <StackPanel Background="White">
+                    <Button Style="{StaticResource NoStyleButtonWithoutWhite}" Height="90" Command="{Binding TypeClick}" CommandParameter="Bathroom">
+                        <StackPanel Background="{DynamicResource WorkField}">
                             <Image Source="pack://application:,,,/Resourses/Images/BathroomIcon.png" Height="45" Margin="0 2"/>
-                            <TextBlock Text="{DynamicResource _Bathroom}" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="20" Margin="0 0 0 7"/>
+                            <TextBlock Style="{DynamicResource WorkText}" Text="{DynamicResource _Bathroom}" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="20" Margin="0 0 0 7"/>
                             <Separator Width="100" VerticalAlignment="Bottom" Margin="0"/>
                         </StackPanel>
                     </Button>
 
-                    <Button Style="{StaticResource NoStyleButton}" Height="90" Command="{Binding TypeClick}" CommandParameter="Technique">
-                        <StackPanel Background="White">
+                    <Button Style="{StaticResource NoStyleButtonWithoutWhite}" Height="90" Command="{Binding TypeClick}" CommandParameter="Technique">
+                        <StackPanel Background="{DynamicResource WorkField}">
                             <Image Source="pack://application:,,,/Resourses/Images/TechniqueIcon.png" Height="45" Margin="0 2"/>
-                            <TextBlock Text="{DynamicResource _Tecgnique}" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="20" Margin="0 0 0 7"/>
+                            <TextBlock Style="{DynamicResource WorkText}" Text="{DynamicResource _Tecgnique}" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="20" Margin="0 0 0 7"/>
                             <Separator Width="100" VerticalAlignment="Bottom" Margin="0"/>
                         </StackPanel>
                     </Button>
 
-                    <Button Style="{StaticResource NoStyleButton}" Height="90" Command="{Binding TypeClick}" CommandParameter="Garden">
-                        <StackPanel Background="White">
+                    <Button Style="{StaticResource NoStyleButtonWithoutWhite}" Height="90" Command="{Binding TypeClick}" CommandParameter="Garden">
+                        <StackPanel Background="{DynamicResource WorkField}">
                             <Image Source="pack://application:,,,/Resourses/Images/GardenIcon.png" Height="45" Margin="0 2"/>
-                            <TextBlock Text="{DynamicResource _Garden}" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="20" Margin="0 0 0 7"/>
+                            <TextBlock Style="{DynamicResource WorkText}" Text="{DynamicResource _Garden}" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="20" Margin="0 0 0 7"/>
                             <Separator Width="100" VerticalAlignment="Bottom" Margin="0"/>
                         </StackPanel>
                     </Button>
-                    
-                    <Button Style="{StaticResource NoStyleButton}" Height="90" Command="{Binding TypeClick}" CommandParameter="Decoration">
-                        <StackPanel Background="White">
+
+                    <Button Style="{StaticResource NoStyleButtonWithoutWhite}" Height="90" Command="{Binding TypeClick}" CommandParameter="Decoration">
+                        <StackPanel Background="{DynamicResource WorkField}">
                             <Image Source="pack://application:,,,/Resourses/Images/DecorIcon.png" Height="45" Margin="0 2"/>
-                            <TextBlock Text="{DynamicResource _Decoration}" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="20" Margin="0 0 0 7"/>
+                            <TextBlock Style="{DynamicResource WorkText}" Text="{DynamicResource _Decoration}" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="20" Margin="0 0 0 7"/>
                             <Separator Width="100" VerticalAlignment="Bottom" Margin="0"/>
                         </StackPanel>
                     </Button>
 
-                    <Button Style="{StaticResource NoStyleButton}" Height="90" Command="{Binding TypeClick}" CommandParameter="Build">
-                        <StackPanel Background="White">
+                    <Button Style="{StaticResource NoStyleButtonWithoutWhite}" Height="90" Command="{Binding TypeClick}" CommandParameter="Build">
+                        <StackPanel Background="{DynamicResource WorkField}">
                             <Image Source="pack://application:,,,/Resourses/Images/Build.png" Height="45" Margin="0 2"/>
-                            <TextBlock Text="{DynamicResource _Build}" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="20" Margin="0 0 0 7"/>
+                            <TextBlock Style="{DynamicResource WorkText}" Text="{DynamicResource _Build}" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="20" Margin="0 0 0 7"/>
                             <Separator Width="100" VerticalAlignment="Bottom" Margin="0"/>
                         </StackPanel>
                     </Button>
 
-                    <Button Style="{StaticResource NoStyleButton}" Height="90" Command="{Binding TypeClick}" CommandParameter="User">
-                        <StackPanel Background="White">
+                    <Button Style="{StaticResource NoStyleButtonWithoutWhite}" Height="90" Command="{Binding TypeClick}" CommandParameter="User">
+                        <StackPanel Background="{DynamicResource WorkField}">
                             <Image Source="pack://application:,,,/Resourses/Images/UserIcon.png" Height="45" Margin="0 2"/>
-                            <TextBlock Text="{DynamicResource _User}" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="20" Margin="0 0 0 7"/>
+                            <TextBlock Style="{DynamicResource WorkText}" Text="{DynamicResource _User}" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="20" Margin="0 0 0 7"/>
                             <Separator Width="100" VerticalAlignment="Bottom" Margin="0"/>
                         </StackPanel>
                     </Button>
@@ -113,10 +113,10 @@
             </Border>
         </ScrollViewer>
 
-        <ListBox Grid.Column="1" Name="Elements" Width="200" HorizontalAlignment="Left" ItemsSource="{Binding ElementsOfType}" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.CanContentScroll="False" SelectedItem="{Binding Path=CurrentElements,Mode=TwoWay}" BorderThickness="0 0 1 0" BorderBrush="#FF3D3D3D">
+        <ListBox Background="{DynamicResource MainColor}" Grid.Column="1" Name="Elements" Width="200" HorizontalAlignment="Left" ItemsSource="{Binding ElementsOfType}" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.CanContentScroll="False" SelectedItem="{Binding Path=CurrentElements,Mode=TwoWay}" BorderThickness="0 0 1 0" BorderBrush="#FF3D3D3D">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <ListBoxItem Name="CurrentItem" Style="{StaticResource  NoStyleBoxItem}" Height="200">
+                    <ListBoxItem Background="{DynamicResource WorkField}" Name="CurrentItem" Style="{StaticResource  NoStyleBoxItem}" Height="200">
                         <Button Style="{StaticResource NoStyleButton}" Width="200" HorizontalAlignment="Center" Command="{Binding DataContext.SelectElement, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}}}" CommandParameter="{Binding ElementName=CurrentItem}">
                             <StackPanel Orientation="Vertical">
                                 <Image Source="{Binding Front_view}" Height="150"/>
@@ -133,13 +133,9 @@
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <Canvas ClipToBounds="True" Name="Canvas">
-                        <Canvas.RenderTransform>
-                            <ScaleTransform ScaleX="{Binding ZoomProperty.ScaleX}" ScaleY="{Binding ZoomProperty.ScaleY}" CenterX="{Binding ZoomProperty.CenterX}" CenterY="{Binding ZoomProperty.CenterY}"/>
-                        </Canvas.RenderTransform>
                         <Canvas.InputBindings>
                             <MouseBinding MouseAction="LeftClick" Command="{Binding DropItemToCanvas}" CommandParameter="{Binding ElementName=Canvas}"/>
                             <MouseBinding MouseAction="RightClick" Command="{Binding SecondPointSelect}" CommandParameter="{Binding ElementName=Canvas}"/>
-                            <!--<MouseBinding Command="{Binding ZoomCanvas}" Gesture="{x:Static cs:MouseWheelGesture.CtrlDown}" CommandParameter="{Binding ElementName=Canvas}"/>-->
                         </Canvas.InputBindings>
                         <Canvas.Background>
                             <DrawingBrush TileMode="Tile" Viewport="0,0,50,50" ViewportUnits="Absolute">
@@ -180,48 +176,44 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-        <TextBlock Grid.Column="2" Text="{Binding TotalPrice}" Foreground="#FF3D3D3D" HorizontalAlignment="Right" FontSize="25" Margin="10"/>
+        <TextBlock Grid.Column="2" Text="{Binding TotalPrice}" Foreground="{DynamicResource ForegroundTextBlock}" HorizontalAlignment="Right" FontSize="25" Margin="10"/>
 
         <StackPanel Grid.Column="3">
 
-            <Button ToolTip="{DynamicResource _Save}" Margin="0,10" Style="{StaticResource NoStyleButton}" Command="{Binding SaveProject}" CommandParameter="{Binding ElementName=House}">
+            <Button ToolTip="{DynamicResource _Save}" Margin="0,10" Style="{StaticResource NoStyleButtonWithoutWhite}" Command="{Binding SaveProject}" CommandParameter="{Binding ElementName=House}">
                 <Image Source="pack://application:,,,/Resourses/Images/Save.png" Height="30"/>
             </Button>
 
-            <Button ToolTip="{DynamicResource _SaveAs}" Margin="0,10" Style="{StaticResource NoStyleButton}" Command="{Binding SaveAs}">
+            <Button ToolTip="{DynamicResource _SaveAs}" Margin="0,10" Style="{StaticResource NoStyleButtonWithoutWhite}" Command="{Binding SaveAs}">
                 <Image Source="pack://application:,,,/Resourses/Images/SaveAs.png" Height="30"/>
             </Button>
 
-            <Button ToolTip="{DynamicResource _Photo}" Margin="0,10" Style="{StaticResource NoStyleButton}" Command="{Binding SaveScrean}" CommandParameter="{Binding ElementName=House}">
+            <Button ToolTip="{DynamicResource _Photo}" Margin="0,10" Style="{StaticResource NoStyleButtonWithoutWhite}" Command="{Binding SaveScrean}" CommandParameter="{Binding ElementName=House}">
                 <Image Source="pack://application:,,,/Resourses/Images/Photo.png" Height="30"/>
             </Button>
 
-            <Button ToolTip="{DynamicResource _Share}" Margin="0,10" Style="{StaticResource NoStyleButton}" Command="{Binding ZoomPlusCommand}" CommandParameter="{Binding ElementName=House}">
-                <Image Source="pack://application:,,,/Resourses/Images/Share.png" Height="30"/>
-            </Button>
-
-            <Button ToolTip="{DynamicResource _Undo}" Margin="0,10" Style="{StaticResource NoStyleButton}" Command="{Binding BackHistoryClick}">
+            <Button ToolTip="{DynamicResource _Undo}" Margin="0,10" Style="{StaticResource NoStyleButtonWithoutWhite}" Command="{Binding BackHistoryClick}">
                 <Image Source="pack://application:,,,/Resourses/Images/Back.png" Height="30"/>
             </Button>
 
-            <Button ToolTip="{DynamicResource _Redo}" Margin="0,10" Style="{StaticResource NoStyleButton}" Command="{Binding ForwardHistoryClick}">
+            <Button ToolTip="{DynamicResource _Redo}" Margin="0,10" Style="{StaticResource NoStyleButtonWithoutWhite}" Command="{Binding ForwardHistoryClick}">
                 <Image Source="pack://application:,,,/Resourses/Images/Forward.png" Height="30"/>
             </Button>
             
             <Separator BorderThickness="10" BorderBrush="Black"/>
-            <Button ToolTip="{DynamicResource _Left}" Margin="0,10" Style="{StaticResource NoStyleButton}" Command="{Binding LeftRotate}">
+            <Button ToolTip="{DynamicResource _Left}" Margin="0,10" Style="{StaticResource NoStyleButtonWithoutWhite}" Command="{Binding LeftRotate}">
                 <Image Source="pack://application:,,,/Resourses/Images/Left.png" Height="30"/>
             </Button>
 
-            <Button ToolTip="{DynamicResource _Right}" Margin="0,10" Style="{StaticResource NoStyleButton}" Command="{Binding RightRorate}">
+            <Button ToolTip="{DynamicResource _Right}" Margin="0,10" Style="{StaticResource NoStyleButtonWithoutWhite}" Command="{Binding RightRorate}">
                 <Image Source="pack://application:,,,/Resourses/Images/Right.png" Height="30"/>
             </Button>
 
-            <Button ToolTip="{DynamicResource _Delete}" Margin="0,10" Style="{StaticResource NoStyleButton}" Command="{Binding DeleteElement}">
+            <Button ToolTip="{DynamicResource _Delete}" Margin="0,10" Style="{StaticResource NoStyleButtonWithoutWhite}" Command="{Binding DeleteElement}">
                 <Image Source="pack://application:,,,/Resourses/Images/Delete.png" Height="30"/>
             </Button>
 
-            <Button ToolTip="{DynamicResource _Block}" Margin="0,10" Style="{StaticResource NoStyleButton}" Command="{Binding LockUnlockClick}">
+            <Button ToolTip="{DynamicResource _Block}" Margin="0,10" Style="{StaticResource NoStyleButtonWithoutWhite}" Command="{Binding LockUnlockClick}">
                 <Image Source="{Binding LockUnlock}" Height="30"/>
             </Button>
         </StackPanel>

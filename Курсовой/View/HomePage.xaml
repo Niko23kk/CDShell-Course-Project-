@@ -14,20 +14,8 @@
     <Page.DataContext>
         <vm:HomePageViewModel/>
     </Page.DataContext>
-    
-    <Grid>
-        <Grid.Background>
-            <ImageBrush  ImageSource="pack://application:,,,/Resourses/Images/Background.jpg" Stretch="UniformToFill">
-                <ImageBrush.RelativeTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform AngleY="0" AngleX="0"/>
-                        <RotateTransform Angle="0"/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </ImageBrush.RelativeTransform>
-            </ImageBrush>
-        </Grid.Background>
+
+    <Grid Background="{DynamicResource BackgroundImage}">
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Name="MainHeight" Height="*"/>
@@ -39,7 +27,7 @@
         </Grid.ColumnDefinitions>
         
         <DockPanel Grid.Row="1" Grid.Column="0" Margin="20,10,5,10" MinWidth="300">
-            <TextBlock DockPanel.Dock="Top" Text="{DynamicResource _LastPtojects}" FontSize="32" TextWrapping="Wrap" Padding="10" Margin="30,10"/>
+            <TextBlock Style="{DynamicResource TextBl}" DockPanel.Dock="Top" Text="{DynamicResource _LastPtojects}" FontSize="32" TextWrapping="Wrap" Padding="10" Margin="30,10"/>
             <ScrollViewer Name="ScrollContainer" ScrollViewer.CanContentScroll="False" VerticalScrollBarVisibility="Hidden" Height="auto">
                 <ItemsControl ItemsSource="{Binding ProjectsCurentUser,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                     <ItemsControl.ItemTemplate>
@@ -50,16 +38,10 @@
                                     <ColumnDefinition Width="50"/>
                                     <ColumnDefinition Width="50"/>
                                 </Grid.ColumnDefinitions>
-                                <Border Name="SelectedProject" Margin="2" CornerRadius="10" BorderThickness="1" BorderBrush="Gray">
+                                <Border Name="SelectedProject" Margin="2" Background="{DynamicResource Gradient}" CornerRadius="10" BorderThickness="1" BorderBrush="Gray">
                                     <Border.InputBindings>
                                         <MouseBinding MouseAction="LeftClick" Command="{Binding DataContext.OpenProject, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}" CommandParameter="{Binding ElementName=SelectedProject}"/>
                                     </Border.InputBindings>
-                                    <Border.Background>
-                                        <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
-                                            <GradientStop Color="#FFBDF6FF" Offset="1"/>
-                                            <GradientStop Color="#FFA2F1FC" Offset="0"/>
-                                        </LinearGradientBrush>
-                                    </Border.Background>
                                     <Grid Margin="15" VerticalAlignment="Center">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="2*"/>
@@ -101,21 +83,7 @@
         <ScrollViewer Grid.Row="1" Grid.Column="1" ScrollViewer.CanContentScroll="False" VerticalScrollBarVisibility="Hidden" Height="auto">
             <StackPanel  Margin="10,10,20,30" >
                 <DockPanel>
-                    <Border CornerRadius="20" Padding="10 10 20 20">
-                        <Border.Background>
-                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                <LinearGradientBrush.RelativeTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
-                                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
-                                        <RotateTransform CenterY="0.5" CenterX="0.5" Angle="315"/>
-                                        <TranslateTransform/>
-                                    </TransformGroup>
-                                </LinearGradientBrush.RelativeTransform>
-                                <GradientStop Color="#FF69EBC5" Offset="0"/>
-                                <GradientStop Color="#FFC2FFED" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Border.Background>
+                    <Border CornerRadius="20" Padding="10 10 20 20" Background="{DynamicResource UserGradient}">
                         <Border.Effect>
                             <DropShadowEffect BlurRadius="10"/>
                         </Border.Effect>
@@ -126,92 +94,50 @@
                                 </Ellipse.Fill>
                             </Ellipse>
                             <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center">
-                                <TextBlock Text="{Binding Login}" FontSize="24" Margin="10,5"/>
+                                <TextBlock Style="{DynamicResource TextBl}" Text="{Binding Login}" FontSize="24" Margin="10,5"/>
                                 <WrapPanel>
-                                    <TextBlock Text="{Binding FirstName}" FontSize="18" Margin="10,3"/>
-                                    <TextBlock Text="{Binding SecondName}" FontSize="18" Margin="10,3"/>
+                                    <TextBlock Style="{DynamicResource TextBl}" Text="{Binding FirstName}" FontSize="18" Margin="10,3"/>
+                                    <TextBlock Style="{DynamicResource TextBl}" Text="{Binding SecondName}" FontSize="18" Margin="10,3"/>
                                 </WrapPanel>
-                                <TextBlock Text="{Binding Email}" FontSize="18" Margin="10,3"/>
+                                <TextBlock Style="{DynamicResource TextBl}" Text="{Binding Email}" FontSize="18" Margin="10,3"/>
                             </StackPanel>
                         </WrapPanel>
                     </Border>
                 </DockPanel>
 
                 <Button Style="{StaticResource NoStyleButtonWithoutWhite}" Command="{Binding NewProjectClick}" CommandParameter="{Binding ElementName=HomePageName}">
-                    <Border Margin="10,20" CornerRadius="20" Width="auto" HorizontalAlignment="Center">
-                        <Border.Background>
-                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                <LinearGradientBrush.RelativeTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
-                                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
-                                        <RotateTransform Angle="135" CenterY="0.5" CenterX="0.5"/>
-                                        <TranslateTransform/>
-                                    </TransformGroup>
-                                </LinearGradientBrush.RelativeTransform>
-                                <GradientStop Color="#FFB2F5FF" Offset="0"/>
-                                <GradientStop Color="#FF66C3D0" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Border.Background>
+                    <Border Margin="10,20" CornerRadius="20" Width="auto" HorizontalAlignment="Center" Background="{DynamicResource ButtonGradient}">
                         <Border.Effect>
                             <DropShadowEffect BlurRadius="10"/>
                         </Border.Effect>
 
                         <WrapPanel Margin="0,20" HorizontalAlignment="Center">
                             <Image Margin="20,0" HorizontalAlignment="Center" Height="30" Width="30" Source="pack://application:,,,/Resourses/Images/add.png"/>
-                            <TextBlock TextWrapping="Wrap" Text="{DynamicResource _NewProject}" VerticalAlignment="Center" FontSize="24" Width="150" Margin="10,0,30,0"/>
+                            <TextBlock Style="{DynamicResource TextBl}" TextWrapping="Wrap" Text="{DynamicResource _NewProject}" VerticalAlignment="Center" FontSize="24" Width="150" Margin="10,0,30,0"/>
                         </WrapPanel>
                     </Border>
                 </Button>
 
                 <Button Style="{StaticResource NoStyleButtonWithoutWhite}" Command="{Binding AddTextureClick}">
-                    <Border Margin="10,20" CornerRadius="20" Width="auto" HorizontalAlignment="Center">
-                        <Border.Background>
-                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                <LinearGradientBrush.RelativeTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
-                                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
-                                        <RotateTransform Angle="135" CenterY="0.5" CenterX="0.5"/>
-                                        <TranslateTransform/>
-                                    </TransformGroup>
-                                </LinearGradientBrush.RelativeTransform>
-                                <GradientStop Color="#FFB2F5FF" Offset="0"/>
-                                <GradientStop Color="#FF66C3D0" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Border.Background>
+                    <Border Margin="10,20" CornerRadius="20" Width="auto" HorizontalAlignment="Center" Background="{DynamicResource ButtonGradient}">
                         <Border.Effect>
                             <DropShadowEffect BlurRadius="10"/>
                         </Border.Effect>
                         <WrapPanel Margin="0,20" HorizontalAlignment="Center">
                             <Image Margin="20,0" HorizontalAlignment="Center" Height="30" Width="30" Source="pack://application:,,,/Resourses/Images/add.png"/>
-                            <TextBlock TextWrapping="Wrap" Text="{DynamicResource _NewObject}" VerticalAlignment="Center" FontSize="24" Width="150" Margin="10,0,30,0"/>
+                            <TextBlock Style="{DynamicResource TextBl}" TextWrapping="Wrap" Text="{DynamicResource _NewObject}" VerticalAlignment="Center" FontSize="24" Width="150" Margin="10,0,30,0"/>
                         </WrapPanel>
                     </Border>
                 </Button>
 
                 <Button Style="{StaticResource NoStyleButtonWithoutWhite}" Command="{Binding LoadProject}">
-                <Border Margin="10,20" CornerRadius="20" Width="auto" HorizontalAlignment="Center">
-                    <Border.Background>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <LinearGradientBrush.RelativeTransform>
-                                <TransformGroup>
-                                    <ScaleTransform CenterY="0.5" CenterX="0.5"/>
-                                    <SkewTransform CenterY="0.5" CenterX="0.5"/>
-                                    <RotateTransform Angle="135" CenterY="0.5" CenterX="0.5"/>
-                                    <TranslateTransform/>
-                                </TransformGroup>
-                            </LinearGradientBrush.RelativeTransform>
-                            <GradientStop Color="#FFB2F5FF" Offset="0"/>
-                            <GradientStop Color="#FF66C3D0" Offset="1"/>
-                        </LinearGradientBrush>
-                    </Border.Background>
-                    <Border.Effect>
+                    <Border Margin="10,20" CornerRadius="20" Width="auto" HorizontalAlignment="Center" Background="{DynamicResource ButtonGradient}">
+                        <Border.Effect>
                         <DropShadowEffect BlurRadius="10"/>
                     </Border.Effect>
                     <WrapPanel Margin="0,20" HorizontalAlignment="Center">
                         <Image Margin="20,0" HorizontalAlignment="Center" Height="30" Width="30" Source="pack://application:,,,/Resourses/Images/add.png"/>
-                        <TextBlock TextWrapping="Wrap" Text="{DynamicResource _LoadProject}" VerticalAlignment="Center" FontSize="24" Width="150" Margin="10,0,30,0"/>
+                            <TextBlock Style="{DynamicResource TextBl}" TextWrapping="Wrap" Text="{DynamicResource _LoadProject}" VerticalAlignment="Center" FontSize="24" Width="150" Margin="10,0,30,0"/>
                     </WrapPanel>
                 </Border>
                 </Button>

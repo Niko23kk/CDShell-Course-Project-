@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Курсовой.Model;
-using Курсовой.Clases;
+using Курсовой.Classes;
 using Курсовой.View;
 using System.ComponentModel;
 using System.Windows.Input;
@@ -30,6 +30,16 @@ namespace Курсовой.ViewModel
             else
             {
                 ResourceDictionary resourceDict = Application.LoadComponent(new Uri("/Resourses/RuLanguage.xaml", UriKind.RelativeOrAbsolute)) as ResourceDictionary;
+                Application.Current.Resources.MergedDictionaries.Add(resourceDict);
+            }
+            if (user.Them == null || user.Them == "Default")
+            {
+                ResourceDictionary resourceDict = Application.LoadComponent(new Uri("/Resourses/DefaultThem.xaml", UriKind.RelativeOrAbsolute)) as ResourceDictionary;
+                Application.Current.Resources.MergedDictionaries.Add(resourceDict);
+            }
+            else
+            {
+                ResourceDictionary resourceDict = Application.LoadComponent(new Uri("/Resourses/BlackThem.xaml", UriKind.RelativeOrAbsolute)) as ResourceDictionary;
                 Application.Current.Resources.MergedDictionaries.Add(resourceDict);
             }
             FirstCharLoginCurrenUser = user.Name.ToUpper().First().ToString()+user.Surname.ToUpper().First().ToString();

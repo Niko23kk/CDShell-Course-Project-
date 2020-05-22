@@ -8,21 +8,10 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="InfoPage">
 
-    <Grid>
-        <Grid.Background>
-            <ImageBrush  ImageSource="D:\Учеба\4_сем\Курсач\Фоны\19742.jpg" Stretch="UniformToFill">
-                <ImageBrush.RelativeTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform AngleY="0" AngleX="0"/>
-                        <RotateTransform Angle="0"/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </ImageBrush.RelativeTransform>
-            </ImageBrush>
-        </Grid.Background>
+    <Grid Background="{DynamicResource BackgroundImage}">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
+            <RowDefinition Height="80"/>
             <RowDefinition Height="80"/>
             <RowDefinition Height="80"/>
             <RowDefinition Height="80"/>
@@ -31,5 +20,6 @@
         <TextBlock Style="{StaticResource StyleInfoPage}" Grid.Row="1" Text="{DynamicResource _InfoCourse}"/>
         <TextBlock Style="{StaticResource StyleInfoPage}" Grid.Row="2" Text="{DynamicResource _InfoAuthur}"/>
         <TextBlock Style="{StaticResource StyleInfoPage}" Grid.Row="3" Text="{DynamicResource _InfoApp}"/>
+        <TextBlock Style="{StaticResource StyleInfoPage}" Grid.Row="4" Text="Email: cdshellcompany@mail.ru"/>
     </Grid>
 </Page>

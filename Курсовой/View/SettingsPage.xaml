@@ -5,28 +5,16 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Курсовой.View"
       xmlns:vm="clr-namespace:Курсовой.ViewModel"
-      xmlns:ff="clr-namespace:Курсовой.Clases"
+      xmlns:ff="clr-namespace:Курсовой.Classes"
       mc:Ignorable="d" 
       Title="SettingsPage">
 
     <Page.DataContext>
         <vm:SettingsPageViewModel/>
     </Page.DataContext>
-    
-    <Grid>
-        <Grid.Background>
-            <ImageBrush  ImageSource="D:\Учеба\4_сем\Курсач\Фоны\19742.jpg" Stretch="UniformToFill">
-                <ImageBrush.RelativeTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform AngleY="0" AngleX="0"/>
-                        <RotateTransform Angle="0"/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </ImageBrush.RelativeTransform>
-            </ImageBrush>
-        </Grid.Background>
-        
+
+    <Grid Background="{DynamicResource BackgroundImage}">
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="2*"/>
@@ -41,19 +29,19 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="1" Text="{DynamicResource _Language}" VerticalAlignment="Top" FontSize="20" HorizontalAlignment="Right" Margin="10,0"/>
-        <ComboBox Text="{Binding Language}" Grid.Row="1" Grid.Column="1" FontSize="20" Height="30" VerticalAlignment="Top" Margin="0 0 20 0" HorizontalAlignment="Left" MinWidth="200">
+        <TextBlock Style="{DynamicResource TextBl}" Grid.Row="1" Text="{DynamicResource _Language}" VerticalAlignment="Top" FontSize="20" HorizontalAlignment="Right" Margin="10,0"/>
+        <ComboBox Text="{Binding Language}" Grid.Row="1" Grid.Column="1" FontSize="18" Height="30" VerticalAlignment="Top" Margin="0 0 20 0" HorizontalAlignment="Left" MinWidth="200">
             <ComboBoxItem Content="English"/>
             <ComboBoxItem Content="Русский"/>
         </ComboBox>
 
-        <TextBlock Grid.Row="2" Text="{DynamicResource _Them}" VerticalAlignment="Top" FontSize="20" HorizontalAlignment="Right" Margin="10,0"/>
-        <ComboBox Text="{Binding Them}" Grid.Row="2" Grid.Column="1" FontSize="20" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" MinWidth="200" Margin="0 0 20 0">
+        <TextBlock Style="{DynamicResource TextBl}" Grid.Row="2" Text="{DynamicResource _Them}" VerticalAlignment="Top" FontSize="20" HorizontalAlignment="Right" Margin="10,0"/>
+        <ComboBox Text="{Binding Them}" Grid.Row="2" Grid.Column="1" FontSize="18" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" MinWidth="200" Margin="0 0 20 0">
             <ComboBoxItem Content="{DynamicResource _DefaultThem}"/>
             <ComboBoxItem Content="{DynamicResource _DarkThem}"/>
         </ComboBox>
 
-        <TextBlock TextWrapping="Wrap" Grid.Row="3" Text="{DynamicResource _ChangePas}" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10,0"/>
+        <TextBlock Style="{DynamicResource TextBl}" TextWrapping="Wrap" Grid.Row="3" Text="{DynamicResource _ChangePas}" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10,0"/>
         <PasswordBox Grid.Row="3" Grid.Column="1" Name="OldPassword" MinWidth="200" Height="35" HorizontalAlignment="Left" VerticalAlignment="Top" 
                      ff:Secure.BoundPassword="{Binding Password,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Tag="{DynamicResource _Password}"/>
 

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Курсовой.Model;
-using Курсовой.Clases;
+using Курсовой.Classes;
 using Курсовой.View;
 using System.ComponentModel;
 using System.Windows.Input;
@@ -93,6 +93,17 @@ namespace Курсовой.ViewModel
             }
         }
 
+        public ICommand SignInClick
+        {
+            get
+            {
+                return new DelegateCommand(obj =>
+                {
+                    (obj as Page).NavigationService.Navigate(new Uri("pack://application:,,,/View/SignIn.xaml"), UriKind.RelativeOrAbsolute);
+                });
+            }
+        }
+
         public ICommand Change
         {
             get
@@ -107,26 +118,26 @@ namespace Курсовой.ViewModel
                             {
                                 if (Password.Length < 5)
                                 {
-                                    MessageBox.Show("Check your Password (minimal lenght 5)");
+                                    CustomMessageBox.Show("Error", "Check your Password (minimal lenght 5)", MessageBoxButton.OK);
                                     check = false;
                                 }
                                 if (ConPassword.Length < 5)
                                 {
-                                    MessageBox.Show("Check you Confirm Password (minimal lenght 5)");
+                                    CustomMessageBox.Show("Error", "Check you Confirm Password (minimal lenght 5)", MessageBoxButton.OK);
                                     check = false;
                                 }
                                 if (check)
                                 {
                                     if (Password != ConPassword)
                                     {
-                                        MessageBox.Show("Password and Confirm Password are different");
+                                        CustomMessageBox.Show("Error", "Password and Confirm Password are different", MessageBoxButton.OK);
                                         return;
                                     }
                                     SHA1 sHA1 = new SHA1CryptoServiceProvider();
                                     CurUser.Password = sHA1.ComputeHash(Encoding.ASCII.GetBytes(Password));
                                     DBRepository<User> dBRepository = new DBRepository<User>(new BuildEntities());
                                     dBRepository.Update(CurUser);
-                                    MessageBox.Show("Password was changed");
+                                    CustomMessageBox.Show("Event", "Password was changed", MessageBoxButton.OK);
                                     var window = Application.Current.Windows[Application.Current.Windows.Count - 1];
                                     (window as SignInWindow).Frame.Navigate(new SignIn());
                                     dBRepository.Dispose();
@@ -134,16 +145,18 @@ namespace Курсовой.ViewModel
                             }
                             catch
                             {
-                                MessageBox.Show("Input Password and Confirm Password");
+                                CustomMessageBox.Show("Error", "Input Password and Confirm Password", MessageBoxButton.OK);
                             }
                         }
                         else
                         {
-                            MessageBox.Show("Code is not right");
+                            CustomMessageBox.Show("Error", "Code is not right", MessageBoxButton.OK);
                         }
                     }
                     catch
-                    { MessageBox.Show("Check tou code"); };
+                    {
+                        CustomMessageBox.Show("Error", "Check you code", MessageBoxButton.OK);
+                    };
                 });
             }
         }

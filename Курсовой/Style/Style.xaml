@@ -2,19 +2,35 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Курсовой">
     <!--Font family-->
-    <Style TargetType="TextBlock">
+
+    <Style TargetType="TextBlock" x:Key="TextBl">
+        <Setter Property="FontFamily" Value="Calibri"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextForeground}"/>
+    </Style>
+
+    <Style TargetType="TextBlock" x:Key="WorkText">
+        <Setter Property="FontFamily" Value="Calibri"/>
+        <Setter Property="Foreground" Value="Black"/>
+    </Style>
+
+    <Style TargetType="TextBlock" x:Key="OtherTextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundTextBox}"/>
         <Setter Property="FontFamily" Value="Calibri"/>
     </Style>
+
     <Style TargetType="Label">
+        <Setter Property="Foreground" Value="{DynamicResource TextForeground}"/>
         <Setter Property="FontFamily" Value="Calibri"/>
     </Style>
+    
     <Style TargetType="ListView">
+        <Setter Property="Foreground" Value="{DynamicResource TextForeground}"/>
         <Setter Property="FontFamily" Value="Calibri"/>
     </Style>
 
     <Style TargetType="TextBlock" x:Key="StyleInfoPage">
         <Setter Property="FontSize" Value="30"/>
-        <Setter Property="Foreground" Value="#FF3D3D3D"/>
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundTextBlock}"/>
         <Setter Property="VerticalAlignment" Value="Top"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="TextWrapping" Value="Wrap"/>
@@ -25,22 +41,21 @@
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="FontFamily" Value="Calibri"/>
-        <Setter Property="Foreground" Value="#9E9E9E"/>
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundTextBox}"/>
         <Setter Property="Padding" Value="7"/>
         <Setter Property="Margin" Value="5,2"/>
         <Setter Property="FontSize" Value="16"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBox}">
-                    <Grid Background="#B2E8E8E8" >
+                    <Grid Background="{DynamicResource BackgroundTextBox}" >
                         <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                        <Separator Name="Underline1" Margin="0,3,0,0" VerticalAlignment="Bottom" Background="{DynamicResource LogoandButton}"/>
                         <Separator Name="Underline" Margin="0,3,0,0" VerticalAlignment="Bottom"/>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="true">
-                        </Trigger>
                         <Trigger Property="IsFocused" Value="true">
-                            <Setter Property="Foreground" Value="Gray"/>
+                            <Setter Property="Foreground" Value="{DynamicResource IsFocusedText}"/>
                             <Setter Property="Visibility" TargetName="Underline" Value="Hidden"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
@@ -54,21 +69,22 @@
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="FontFamily" Value="Calibri"/>
-        <Setter Property="Foreground" Value="#9E9E9E"/>
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundTextBox}"/>
         <Setter Property="Padding" Value="7"/>
         <Setter Property="Margin" Value="5,2"/>
         <Setter Property="FontSize" Value="16"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type PasswordBox}">
-                    <Grid Background="#B2E8E8E8" >
+                    <Grid Background="{DynamicResource BackgroundTextBox}" >
                         <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
-                        <TextBlock Name="Placeholder" Text="{Binding Path=Tag, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" Padding="5" Margin="5,2" FontSize="16"/>
+                        <TextBlock Style="{DynamicResource OtherTextBlock}" Name="Placeholder" Text="{Binding Path=Tag, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" Padding="5" Margin="5,2" FontSize="16"/>
+                        <Separator Name="Underline1" Margin="0,3,0,0" VerticalAlignment="Bottom" Background="{DynamicResource LogoandButton}"/>
                         <Separator Name="Underline" Margin="0,3,0,0" VerticalAlignment="Bottom"/>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsFocused" Value="true">
-                            <Setter Property="Foreground" Value="Gray"/>
+                            <Setter Property="Foreground" Value="{DynamicResource IsFocusedText}"/>
                             <Setter Property="Visibility" TargetName="Underline" Value="Hidden"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
@@ -79,11 +95,11 @@
 
     <Style TargetType="Button" x:Key="MainButton">
         <Setter Property="FontSize" Value="18"/>
-        <Setter Property="Button.Foreground" Value="White" />
+        <Setter Property="Foreground" Value="{DynamicResource ButtonForeground}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border CornerRadius="15,15,15,15" BorderThickness="1" Background="#FF66C3D0"  >
+                    <Border CornerRadius="15,15,15,15" BorderThickness="1" Background="{DynamicResource LogoandButton}"  >
                         <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     </Border>
                     <ControlTemplate.Triggers>
@@ -93,7 +109,7 @@
                                 <Condition Property="IsPressed" Value="True" />
                             </MultiTrigger.Conditions>
                             <MultiTrigger.Setters>
-                                <Setter Property="Foreground" Value="White" />
+                                <Setter Property="Foreground" Value="{DynamicResource MainColor}" />
                             </MultiTrigger.Setters>
                         </MultiTrigger>
                         <Trigger Property="IsMouseOver" Value="true">
@@ -134,7 +150,7 @@
     </Style>
 
     <Style TargetType="ListBoxItem" x:Key="NoStyleBoxItem">
-        <Setter Property="Button.Foreground" Value="black" />
+        <Setter Property="Button.Foreground" Value="{DynamicResource TextForeground}" />
         <Setter Property="Width" Value="185"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -147,8 +163,10 @@
         </Setter>
     </Style>
 
+    <!--Button-->
+    
     <Style TargetType="Button" x:Key="MenuButton">
-        <Setter Property="Foreground" Value="#FF3D3D3D"/>
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundTextBlock}"/>
         <Setter Property="Width" Value="300"/>
         <Setter Property="Height" Value="80"/>
         <Setter Property="Template">
@@ -160,7 +178,7 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Foreground" Value="#FF66C3D0"/>
+                            <Setter Property="Foreground" Value="{DynamicResource LogoandButton}"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
                             <Setter Property="FontSize" Value="20" />
@@ -173,11 +191,11 @@
     </Style>
 
     <Style TargetType="Button" x:Key="NoStyleButton">
-        <Setter Property="Button.Foreground" Value="black" />
+        <Setter Property="Button.Foreground" Value="{DynamicResource TextForeground}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Border Background="White">
+                    <Border Background="{DynamicResource MainColor}">
                         <ContentPresenter Name="Content" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     </Border>
                     <ControlTemplate.Triggers>
@@ -200,6 +218,69 @@
                         <Trigger Property="IsPressed" Value="true">
                             <Setter Property="FontSize" Value="20" />
                             <Setter Property="FontWeight" Value="Bold"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--ComboBox-->
+    <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="ToggleButton">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="24" />
+            </Grid.ColumnDefinitions>
+            <Border x:Name="Border" Grid.ColumnSpan="2" CornerRadius="5" Background="#B2E8E8E8" BorderBrush="{DynamicResource MainColor}" BorderThickness="1" />
+            <Path x:Name="Arrow" Grid.Column="1" Fill="{DynamicResource ForegroundTextBox}" HorizontalAlignment="Center" VerticalAlignment="Center" Data="M -2 0 L 2 4 L 6 0 Z"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="ToggleButton.IsMouseOver" Value="true">
+                <Setter TargetName="Border" Property="BorderBrush" Value="Gray" />
+                <Setter TargetName="Arrow" Property="Fill" Value="Gray" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    
+    <Style x:Key="{x:Type ComboBox}" TargetType="ComboBox">
+        <Setter Property="Width" Value="Auto"/>
+        <Setter Property="Height" Value="24"/>
+        <Setter Property="FontSize" Value="12"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ComboBox">
+                    <Grid>
+                        <ToggleButton Name="ToggleButton" Template="{StaticResource ComboBoxToggleButton}" Grid.Column="2"
+                                      IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}" ClickMode="Press"/>
+                        <ContentPresenter Name="ContentSite" IsHitTestVisible="False" Content="{TemplateBinding SelectionBoxItem}" ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                          ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" Margin="6,3,23,3" VerticalAlignment="Center"
+                                          HorizontalAlignment="Left" />
+                        <Popup Name="Popup" Placement="Bottom" IsOpen="{TemplateBinding IsDropDownOpen}" AllowsTransparency="True" Focusable="False" PopupAnimation="Slide" Margin="8">
+                            <Grid Name="DropDown" SnapsToDevicePixels="True" MinWidth="{TemplateBinding ActualWidth}" MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                <Border x:Name="DropDownBorder" Background="#B2E8E8E8" CornerRadius="3" Margin="0,3,0,3" />
+                                <ScrollViewer SnapsToDevicePixels="True">
+                                    <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
+                                </ScrollViewer>
+                            </Grid>
+                        </Popup>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="{x:Type ComboBoxItem}" TargetType="ComboBoxItem">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ComboBoxItem">
+                    <Border Name="Border" Padding="7" BorderThickness="1" SnapsToDevicePixels="true">
+                        <ContentPresenter />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsHighlighted" Value="true">
+                            <Setter TargetName="Border" Property="Background" Value="#FFD9D9D9"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

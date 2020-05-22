@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Курсовой.Model;
-using Курсовой.Clases;
+using Курсовой.Classes;
 using Курсовой.View;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
@@ -152,23 +152,6 @@ namespace Курсовой.ViewModel
             }
         }
 
-
-        public double Zoom { get; set; } = 1;
-
-        private ScaleTransform zoomProperty;
-        public ScaleTransform ZoomProperty
-        {
-            get
-            {
-                return zoomProperty;
-            }
-            set
-            {
-                zoomProperty = value;
-                OnPropertyChanged();
-            }
-        }
-
         public ICommand TypeClick
         {
             get
@@ -254,38 +237,6 @@ namespace Курсовой.ViewModel
             }
         }
 
-        //public ICommand ZoomCanvas
-        //{
-        //    get
-        //    {
-        //        return new DelegateCommand(obj =>
-        //        {
-        //            (obj as Canvas).InputBindings.ToString();
-        //            MouseWheelGesture gesture = new MouseWheelGesture();
-        //            gesture.Matches(null, null);
-        //            MessageBox.Show(gesture.Direction.ToString());
-        //            if (MouseWheelGesture.CtrlDown.Direction == MouseWheelGesture.WheelDirection.Down)
-        //            {
-        //                MessageBox.Show("Down");
-        //            }
-        //            else
-        //                MessageBox.Show("");
-        //        });
-        //    }
-        //}
-        
-        public ICommand ZoomPlusCommand
-        {
-            get
-            {
-                return new DelegateCommand(obj =>
-                {
-                    Zoom += 0.2;
-                    ZoomProperty = new ScaleTransform(Zoom, Zoom, 50, 50);
-                });
-            }
-        }
-
         public ICommand DropItemToCanvas
         {
             get
@@ -301,7 +252,7 @@ namespace Курсовой.ViewModel
                         }
                         else
                         {
-                            //MessageBox.Show("Choose second point (click RMB)");
+                            CustomMessageBox.Show("Help", "Choose second point (click RMB)", MessageBoxButton.OK);
                         }
                     }
                     else if(!Choose && !Change)
@@ -477,24 +428,10 @@ namespace Курсовой.ViewModel
                         try
                         {
                             System.IO.File.WriteAllBytes($"{openFile.FileName}", ms.ToArray());
-                            MessageBox.Show("Screan was saved");
+                            CustomMessageBox.Show("Event", "Screan was saved", MessageBoxButton.OK);
                         }
                         catch { }
                     }
-                    
-                    //System.Drawing.Bitmap croppedImage = new System.Drawing.Bitmap(@"D:\Учеба\4_сем\Курсач\123.png");
-                    //var windows = Application.Current.Windows;
-                    //Window window = null;
-                    //foreach (var item in windows)
-                    //{
-                    //    window = item as Window;
-                    //}
-                    //System.Drawing.Rectangle destinationsRect = new System.Drawing.Rectangle(300, 0, width, height);
-                    //croppedImage = croppedImage.Clone(destinationsRect, croppedImage.PixelFormat);
-
-                    //System.Drawing.Image image = croppedImage.Clone(destinationsRect, System.Drawing.Imaging.PixelFormat.Undefined);
-                    //croppedImage.Dispose();
-                    //image.Save(@"D:\Учеба\4_сем\Курсач\123.png");
                 });
             }
         }
@@ -568,7 +505,7 @@ namespace Курсовой.ViewModel
                             workFields.Add(item.Field);
                         }
                         dBRepository.AddCollection(workFields);
-                        MessageBox.Show("Project save");
+                        CustomMessageBox.Show("Event", "Project save", MessageBoxButton.OK);
                         dBRepository.Dispose();
                         dBProject.Dispose();
                     }
@@ -601,7 +538,7 @@ namespace Курсовой.ViewModel
                                 XmlSerializer serializer = new XmlSerializer(typeof(List<(int? ID_UP, int? Element_ID, int? PositionX, int? PositionY, int? Rotate)>));
                                 StreamWriter file = new StreamWriter(openFile.FileName);
                                 serializer.Serialize(file, save);
-                                MessageBox.Show("Project save");
+                                CustomMessageBox.Show("Event", "Project save", MessageBoxButton.OK);
                             }
                         }
                         catch { }
@@ -770,6 +707,7 @@ namespace Курсовой.ViewModel
                         {
                             HomeCollection.Add(BufferElement);
                             TotalPrice = (Convert.ToDecimal(TotalPrice) + (decimal)CurrentElement.Price).ToString();
+                            BackHistory.History.Push(HomeCollection.ToList());
                             ChangeWorkField = null;
                             Choose = false;
                             Change = false;
@@ -863,34 +801,5 @@ namespace Курсовой.ViewModel
             }
         }
         
-
-        
-        //private Double zoomMax = 5;
-        //private Double zoomMin = 0.5;
-        //private Double zoomSpeed = 0.001;
-        //private Double zoom = 1;
-        //// Image
-        //private Image backgroung;
-        
-
-        //// Zoom on Mouse wheel
-        //private void Canvas_MouseWheel(object sender, MouseWheelEventArgs e)
-        //{
-        //    zoom += zoomSpeed * e.Delta; // Ajust zooming speed (e.Delta = Mouse spin value )
-        //    if (zoom < zoomMin) { zoom = 0.5; } // Limit Min Scale
-        //    if (zoom > zoomMax) { zoom = 5; } // Limit Max Scale
-
-        //    Point mousePos = e.GetPosition(canvas_Draw);
-
-        //    if (zoom > 1)
-        //    {
-        //        canvas_Draw.RenderTransform = new ScaleTransform(zoom, zoom, mousePos.X, mousePos.Y); // transform Canvas size from mouse position
-        //    }
-        //    else
-        //    {
-        //        canvas_Draw.RenderTransform = new ScaleTransform(zoom, zoom); // transform Canvas size
-        //    }
-        //}
-
     }
 }

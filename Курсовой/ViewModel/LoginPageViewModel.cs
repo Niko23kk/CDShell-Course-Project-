@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Курсовой.Model;
-using Курсовой.Clases;
+using Курсовой.Classes;
 using Курсовой.View;
 using System.ComponentModel;
 using System.Windows.Input;
@@ -40,6 +40,17 @@ namespace Курсовой.ViewModel
             }
         }
 
+        public ICommand SignInClick
+        {
+            get
+            {
+                return new DelegateCommand(obj =>
+                {
+                    (obj as Page).NavigationService.Navigate(new Uri("pack://application:,,,/View/SignIn.xaml"), UriKind.RelativeOrAbsolute);
+                });
+            }
+        }
+
         public ICommand GetCode
         {
             get
@@ -54,7 +65,7 @@ namespace Курсовой.ViewModel
                     }
                     catch
                     {
-                        MessageBox.Show("We don't find this login");
+                        CustomMessageBox.Show("Error", "We don't find this login", MessageBoxButton.OK);
                     }
                     try
                     {
@@ -75,7 +86,7 @@ namespace Курсовой.ViewModel
                     }
                     catch
                     {
-                        MessageBox.Show("We don't find account");
+                        CustomMessageBox.Show("Error", "We don't find this account", MessageBoxButton.OK);
                     }
                     dBRepository.Dispose();
                 });

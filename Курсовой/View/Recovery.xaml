@@ -3,25 +3,13 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:ff="clr-namespace:Курсовой.Clases"
+      xmlns:ff="clr-namespace:Курсовой.Classes"
       xmlns:local="clr-namespace:Курсовой.View"
       mc:Ignorable="d" 
       MinHeight="400" MinWidth="300"
-      Title="Recovery">
+      Title="Recovery" Name="RecoveryPage">
 
-    <Grid ShowGridLines="True" RenderTransformOrigin="0.5,0.5">
-        <Grid.Background>
-            <ImageBrush  ImageSource="pack://application:,,,/Resourses/Images/Background.jpg" Stretch="UniformToFill">
-                <ImageBrush.RelativeTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform AngleY="0" AngleX="0"/>
-                        <RotateTransform Angle="0"/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </ImageBrush.RelativeTransform>
-            </ImageBrush>
-        </Grid.Background>
+    <Grid Background="{DynamicResource BackgroundImage}">
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="100"/>
@@ -32,10 +20,10 @@
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="1" Text="{DynamicResource _PasswordRec}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="32" FontWeight="Bold" Foreground="#9E9E9E"/>
+        <TextBlock Grid.Row="1" Text="{DynamicResource _PasswordRec}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="32" FontWeight="Bold" Foreground="{DynamicResource Header}"/>
 
         <TextBox Name="Code" Text="{Binding Code, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" MinWidth="300" Height="35"/>
-        <TextBlock IsHitTestVisible="False" Grid.Row="2" FontSize="16" Text="{DynamicResource _Code}" Width="300"  TextAlignment="Left" Height="35" Padding="7" FontFamily="Calibri" Foreground="#9E9E9E">
+        <TextBlock IsHitTestVisible="False" Grid.Row="2" FontSize="16" Text="{DynamicResource _Code}" Width="300"  TextAlignment="Left" Height="35" Padding="7" FontFamily="Calibri" Foreground="{DynamicResource ForegroundTextBox}">
             <TextBlock.Style>
                 <Style TargetType="{x:Type TextBlock}">
                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -55,7 +43,7 @@
         <Button Grid.Row="6" Style="{StaticResource MainButton}" Content="{DynamicResource _Change}" Width="150" Command="{Binding Change}" CommandParameter="{Binding ElementName=SignInPage}"/>
 
         <TextBlock Grid.Row="7" Margin="0,10" HorizontalAlignment="Center">
-                <Hyperlink  FontFamily="Calibri" FontSize="14" Command="{Binding SignInClick}" CommandParameter="{Binding ElementName=RegistrationPage}"><TextBlock Text="{DynamicResource _BackSign}"/></Hyperlink>
+                <Hyperlink  FontFamily="Calibri" FontSize="14" Command="{Binding SignInClick}" CommandParameter="{Binding ElementName=RecoveryPage}"><TextBlock Text="{DynamicResource _BackSign}"/></Hyperlink>
             </TextBlock>
     </Grid>
 </Page>

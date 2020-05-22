@@ -7,7 +7,7 @@ using System.Windows.Input;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Курсовой.Clases
+namespace Курсовой.Classes
 {
     class DelegateCommand:ICommand
     {

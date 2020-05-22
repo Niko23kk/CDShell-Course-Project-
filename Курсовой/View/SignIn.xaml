@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:ff="clr-namespace:Курсовой.Clases"
+        xmlns:ff="clr-namespace:Курсовой.Classes"
         xmlns:vm="clr-namespace:Курсовой.ViewModel"
         xmlns:local="clr-namespace:Курсовой.View"
         mc:Ignorable="d"
@@ -11,19 +11,7 @@
     <Page.DataContext>
         <vm:SignInViewModel/>
     </Page.DataContext>
-    <Grid RenderTransformOrigin="0.5,0.5">
-        <Grid.Background>
-            <ImageBrush  ImageSource="pack://application:,,,/Resourses/Images/Background.jpg" Stretch="UniformToFill">
-                <ImageBrush.RelativeTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform AngleY="0" AngleX="0"/>
-                        <RotateTransform Angle="0"/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </ImageBrush.RelativeTransform>
-            </ImageBrush>
-        </Grid.Background>
+    <Grid Background="{DynamicResource BackgroundImage}">
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="100"/>
@@ -35,10 +23,10 @@
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="1" Text="{DynamicResource _SignIn}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="32" FontWeight="Bold" Foreground="#9E9E9E"/>
+        <TextBlock Grid.Row="1" Text="{DynamicResource _SignIn}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="32" FontWeight="Bold" Foreground="{DynamicResource Header}"/>
 
         <TextBox Name="Login" Text="{Binding Login, Mode=TwoWay}" Grid.Row="3" MinWidth="300" Height="35"/>
-        <TextBlock IsHitTestVisible="False" Grid.Row="3" FontSize="16" Text="{DynamicResource _Login}" Width="300"  TextAlignment="Left" Height="35" Padding="7" FontFamily="Calibri" Foreground="#9E9E9E">
+        <TextBlock IsHitTestVisible="False" Grid.Row="3" FontSize="16" Text="{DynamicResource _Login}" Width="300"  TextAlignment="Left" Height="35" Padding="7" FontFamily="Calibri" Foreground="{DynamicResource ForegroundTextBox}">
             <TextBlock.Style>
                 <Style TargetType="{x:Type TextBlock}">
                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -56,14 +44,14 @@
         <Button Grid.Row="6" Style="{StaticResource MainButton}" Content="{DynamicResource _SignIn}" Width="150" Command="{Binding SignInClick}" CommandParameter="{Binding ElementName=SignInPage}"/>
         
         <WrapPanel Grid.Row="7" HorizontalAlignment="Center" Orientation="Vertical" Margin="10 10 10 0">
-            <TextBlock Text="{DynamicResource _RegClick}" TextWrapping="Wrap" FontSize="14" Foreground="#9E9E9E"/>
+            <TextBlock Text="{DynamicResource _RegClick}" TextWrapping="Wrap" FontSize="14" Foreground="{DynamicResource ForegroundTextBox}"/>
             <TextBlock HorizontalAlignment="Center">    
                 <TextBlock Text=" " />
                 <Hyperlink  FontFamily="Calibri" FontSize="14" Command="{Binding RegistrationClick}" CommandParameter="{Binding ElementName=SignInPage}"><TextBlock Text="{DynamicResource _ClickMe}"/></Hyperlink>
             </TextBlock>
         </WrapPanel>
         <WrapPanel Grid.Row="8" HorizontalAlignment="Center" Orientation="Vertical" Margin="10 5 10 0">
-            <TextBlock Text="{DynamicResource _ForgotPas}" TextWrapping="Wrap" FontSize="14" Foreground="#9E9E9E"/>
+            <TextBlock Text="{DynamicResource _ForgotPas}" TextWrapping="Wrap" FontSize="14" Foreground="{DynamicResource ForegroundTextBox}"/>
             <TextBlock HorizontalAlignment="Center">
                 <TextBlock Text=" " />
                 <Hyperlink  FontFamily="Calibri" FontSize="14" Command="{Binding NewPassword}" CommandParameter="{Binding ElementName=SignInPage}"><TextBlock Text="{DynamicResource _ClickMe}"/></Hyperlink>

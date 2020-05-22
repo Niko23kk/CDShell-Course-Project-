@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="Курсовой.Model.Elements">
+    <Position X="1" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAQAAgEAABAAAAAAAAAAAAAAAEQAACAAAAAE=</HashCode>
+      <FileName>Model\Elements.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="User" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="WorkField" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Курсовой.Model.Project">
+    <Position X="6.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAEAAAAAAAAAAAIAAAAAABAAAEAAAQAAAAAAAA=</HashCode>
+      <FileName>Model\Project.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="UserProject" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Курсовой.Model.User">
+    <Position X="3.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACCAAACAgAAAQAAQABABAAAACAQAQCAAAAAA=</HashCode>
+      <FileName>Model\User.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="UserProject" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Курсовой.Model.UserProject">
+    <Position X="8.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAgAAAAAAACAAAAAAAAAEAEAAACAAAAAA=</HashCode>
+      <FileName>Model\UserProject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Курсовой.Model.WorkField">
+    <Position X="11" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAABAAAAAgAAgAAAQAAAAEABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\WorkField.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="UserProject" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Курсовой.Model.CurrentUserID">
+    <Position X="8.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAgAAAAAABABAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\CurrentUserID.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="instance" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Курсовой.Model.HomeElements">
+    <Position X="6.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>Model\HomeElements.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Field" />
+      <Property Name="Element" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Курсовой.Model.BuildHistory">
+    <Position X="10.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Model\Memento.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Курсовой.Model.DBRepository&lt;IEntity&gt;" BaseTypeListCollapsed="true">
+    <Position X="12.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYCCAAAACAAAAAAAAAABAAAAAABAEAACgAAAAAEAAA=</HashCode>
+      <FileName>Model\Repository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.1" />
+  </Class>
+  <Class Name="Курсовой.Model.UserProj">
+    <Position X="5.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\UserProj.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="User" />
+      <Property Name="Project" />
+    </ShowAsAssociation>
+  </Class>
+  <Interface Name="Курсовой.Model.IRepository&lt;IEntity&gt;">
+    <Position X="12.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQACAAAAAAAAAAAAAAABAAAAAABAEAAAgAAAAAEAAA=</HashCode>
+      <FileName>Model\Repository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

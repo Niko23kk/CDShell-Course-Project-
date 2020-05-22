@@ -12,19 +12,7 @@
         <vm:NewTextureViewModel/>
     </Window.DataContext>
 
-    <Grid>
-        <Grid.Background>
-            <ImageBrush  ImageSource="pack://application:,,,/Resourses/Images/Background.jpg" Stretch="UniformToFill">
-                <ImageBrush.RelativeTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform AngleY="0" AngleX="0"/>
-                        <RotateTransform Angle="0"/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </ImageBrush.RelativeTransform>
-            </ImageBrush>
-        </Grid.Background>
+    <Grid Background="{DynamicResource BackgroundImage}">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
@@ -40,9 +28,9 @@
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Row="1" Text="{DynamicResource _Title}" FontSize="20" Margin="0,0,20,0" HorizontalAlignment="Right"/>
+        <TextBlock Style="{DynamicResource TextBl}" Grid.Row="1" Text="{DynamicResource _Title}" FontSize="20" Margin="0,0,20,0" HorizontalAlignment="Right"/>
         <TextBox Name="Title" Text="{Binding Title}" Grid.Row="1" Grid.Column="1" Width="200" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35"/>
-        <TextBlock IsHitTestVisible="False" Grid.Row="1" Grid.Column="1" FontSize="16" Text="{DynamicResource _Title}" Width="200"  HorizontalAlignment="Left" Height="35" Padding="7" Margin="2 0 " FontFamily="Calibri" Foreground="#9E9E9E">
+        <TextBlock IsHitTestVisible="False" Grid.Row="1" Grid.Column="1" FontSize="16" Text="{DynamicResource _Title}" Width="200"  HorizontalAlignment="Left" Height="35" Padding="7 3" Margin="2 -2" FontFamily="Calibri" Foreground="{DynamicResource ForegroundTextBox}">
             <TextBlock.Style>
                 <Style TargetType="{x:Type TextBlock}">
                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -55,13 +43,13 @@
             </TextBlock.Style>
         </TextBlock>
 
-        <TextBlock Grid.Row="2" Text="{DynamicResource _Price}" FontSize="20" Margin="0,0,20,0" HorizontalAlignment="Right"/>
+        <TextBlock Style="{DynamicResource TextBl}" Grid.Row="2" Text="{DynamicResource _Price}" FontSize="20" Margin="0,0,20,0" HorizontalAlignment="Right"/>
         <TextBox Text="{Binding Price}" Grid.Row="2" Grid.Column="1" Width="200" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35"/>
 
-        <TextBlock Grid.Row="3" Text="{DynamicResource _Size}" FontSize="20" Margin="0,0,20,0" HorizontalAlignment="Right"/>
+        <TextBlock Style="{DynamicResource TextBl}" Grid.Row="3" Text="{DynamicResource _Size}" FontSize="20" Margin="0,0,20,0" HorizontalAlignment="Right"/>
         <TextBox Text="{Binding Size}" Grid.Row="3" Grid.Column="1" Width="50" Height="35" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
-        <TextBlock Grid.Row="4" Text="{DynamicResource _FrontView}" FontSize="20" Margin="0,0,20,0" HorizontalAlignment="Right"/>
+        <TextBlock Style="{DynamicResource TextBl}" Grid.Row="4" Text="{DynamicResource _FrontView}" FontSize="20" Margin="0,0,20,0" HorizontalAlignment="Right"/>
         <StackPanel Grid.Column="1" Grid.Row="4" Orientation="Horizontal">
             <Button Content="{DynamicResource _Choose}" Style="{StaticResource MainButton}" IsEnabled="True" Height="40" VerticalAlignment="Top" Width="100" HorizontalAlignment="Left" Command="{Binding FrontImageClick}"/>
             <Border Margin="20,0" CornerRadius="10" Background="#33828080">
@@ -69,7 +57,7 @@
             </Border>
         </StackPanel>
 
-        <TextBlock Grid.Row="6" Text="{DynamicResource _SideView}" FontSize="20" Margin="0,0,20,0" HorizontalAlignment="Right"/>
+        <TextBlock Style="{DynamicResource TextBl}" Grid.Row="6" Text="{DynamicResource _SideView}" FontSize="20" Margin="0,0,20,0" HorizontalAlignment="Right"/>
         <StackPanel Grid.Column="1" Grid.Row="6" Orientation="Horizontal">
             <Button Content="{DynamicResource _Choose}" Style="{StaticResource MainButton}" IsEnabled="True" Height="40" VerticalAlignment="Top" Width="100" HorizontalAlignment="Left" Command="{Binding SideImageClick}"/>
             <Border Margin="20,0" CornerRadius="10"  Background="#33828080">

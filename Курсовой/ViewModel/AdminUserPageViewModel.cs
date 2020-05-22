@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Курсовой.Model;
-using Курсовой.Clases;
+using Курсовой.Classes;
 using Курсовой.ViewModel;
 using System.Windows.Input;
 using System.Windows;
@@ -76,7 +76,7 @@ namespace Курсовой.ViewModel
                     OnPropertyChanged();
                 }
                 else
-                    MessageBox.Show("Check your First name (max lenght 25)");
+                    CustomMessageBox.Show("Error", "Check your First name (max lenght 25)", MessageBoxButton.OK);
             }
         }
 
@@ -92,7 +92,7 @@ namespace Курсовой.ViewModel
                     OnPropertyChanged();
                 }
                 else
-                    MessageBox.Show("Check your Second name (max lenght 25)");
+                    CustomMessageBox.Show("Error", "Check your Second name (max lenght 25)", MessageBoxButton.OK);
             }
         }
 
@@ -108,7 +108,7 @@ namespace Курсовой.ViewModel
                     OnPropertyChanged();
                 }
                 else
-                    MessageBox.Show("Check your email (max lenght 30)");
+                    CustomMessageBox.Show("Error", "Check your email (max lenght 30)", MessageBoxButton.OK);
             }
         }
 
@@ -124,7 +124,7 @@ namespace Курсовой.ViewModel
                     OnPropertyChanged();
                 }
                 else
-                    MessageBox.Show("Check your Login (max lenght 25)");
+                    CustomMessageBox.Show("Error", "Check your Login (max lenght 25)", MessageBoxButton.OK);
             }
         }
 
@@ -167,8 +167,7 @@ namespace Курсовой.ViewModel
                     newLogin = value;
                     OnPropertyChanged();
                 }
-                else
-                    MessageBox.Show("Check your Login (max lenght 25)");
+                else CustomMessageBox.Show("Error", "Check your Login (max lenght 25)", MessageBoxButton.OK);
             }
         }
 
@@ -279,15 +278,18 @@ namespace Курсовой.ViewModel
                 {
                     try
                     {
-                        DBRepository<User> dBRepository = new DBRepository<User>(new BuildEntities());
-                        dBRepository.Remove((obj as FrameworkElement).DataContext as User);
-                        Users.Clear();
-                        foreach (var item in dBRepository.GetAll().Where(s => s.Type != "Admin"))
+                        if (CustomMessageBox.Show("Delete", "Deleted user?", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                         {
-                            Users.Add(item);
+                            DBRepository<User> dBRepository = new DBRepository<User>(new BuildEntities());
+                            dBRepository.Remove((obj as FrameworkElement).DataContext as User);
+                            Users.Clear();
+                            foreach (var item in dBRepository.GetAll().Where(s => s.Type != "Admin"))
+                            {
+                                Users.Add(item);
+                            }
+                            CustomMessageBox.Show("Delete", "User has been deleted", MessageBoxButton.OK);
+                            dBRepository.Dispose();
                         }
-                        MessageBox.Show("User has been deleted");
-                        dBRepository.Dispose();
                     }
                     catch
                     { }
@@ -304,25 +306,25 @@ namespace Курсовой.ViewModel
                     bool check = true;
                     if (FirstName.Length == 0)
                     {
-                        MessageBox.Show("Input First name");
+                        CustomMessageBox.Show("Error", "Input First name", MessageBoxButton.OK);
                         check = false;
                     }
                     if (SecondName.Length == 0)
                     {
-                        MessageBox.Show("Input Second name");
+                        CustomMessageBox.Show("Error", "Input Second name", MessageBoxButton.OK);
                         check = false;
                     }
                     if (!Regex.IsMatch(Email, @"^[-a-z0-9!#$%&'*+/=?^_`{|}~]+(\.[-a-z0-9!#$%&'*+/=?^_`{|}~]+)*@([a-z0-9]([-a-z0-9]{0,61}[a-z0-9])?\.)" +
                         "*(aero|arpa|asia|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel|[a-z][a-z])$"))
                     {
-                        MessageBox.Show("Uncorrectly format");
+                        CustomMessageBox.Show("Error", "Uncorrectly format in email", MessageBoxButton.OK);
                         check = false;
                     }
                     try
                     {
                         if (Password.Length < 5 && Password.Length > 0)
                         {
-                            MessageBox.Show("Check Password (minimal lenght 5)");
+                            CustomMessageBox.Show("Error", "Check Password (minimal lenght 5)", MessageBoxButton.OK);
                             check = false;
                         }
                     }
@@ -363,7 +365,7 @@ namespace Курсовой.ViewModel
                         }
                         user.Type = AdminStatus ? "Admin" : "User";
                         dBRepository.Update(user);
-                        MessageBox.Show("Info was updating");
+                        CustomMessageBox.Show("Event", "Info was updating", MessageBoxButton.OK);
                         Users.Clear();
                         foreach (var item in dBRepository.GetAll().Where(s => s.Type != "Admin"))
                         {

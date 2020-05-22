@@ -11,7 +11,7 @@ namespace Курсовой.Model
     public interface IRepository<IEntity>:IDisposable where IEntity : class
     {
         void Create(IEntity item);
-        IEntity FindById(int id);
+        IEntity FindById(IEntity id);
         void AddCollection(IEnumerable<IEntity> entities);
         void RemoveCollection(IEnumerable<IEntity> entities);
         IEnumerable<IEntity> GetAll();
@@ -58,7 +58,7 @@ namespace Курсовой.Model
             }
         }
 
-        public IEntity FindById(int id)
+        public IEntity FindById(IEntity id)
         {
             return dbSet.Find(id);
         }
@@ -88,7 +88,6 @@ namespace Курсовой.Model
                 context.SaveChanges();
                 return;
             }
-
         }
 
         public void Update(IEntity item)
