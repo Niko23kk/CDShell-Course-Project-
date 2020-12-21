@@ -7,7 +7,7 @@
         xmlns:vm="clr-namespace:Курсовой.ViewModel"
         xmlns:local="clr-namespace:Курсовой.View"
         mc:Ignorable="d"
-        MinHeight="400" MinWidth="300" Height="500" Width="400" Name="RegistrationPage">
+        MinHeight="400" MinWidth="300" Name="RegistrationPage">
     <Page.DataContext>
         <vm:RegistrateViewModel/>
     </Page.DataContext>

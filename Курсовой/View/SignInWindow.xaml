@@ -6,7 +6,7 @@
         xmlns:vm="clr-namespace:Курсовой.ViewModel"
         xmlns:local="clr-namespace:Курсовой.View"
         mc:Ignorable="d"
-        Title="CD SHELL" Height="550" Width="400" WindowStartupLocation="CenterScreen"  Icon="pack://application:,,,/Resourses/Logo.png" Style="{StaticResource WindowStyle}">
+        Title="CD SHELL" Height="550" Width="400" WindowStartupLocation="CenterScreen"  Icon="pack://application:,,,/Resources/Logo.png" Style="{StaticResource WindowStyle}">
     <Window.DataContext>
         <vm:SignInWindowViewModel/>
     </Window.DataContext>

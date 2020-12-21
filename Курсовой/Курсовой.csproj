@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" />
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -37,16 +37,29 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Logo.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServerCompact, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.SqlServerCompact.6.4.4\lib\net45\EntityFramework.SqlServerCompact.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Compact.4.0.8876.1\lib\net40\System.Data.SqlServerCe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -72,44 +85,18 @@
     <Compile Include="Classes\DelegateCommand.cs" />
     <Compile Include="Classes\Secure.cs" />
     <Compile Include="Classes\WindowFunction.cs" />
-    <Compile Include="Model\BuildDB.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BuildDB.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\BuildDB.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BuildDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\BuildDB.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BuildDB.edmx</DependentUpon>
-    </Compile>
+    <Compile Include="Model\Build.cs" />
     <Compile Include="Model\CurrentUserID.cs" />
-    <Compile Include="Model\Elements.cs">
-      <DependentUpon>BuildDB.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Model\Elements.cs" />
     <Compile Include="Model\HomeElements.cs" />
     <Compile Include="Model\Memento.cs" />
-    <Compile Include="Model\Project.cs">
-      <DependentUpon>BuildDB.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Model\Project.cs" />
     <Compile Include="Model\Repository.cs" />
-    <Compile Include="Model\sysdiagrams.cs">
-      <DependentUpon>BuildDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\User.cs">
-      <DependentUpon>BuildDB.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Model\sysdiagrams.cs" />
+    <Compile Include="Model\User.cs" />
     <Compile Include="Model\UserProj.cs" />
-    <Compile Include="Model\UserProject.cs">
-      <DependentUpon>BuildDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\WorkField.cs">
-      <DependentUpon>BuildDB.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Model\UserProject.cs" />
+    <Compile Include="Model\WorkField.cs" />
     <Compile Include="ViewModel\AdminElementsPageViewModel.cs" />
     <Compile Include="ViewModel\AdminProjectPageViewModel.cs" />
     <Compile Include="ViewModel\AdminUserPageViewModel.cs" />
@@ -177,19 +164,19 @@
     <Compile Include="View\WorkSpace.xaml.cs">
       <DependentUpon>WorkSpace.xaml</DependentUpon>
     </Compile>
-    <Page Include="Resourses\BlackThem.xaml">
+    <Page Include="Resources\BlackThem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resourses\EngLanguage.xaml">
+    <Page Include="Resources\EngLanguage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resourses\DefaultThem.xaml">
+    <Page Include="Resources\DefaultThem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resourses\RuLanguage.xaml">
+    <Page Include="Resources\RuLanguage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -300,13 +287,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="ClassDiagram.cd" />
-    <EntityDeploy Include="Model\BuildDB.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>BuildDB.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="Model\BuildDB.edmx.diagram">
-      <DependentUpon>BuildDB.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -319,67 +299,68 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resourses\Logo.png" />
+    <Resource Include="Resources\Logo.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resourses\Images\add.png" />
+    <Resource Include="Resources\Images\add.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resourses\Images\BackgroundDefault.jpg" />
+    <Resource Include="Resources\Images\BackgroundDefault.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resourses\Images\BadroomIcon.png" />
-    <Resource Include="Resourses\Images\BathroomIcon.png" />
-    <Resource Include="Resourses\Images\DecorIcon.png" />
-    <Resource Include="Resourses\Images\GardenIcon.png" />
-    <Resource Include="Resourses\Images\KitchenIcon.png" />
-    <Resource Include="Resourses\Images\LivingRoomIcon.png" />
-    <Resource Include="Resourses\Images\TechniqueIcon.png" />
-    <Resource Include="Resourses\Images\UserIcon.png" />
+    <Resource Include="Resources\Images\BadroomIcon.png" />
+    <Resource Include="Resources\Images\BathroomIcon.png" />
+    <Resource Include="Resources\Images\DecorIcon.png" />
+    <Resource Include="Resources\Images\GardenIcon.png" />
+    <Resource Include="Resources\Images\KitchenIcon.png" />
+    <Resource Include="Resources\Images\LivingRoomIcon.png" />
+    <Resource Include="Resources\Images\TechniqueIcon.png" />
+    <Resource Include="Resources\Images\UserIcon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resourses\Images\Photo.png" />
-    <Resource Include="Resourses\Images\Left.png" />
-    <Resource Include="Resourses\Images\Right.png" />
-    <Resource Include="Resourses\Images\Save.png" />
-    <Resource Include="Resourses\Images\Share.png" />
+    <Resource Include="Resources\Images\Photo.png" />
+    <Resource Include="Resources\Images\Left.png" />
+    <Resource Include="Resources\Images\Right.png" />
+    <Resource Include="Resources\Images\Save.png" />
+    <Resource Include="Resources\Images\Share.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resourses\Images\SaveAs.png" />
-    <Resource Include="Resourses\Images\Delete.png" />
+    <Resource Include="Resources\Images\SaveAs.png" />
+    <Resource Include="Resources\Images\Delete.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resourses\Images\Grass.jpg" />
-    <Resource Include="Resourses\Images\Preview.png" />
-    <Resource Include="Resourses\Images\Build.png" />
-    <Resource Include="Resourses\Images\Back.png" />
-    <Resource Include="Resourses\Images\Forward.png" />
-    <Resource Include="Resourses\Images\Lock.png" />
-    <Resource Include="Resourses\Images\Unlock.png" />
-    <Resource Include="Resourses\Images\Project.png" />
-    <Resource Include="Resourses\Images\BackgroundBlack.jpg" />
-    <Content Include="Model\BuildDB.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BuildDB.edmx</DependentUpon>
-      <LastGenOutput>BuildDB.Context.cs</LastGenOutput>
+    <Resource Include="Resources\Images\Grass.jpg" />
+    <Resource Include="Resources\Images\Preview.png" />
+    <Resource Include="Resources\Images\Build.png" />
+    <Resource Include="Resources\Images\Back.png" />
+    <Resource Include="Resources\Images\Forward.png" />
+    <Resource Include="Resources\Images\Lock.png" />
+    <Resource Include="Resources\Images\Unlock.png" />
+    <Resource Include="Resources\Images\Project.png" />
+    <Resource Include="Resources\Images\BackgroundBlack.jpg" />
+    <Resource Include="Logo.ico" />
+    <Content Include="Model\Build.sdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Model\BuildDB.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BuildDB.edmx</DependentUpon>
-      <LastGenOutput>BuildDB.cs</LastGenOutput>
-    </Content>
-    <Content Include="Resourses\Images\MoreInfo.png" />
+    <Content Include="Resources\Images\MoreInfo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>Данный проект ссылается на пакеты NuGet, отсутствующие на этом компьютере. Используйте восстановление пакетов NuGet, чтобы скачать их.  Дополнительную информацию см. по адресу: http://go.microsoft.com/fwlink/?LinkID=322105. Отсутствует следующий файл: {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.props'))" />
-    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
   </Target>
-  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" />
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    if not exist "$(TargetDir)x86" md "$(TargetDir)x86"
+    xcopy /s /y "$(SolutionDir)packages\Microsoft.SqlServer.Compact.4.0.8876.1\NativeBinaries\x86\*.*" "$(TargetDir)x86"
+    if not exist "$(TargetDir)amd64" md "$(TargetDir)amd64"
+    xcopy /s /y "$(SolutionDir)packages\Microsoft.SqlServer.Compact.4.0.8876.1\NativeBinaries\amd64\*.*" "$(TargetDir)amd64"</PostBuildEvent>
+  </PropertyGroup>
 </Project>

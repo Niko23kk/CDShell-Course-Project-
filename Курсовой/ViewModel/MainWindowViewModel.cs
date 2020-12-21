@@ -24,22 +24,22 @@ namespace Курсовой.ViewModel
             LoginCurrenUser = user.Login;
             if (user.Language == null || user.Language == "English")
             {
-                ResourceDictionary resourceDict = Application.LoadComponent(new Uri("/Resourses/EngLanguage.xaml", UriKind.RelativeOrAbsolute)) as ResourceDictionary;
+                ResourceDictionary resourceDict = Application.LoadComponent(new Uri("/Resources/EngLanguage.xaml", UriKind.RelativeOrAbsolute)) as ResourceDictionary;
                 Application.Current.Resources.MergedDictionaries.Add(resourceDict);
             }
             else
             {
-                ResourceDictionary resourceDict = Application.LoadComponent(new Uri("/Resourses/RuLanguage.xaml", UriKind.RelativeOrAbsolute)) as ResourceDictionary;
+                ResourceDictionary resourceDict = Application.LoadComponent(new Uri("/Resources/RuLanguage.xaml", UriKind.RelativeOrAbsolute)) as ResourceDictionary;
                 Application.Current.Resources.MergedDictionaries.Add(resourceDict);
             }
             if (user.Them == null || user.Them == "Default")
             {
-                ResourceDictionary resourceDict = Application.LoadComponent(new Uri("/Resourses/DefaultThem.xaml", UriKind.RelativeOrAbsolute)) as ResourceDictionary;
+                ResourceDictionary resourceDict = Application.LoadComponent(new Uri("/Resources/DefaultThem.xaml", UriKind.RelativeOrAbsolute)) as ResourceDictionary;
                 Application.Current.Resources.MergedDictionaries.Add(resourceDict);
             }
             else
             {
-                ResourceDictionary resourceDict = Application.LoadComponent(new Uri("/Resourses/BlackThem.xaml", UriKind.RelativeOrAbsolute)) as ResourceDictionary;
+                ResourceDictionary resourceDict = Application.LoadComponent(new Uri("/Resources/BlackThem.xaml", UriKind.RelativeOrAbsolute)) as ResourceDictionary;
                 Application.Current.Resources.MergedDictionaries.Add(resourceDict);
             }
             FirstCharLoginCurrenUser = user.Name.ToUpper().First().ToString()+user.Surname.ToUpper().First().ToString();

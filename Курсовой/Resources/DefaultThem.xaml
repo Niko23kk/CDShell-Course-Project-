@@ -1,0 +1,69 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Курсовой.Resources">
+
+    <ImageBrush x:Key="BackgroundImage" ImageSource="pack://application:,,,/Resources/Images/BackgroundDefault.jpg" Stretch="UniformToFill">
+        <ImageBrush.RelativeTransform>
+            <TransformGroup>
+                <ScaleTransform/>
+                <SkewTransform AngleY="0" AngleX="0"/>
+                <RotateTransform Angle="0"/>
+                <TranslateTransform/>
+            </TransformGroup>
+        </ImageBrush.RelativeTransform>
+    </ImageBrush>
+    
+    <SolidColorBrush Color="#B2E8E8E8" x:Key="BackgroundTextBox"/>
+    <SolidColorBrush Color="#FF3D3D3D" x:Key="ForegroundTextBlock"/>
+    <SolidColorBrush Color="#9E9E9E" x:Key="ForegroundTextBox"/>
+    <SolidColorBrush Color="#9E9E9E" x:Key="Header"/>
+    <SolidColorBrush Color="White" x:Key="MainColor"/>
+    <SolidColorBrush Color="White" x:Key="WorkField"/>
+    <SolidColorBrush Color="White" x:Key="ButtonForeground"/>
+    <SolidColorBrush Color="#FF66C3D0" x:Key="LogoandButton"/>
+
+    <SolidColorBrush Color="Gray" x:Key="IsFocusedText"/>
+    <SolidColorBrush Color="Black" x:Key="TextForeground"/>
+    
+    <!--Gradient-->
+    
+    <LinearGradientBrush x:Key="Gradient">
+        <GradientStop Color="#FFBDF6FF" Offset="1"/>
+        <GradientStop Color="#FFA2F1FC" Offset="0"/>
+    </LinearGradientBrush>
+    
+    <LinearGradientBrush x:Key="UserGradient" EndPoint="0.5,1" StartPoint="0.5,0">
+        <LinearGradientBrush.RelativeTransform>
+            <TransformGroup>
+                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                <RotateTransform CenterY="0.5" CenterX="0.5" Angle="315"/>
+                <TranslateTransform/>
+            </TransformGroup>
+        </LinearGradientBrush.RelativeTransform>
+        <GradientStop Color="#FF69EBC5" Offset="0"/>
+        <GradientStop Color="#FFC2FFED" Offset="1"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="ButtonGradient" EndPoint="0.5,1" StartPoint="0.5,0">
+        <LinearGradientBrush.RelativeTransform>
+            <TransformGroup>
+                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                <RotateTransform Angle="135" CenterY="0.5" CenterX="0.5"/>
+                <TranslateTransform/>
+            </TransformGroup>
+        </LinearGradientBrush.RelativeTransform>
+        <GradientStop Color="#FFB2F5FF" Offset="0"/>
+        <GradientStop Color="#FF66C3D0" Offset="1"/>
+    </LinearGradientBrush>
+    
+    <!--Window-->
+    
+    <SolidColorBrush x:Key="TitleBarBackgroundBrush" Color="#FCD5A6" />
+    <SolidColorBrush x:Key="WindowBorderBrush" Color="#CFCFCF" />
+    <SolidColorBrush x:Key="WindowBorderBrushInactive" Color="#999999" />
+    <SolidColorBrush x:Key="WindowStatusForeground" Color="Black" />
+    <SolidColorBrush x:Key="WindowStatusForegroundInactive" Color="#FFFFFF" />
+
+</ResourceDictionary>

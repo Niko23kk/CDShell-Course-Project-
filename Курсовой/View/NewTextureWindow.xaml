@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:Курсовой.View"
         mc:Ignorable="d"
         Title="CD SHELL" Height="650" Width="500" ResizeMode="NoResize"
-        Style="{StaticResource WindowStyle}" Icon="pack://application:,,,/Resourses/Logo.png" WindowStartupLocation="CenterOwner">
+        Style="{StaticResource WindowStyle}" Icon="pack://application:,,,/Resources/Logo.png" WindowStartupLocation="CenterOwner">
     <Window.DataContext>
         <vm:NewTextureViewModel/>
     </Window.DataContext>

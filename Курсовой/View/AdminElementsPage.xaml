@@ -83,7 +83,7 @@
                                 </Border>
 
                                 <Border Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="50" ToolTip="{DynamicResource _Delete}" Background="#B2E8E8E8" Padding="10" Margin="2.2,16,2.8,16">
-                                    <Image  Source="pack://application:,,,/Resourses/Images/Delete.png" Width="25"/>
+                                    <Image  Source="pack://application:,,,/Resources/Images/Delete.png" Width="25"/>
                                     <Border.InputBindings>
                                         <MouseBinding MouseAction="LeftClick"  Command="{Binding DataContext.DeleteElement, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}" CommandParameter="{Binding ElementName=SelectedProject}"/>
                                     </Border.InputBindings>

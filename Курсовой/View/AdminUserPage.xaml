@@ -85,14 +85,14 @@
                                 </Border>
 
                                 <Border Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" ToolTip="Check projects" CornerRadius="50" Background="#B2E8E8E8" Padding="10">
-                                    <Image  Source="pack://application:,,,/Resourses/Images/Preview.png" Width="25"/>
+                                    <Image  Source="pack://application:,,,/Resources/Images/Preview.png" Width="25"/>
                                     <Border.InputBindings>
                                         <MouseBinding MouseAction="LeftClick" Command="{Binding DataContext.ShowProject, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}" CommandParameter="{Binding ElementName=SelectedProject}"/>
                                     </Border.InputBindings>
                                 </Border>
                                 
                                 <Border Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" ToolTip="{DynamicResource _Delete}" CornerRadius="50" Background="#B2E8E8E8" Padding="10">
-                                    <Image  Source="pack://application:,,,/Resourses/Images/Delete.png" Width="25"/>
+                                    <Image  Source="pack://application:,,,/Resources/Images/Delete.png" Width="25"/>
                                     <Border.InputBindings>
                                         <MouseBinding MouseAction="LeftClick"  Command="{Binding DataContext.DeleteUser, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}" CommandParameter="{Binding ElementName=SelectedProject}"/>
                                     </Border.InputBindings>

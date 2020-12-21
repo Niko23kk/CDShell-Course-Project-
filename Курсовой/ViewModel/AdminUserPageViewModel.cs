@@ -181,13 +181,13 @@ namespace Курсовой.ViewModel
                 {
                     foreach (var item in Application.Current.Windows)
                     {
-                        ((((item as SignInWindow).Content as Frame).Content as Page).FindName("Password") as PasswordBox).Tag = "";
+                        (((((item as Window).Content as Grid).FindName("Frame") as Frame).Content as Page).FindName("Password") as PasswordBox).Tag = "";
                     }
                     if (value.Length > 0)
                     {
                         foreach (var item in Application.Current.Windows)
                         {
-                            ((((item as Window).Content as Frame).Content as Page).FindName("Password") as PasswordBox).Tag = "";
+                            (((((item as Window).Content as Grid).FindName("Frame") as Frame).Content as Page).FindName("Password") as PasswordBox).Tag = "";
                         }
                     }
                     password = value;
@@ -314,10 +314,20 @@ namespace Курсовой.ViewModel
                         CustomMessageBox.Show("Error", "Input Second name", MessageBoxButton.OK);
                         check = false;
                     }
+                    if (!Regex.IsMatch(FirstName, "^[a-zA-Z]{0,25}$") || !Regex.IsMatch(secondName, "^[a-zA-Z]{0,25}$"))
+                    {
+                        CustomMessageBox.Show("Error", "Fisrst and Second name can contain only latin letters", MessageBoxButton.OK);
+                        check = false;
+                    }
                     if (!Regex.IsMatch(Email, @"^[-a-z0-9!#$%&'*+/=?^_`{|}~]+(\.[-a-z0-9!#$%&'*+/=?^_`{|}~]+)*@([a-z0-9]([-a-z0-9]{0,61}[a-z0-9])?\.)" +
                         "*(aero|arpa|asia|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel|[a-z][a-z])$"))
                     {
-                        CustomMessageBox.Show("Error", "Uncorrectly format in email", MessageBoxButton.OK);
+                        CustomMessageBox.Show("Error", "Incorrectly format in email", MessageBoxButton.OK);
+                        check = false;
+                    }
+                    if (!Regex.IsMatch(NewLogin, "^[a-zA-Z]{0,25}$") && NewLogin!="")
+                    {
+                        CustomMessageBox.Show("Error", "Login can contain only latin letters", MessageBoxButton.OK);
                         check = false;
                     }
                     try
@@ -365,12 +375,12 @@ namespace Курсовой.ViewModel
                         }
                         user.Type = AdminStatus ? "Admin" : "User";
                         dBRepository.Update(user);
-                        CustomMessageBox.Show("Event", "Info was updating", MessageBoxButton.OK);
                         Users.Clear();
                         foreach (var item in dBRepository.GetAll().Where(s => s.Type != "Admin"))
                         {
                             Users.Add(item);
                         }
+                        CustomMessageBox.Show("Event", "Info was updating", MessageBoxButton.OK);
                         dBRepository.Dispose();
                     }
                 });

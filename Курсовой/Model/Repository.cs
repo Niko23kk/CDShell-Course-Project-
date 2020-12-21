@@ -88,6 +88,12 @@ namespace Курсовой.Model
                 context.SaveChanges();
                 return;
             }
+            if (typeof(IEntity) == typeof(Elements))
+            {
+                dbSet.Remove(dbSet.ToList().First(s => (s as Elements).ID == (item as Elements).ID));
+                context.SaveChanges();
+                return;
+            }
         }
 
         public void Update(IEntity item)

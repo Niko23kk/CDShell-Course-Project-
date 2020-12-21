@@ -94,28 +94,44 @@ namespace Курсовой.ViewModel
         private int price;
         public int Price
         {
-            get
-            {
-                return price;
-            }
+            get { return price; }
             set
             {
-                price = value;
-                OnPropertyChanged();
+                try
+                {
+                    if (value < 0)
+                    {
+                        throw new Exception();
+                    }
+                    price = value;
+                    OnPropertyChanged();
+                }
+                catch
+                {
+                    CustomMessageBox.Show("Error", "Incorrect data", MessageBoxButton.OK);
+                }
             }
         }
 
         private int size;
         public int Size
         {
-            get
-            {
-                return size;
-            }
+            get { return size; }
             set
             {
-                size = value;
-                OnPropertyChanged();
+                try
+                {
+                    if (value <= 0)
+                    {
+                        throw new Exception();
+                    }
+                    size = value;
+                    OnPropertyChanged();
+                }
+                catch
+                {
+                    CustomMessageBox.Show("Error", "Incorrect data", MessageBoxButton.OK);
+                }
             }
         }
         private BitmapImage frontView;

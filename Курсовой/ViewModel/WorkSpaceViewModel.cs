@@ -123,7 +123,21 @@ namespace Курсовой.ViewModel
                 OnPropertyChanged();
             }
         }
-        
+
+        private string help="";
+        public string Help
+        {
+            get
+            {
+                return help;
+            }
+            set
+            {
+                help = value;
+                OnPropertyChanged();
+            }
+        }
+
         private Elements currentElement;
         public Elements CurrentElement
         {
@@ -138,7 +152,7 @@ namespace Курсовой.ViewModel
             }
         }
 
-        private string lockUnlock= "pack://application:,,,/Resourses/Images/Unlock.png";
+        private string lockUnlock= "pack://application:,,,/Resources/Images/Unlock.png";
         public string LockUnlock
         {
             get
@@ -249,55 +263,43 @@ namespace Курсовой.ViewModel
                         if (CurrentElement.Title != "Floor" && !CurrentElement.Title.Contains("wall"))
                         {
                             DropSelectedIcon();
+                            CurrentElement = null;
                         }
                         else
                         {
-                            CustomMessageBox.Show("Help", "Choose second point (click RMB)", MessageBoxButton.OK);
+                            Help = "Choose second point (click RMB)";
                         }
                     }
-                    else if(!Choose && !Change)
+                    else if (!Choose && !Change)
                     {
+                        CursorPoint = Mouse.GetPosition(obj as Canvas);
                         try
                         {
-                            CursorPoint = Mouse.GetPosition(obj as Canvas);
-                            try
-                            {
-                                ChangeWorkField = HomeCollection.Last(s => (s.Field.PositionX < CursorPoint.X && s.Field.PositionX + s.Element.Size > CursorPoint.X) &&
-                                  (s.Field.PositionY < CursorPoint.Y && s.Field.PositionY + s.Element.Size > CursorPoint.Y && s.Element.Type != "Build" && s.Element.Title!="Floor"));
-                                Change = true;
-                                Choose = true;
-                            }
-                            catch
+                            ChangeWorkField = HomeCollection.Last(s => (s.Field.PositionX < CursorPoint.X && s.Field.PositionX + s.Element.Size > CursorPoint.X) &&
+                              (s.Field.PositionY < CursorPoint.Y && s.Field.PositionY + s.Element.Size > CursorPoint.Y && s.Element.Type != "Build"));
+                            Change = true;
+                            Choose = true;
+                        }
+                        catch
+                        {
+                            if (!Block)
                             {
                                 try
                                 {
                                     ChangeWorkField = HomeCollection.Last(s => (s.Field.PositionX < CursorPoint.X && s.Field.PositionX + s.Element.Size > CursorPoint.X) &&
-                                      (s.Field.PositionY < CursorPoint.Y && s.Field.PositionY + s.Element.Size > CursorPoint.Y && s.Element.Type != "Build"));
+                                  (s.Field.PositionY < CursorPoint.Y && s.Field.PositionY + s.Element.Size > CursorPoint.Y));
                                     Change = true;
                                     Choose = true;
                                 }
-                                catch {
-                                    if (ChangeWorkField == null && !Block)
-                                    {
-                                        try
-                                        {
-                                            ChangeWorkField = HomeCollection.Last(s => (s.Field.PositionX < CursorPoint.X && s.Field.PositionX + s.Element.Size > CursorPoint.X) &&
-                                          (s.Field.PositionY < CursorPoint.Y && s.Field.PositionY + s.Element.Size > CursorPoint.Y));
-                                            Change = true;
-                                            Choose = true;
-                                        }
-                                        catch { ChangeWorkField = null; Change = false;Choose = false; }
-                                    }
-                                }
+                                catch { ChangeWorkField = null; Change = false; Choose = false; }
                             }
                         }
-                        catch
-                        { }
                     }
                     else
                     {
                         CursorPoint = Mouse.GetPosition(obj as Canvas);
                         DropSelectedIcon();
+                        CurrentElement = null;
                     }
                 });
             }
@@ -309,93 +311,97 @@ namespace Курсовой.ViewModel
             {
                 return new DelegateCommand(obj =>
                 {
-                    var windows = Application.Current.Windows;
-                    Loading loadingwin = new Loading("Waiting...");
-                    loadingwin.Show();
-                    DBRepository<Elements> dBRepository = new DBRepository<Elements>(new BuildEntities());
-                    SecondCursorPoint = Mouse.GetPosition(obj as Canvas);
-                    Elements elem = dBRepository.GetAll().Where(s => s.ID == CurrentElement.ID).First();
-                    dBRepository.Dispose();
-                    int x = (int)CursorPoint.X;
-                    int y = (int)CursorPoint.Y;
-                    int saveY = y;
-                    if (elem.Title == "Floor")
+                    if (CurrentElement != null)
                     {
-                        int indexX = x < SecondCursorPoint.X ? 1 : -1;
-                        int indexY = y < SecondCursorPoint.Y ? 1 : -1;
-                        for (; x*indexX < SecondCursorPoint.X*indexX; x += (int)CurrentElement.Size * indexX)
-                        {
-                            for (y = saveY; y*indexY < SecondCursorPoint.Y*indexY; y += (int)CurrentElement.Size * indexY)
-                            {
-                                WorkField workField = new WorkField
-                                {
-                                    Element_ID = CurrentElement.ID,
-                                    Rotate = 0,
-                                    PositionX = x,
-                                    PositionY = y
-                                };
-                                if (CurrentProject != null)
-                                {
-                                    workField.ID_UP = CurrentProject.ID;
-                                }
-                                HomeCollection.Add(new HomeElements(workField, elem));
-                                TotalPrice = (Convert.ToDecimal(TotalPrice)+(decimal)CurrentElement.Price).ToString();
-                            }
-                        }
-                        BackHistory.History.Push(HomeCollection.ToList());
-                    }
-                    if (elem.Title.Contains("wall"))
-                    {
-                        if (elem.Title.Contains("Horizontal"))
+                        Help = "";
+                        var windows = Application.Current.Windows;
+                        Loading loadingwin = new Loading("Waiting...");
+                        loadingwin.Show();
+                        DBRepository<Elements> dBRepository = new DBRepository<Elements>(new BuildEntities());
+                        SecondCursorPoint = Mouse.GetPosition(obj as Canvas);
+                        Elements elem = dBRepository.GetAll().Where(s => s.ID == CurrentElement.ID).First();
+                        dBRepository.Dispose();
+                        int x = (int)CursorPoint.X;
+                        int y = (int)CursorPoint.Y;
+                        int saveY = y;
+                        if (elem.Title == "Floor")
                         {
                             int indexX = x < SecondCursorPoint.X ? 1 : -1;
-                            if(indexX==-1)
-                            {
-                                x -= (int)CurrentElement.Size;
-                            }
-                            for (; x * indexX < SecondCursorPoint.X * indexX - (CurrentElement.Size / 2 * indexX); x += (int)CurrentElement.Size * indexX)
-                            {
-                                WorkField workField = new WorkField
-                                {
-                                    Element_ID = CurrentElement.ID,
-                                    Rotate = 0,
-                                    PositionX = x,
-                                    PositionY = y
-                                };
-                                if (CurrentProject != null)
-                                {
-                                    workField.ID_UP = CurrentProject.ID;
-                                }
-                                HomeCollection.Add(new HomeElements(workField, elem));
-                                TotalPrice = (Convert.ToDecimal(TotalPrice) + (decimal)CurrentElement.Price).ToString();
-                            }
-                        }
-                        if (elem.Title.Contains("Vertical"))
-                        {
                             int indexY = y < SecondCursorPoint.Y ? 1 : -1;
-                            for (y = saveY; y * indexY < SecondCursorPoint.Y * indexY; y += (int)CurrentElement.Size * indexY)
+                            for (; x * indexX < SecondCursorPoint.X * indexX; x += (int)CurrentElement.Size * indexX)
                             {
-                                WorkField workField = new WorkField
+                                for (y = saveY; y * indexY < SecondCursorPoint.Y * indexY; y += (int)CurrentElement.Size * indexY)
                                 {
-                                    Element_ID = CurrentElement.ID,
-                                    Rotate = 90,
-                                    PositionX = x - CurrentElement.Size / 2,
-                                    PositionY = y
-                                };
-                                if (CurrentProject != null)
-                                {
-                                    workField.ID_UP = CurrentProject.ID;
+                                    WorkField workField = new WorkField
+                                    {
+                                        Element_ID = CurrentElement.ID,
+                                        Rotate = 0,
+                                        PositionX = x,
+                                        PositionY = y
+                                    };
+                                    if (CurrentProject != null)
+                                    {
+                                        workField.ID_UP = CurrentProject.ID;
+                                    }
+                                    HomeCollection.Add(new HomeElements(workField, elem));
+                                    TotalPrice = (Convert.ToDecimal(TotalPrice) + (decimal)CurrentElement.Price).ToString();
                                 }
-                                HomeCollection.Add(new HomeElements(workField, elem));
-                                TotalPrice = (Convert.ToDecimal(TotalPrice) + (decimal)CurrentElement.Price).ToString();
                             }
+                            BackHistory.History.Push(HomeCollection.ToList());
                         }
-                        BackHistory.History.Push(HomeCollection.ToList());
+                        if (elem.Title.Contains("wall"))
+                        {
+                            if (elem.Title.Contains("Horizontal"))
+                            {
+                                int indexX = x < SecondCursorPoint.X ? 1 : -1;
+                                if (indexX == -1)
+                                {
+                                    x -= (int)CurrentElement.Size;
+                                }
+                                for (; x * indexX < SecondCursorPoint.X * indexX - (CurrentElement.Size / 2 * indexX); x += (int)CurrentElement.Size * indexX)
+                                {
+                                    WorkField workField = new WorkField
+                                    {
+                                        Element_ID = CurrentElement.ID,
+                                        Rotate = 0,
+                                        PositionX = x,
+                                        PositionY = y
+                                    };
+                                    if (CurrentProject != null)
+                                    {
+                                        workField.ID_UP = CurrentProject.ID;
+                                    }
+                                    HomeCollection.Add(new HomeElements(workField, elem));
+                                    TotalPrice = (Convert.ToDecimal(TotalPrice) + (decimal)CurrentElement.Price).ToString();
+                                }
+                            }
+                            if (elem.Title.Contains("Vertical"))
+                            {
+                                int indexY = y < SecondCursorPoint.Y ? 1 : -1;
+                                for (y = saveY; y * indexY < SecondCursorPoint.Y * indexY; y += (int)CurrentElement.Size * indexY)
+                                {
+                                    WorkField workField = new WorkField
+                                    {
+                                        Element_ID = CurrentElement.ID,
+                                        Rotate = 90,
+                                        PositionX = x - CurrentElement.Size / 2,
+                                        PositionY = y
+                                    };
+                                    if (CurrentProject != null)
+                                    {
+                                        workField.ID_UP = CurrentProject.ID;
+                                    }
+                                    HomeCollection.Add(new HomeElements(workField, elem));
+                                    TotalPrice = (Convert.ToDecimal(TotalPrice) + (decimal)CurrentElement.Price).ToString();
+                                }
+                            }
+                            BackHistory.History.Push(HomeCollection.ToList());
+                        }
+                        loadingwin.Close();
+                        Choose = false;
+                        Change = false;
+                        ChangeWorkField = null;
                     }
-                    loadingwin.Close();
-                    Choose = false;
-                    Change = false;
-                    ChangeWorkField = null;
                 });
             }
         }
@@ -557,6 +563,7 @@ namespace Курсовой.ViewModel
                     {
                         HomeCollection.Remove(ChangeWorkField);
                         TotalPrice = (Convert.ToDecimal(TotalPrice) - (decimal)ChangeWorkField.Element.Price).ToString();
+                        BackHistory.History.Push(HomeCollection.ToList());
                         ChangeWorkField = null;
                         Choose = false;
                         Change = false;
@@ -612,11 +619,23 @@ namespace Курсовой.ViewModel
                         if (BackHistory.History.Count > 1)
                         {
                             ForwardHistory.History.Push(BackHistory.History.Pop());
-                            var t=ForwardHistory.History.First().Except(BackHistory.History.First());
-                            foreach (var item in t)
+                            if (BackHistory.History.First().Count < ForwardHistory.History.First().Count)
                             {
-                                TotalPrice = (Convert.ToDecimal(TotalPrice) - (decimal)item.Element.Price).ToString();
-                                HomeCollection.Remove(item);
+                                var t = ForwardHistory.History.First().Except(BackHistory.History.First());
+                                foreach (var item in t)
+                                {
+                                    TotalPrice = (Convert.ToDecimal(TotalPrice) - (decimal)item.Element.Price).ToString();
+                                    HomeCollection.Remove(item);
+                                }
+                            }
+                            else
+                            {
+                                var t = BackHistory.History.First().Except(ForwardHistory.History.First());
+                                foreach (var item in t)
+                                {
+                                    TotalPrice = (Convert.ToDecimal(TotalPrice) + (decimal)item.Element.Price).ToString();
+                                    HomeCollection.Add(item);
+                                }
                             }
                         }
                         else if(BackHistory.History.Count==1)
@@ -645,14 +664,28 @@ namespace Курсовой.ViewModel
                     {
                         if (BackHistory.History.Count > 0)
                         {
-                            var save = ForwardHistory.History.Pop();
-                            var t = save.Except(BackHistory.History.First());
-                            foreach (var item in t)
+                            if (ForwardHistory.History.First().Count > BackHistory.History.First().Count)
                             {
-                                TotalPrice = (Convert.ToDecimal(TotalPrice) + (decimal)item.Element.Price).ToString();
-                                HomeCollection.Add(item);
+                                var save = ForwardHistory.History.Pop();
+                                var t = save.Except(BackHistory.History.First());
+                                foreach (var item in t)
+                                {
+                                    TotalPrice = (Convert.ToDecimal(TotalPrice) + (decimal)item.Element.Price).ToString();
+                                    HomeCollection.Add(item);
+                                }
+                                BackHistory.History.Push(save);
                             }
-                            BackHistory.History.Push(save);
+                            else
+                            {
+                                var save = ForwardHistory.History.Pop();
+                                var t = BackHistory.History.First().Except(save);
+                                foreach (var item in t)
+                                {
+                                    TotalPrice = (Convert.ToDecimal(TotalPrice) - (decimal)item.Element.Price).ToString();
+                                    HomeCollection.Remove(item);
+                                }
+                                BackHistory.History.Push(save);
+                            }
                         }
                         else
                         {
@@ -688,6 +721,7 @@ namespace Курсовой.ViewModel
                                 Rotate=ChangeWorkField.Field.Rotate,
                                 UserProject=ChangeWorkField.Field.UserProject
                             },ChangeWorkField.Element);
+                            ChangeWorkField = null;
                         }
                     }
                     catch { }
@@ -706,11 +740,11 @@ namespace Курсовой.ViewModel
                         if (BufferElement != null)
                         {
                             HomeCollection.Add(BufferElement);
-                            TotalPrice = (Convert.ToDecimal(TotalPrice) + (decimal)CurrentElement.Price).ToString();
-                            BackHistory.History.Push(HomeCollection.ToList());
-                            ChangeWorkField = null;
-                            Choose = false;
+                            TotalPrice = (Convert.ToDecimal(TotalPrice) + (decimal)BufferElement.Element.Price).ToString(); Choose = false;
                             Change = false;
+                            ChangeWorkField = null;
+                            BufferElement = null;
+                            BackHistory.History.Push(HomeCollection.ToList());
                         }
                     }
                     catch { }
@@ -724,14 +758,14 @@ namespace Курсовой.ViewModel
             {
                 return new DelegateCommand(obj =>
                 {
-                    if(LockUnlock== "pack://application:,,,/Resourses/Images/Lock.png")
+                    if(LockUnlock== "pack://application:,,,/Resources/Images/Lock.png")
                     {
-                        LockUnlock = "pack://application:,,,/Resourses/Images/Unlock.png";
+                        LockUnlock = "pack://application:,,,/Resources/Images/Unlock.png";
                         Block = false;
                     }
                     else
                     {
-                        LockUnlock = "pack://application:,,,/Resourses/Images/Lock.png";
+                        LockUnlock = "pack://application:,,,/Resources/Images/Lock.png";
                         Block = true;
                     }
                 });

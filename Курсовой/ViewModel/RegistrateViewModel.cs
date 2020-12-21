@@ -163,15 +163,25 @@ namespace Курсовой.ViewModel
                         CustomMessageBox.Show("Error", "Input your Second name", MessageBoxButton.OK);
                         check = false;
                     }
+                    if (!Regex.IsMatch(FirstName, "^[a-zA-Z]{0,25}$") || !Regex.IsMatch(secondName, "^[a-zA-Z]{0,25}$"))
+                    {
+                        CustomMessageBox.Show("Error", "Fisrst and Second name can contain only latin letters", MessageBoxButton.OK);
+                        check = false;
+                    }
                     if (!Regex.IsMatch(Email, @"^[-a-z0-9!#$%&'*+/=?^_`{|}~]+(\.[-a-z0-9!#$%&'*+/=?^_`{|}~]+)*@([a-z0-9]([-a-z0-9]{0,61}[a-z0-9])?\.)"+
                         "*(aero|arpa|asia|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel|[a-z][a-z])$"))
                     {
-                        CustomMessageBox.Show("Error", "Uncorrectly format in email", MessageBoxButton.OK);
+                        CustomMessageBox.Show("Error", "Incorrectly format in email", MessageBoxButton.OK);
                         check = false;
                     }
                     if (Login.Length == 0)
                     {
                         CustomMessageBox.Show("Error", "Input your login", MessageBoxButton.OK);
+                        check = false;
+                    }
+                    if(!Regex.IsMatch(Login, "^[a-zA-Z]{0,25}$"))
+                    {
+                        CustomMessageBox.Show("Error", "Login can contain only latin letters", MessageBoxButton.OK);
                         check = false;
                     }
                     try

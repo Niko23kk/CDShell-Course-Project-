@@ -55,14 +55,14 @@
                                 </Border>
 
                                 <Border Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="50" Background="#B2E8E8E8" Padding="10">
-                                    <Image  Source="pack://application:,,,/Resourses/Images/Preview.png" Width="25"/>
+                                    <Image  Source="pack://application:,,,/Resources/Images/Preview.png" Width="25"/>
                                     <Border.ToolTip>
                                         <Image Source="{Binding Preview}" Width="250" Height="250"/>
                                     </Border.ToolTip>
                                 </Border>
 
                                 <Border Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="50" ToolTip="{DynamicResource _Delete}" Background="#B2E8E8E8" Padding="10">
-                                    <Image  Source="pack://application:,,,/Resourses/Images/Delete.png" Width="25"/>
+                                    <Image  Source="pack://application:,,,/Resources/Images/Delete.png" Width="25"/>
                                     <Border.InputBindings>
                                         <MouseBinding MouseAction="LeftClick"  Command="{Binding DataContext.DeleteProject, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}" CommandParameter="{Binding ElementName=SelectedProject}"/>
                                     </Border.InputBindings>
@@ -112,7 +112,7 @@
                         </Border.Effect>
 
                         <WrapPanel Margin="0,20" HorizontalAlignment="Center">
-                            <Image Margin="20,0" HorizontalAlignment="Center" Height="30" Width="30" Source="pack://application:,,,/Resourses/Images/add.png"/>
+                            <Image Margin="20,0" HorizontalAlignment="Center" Height="30" Width="30" Source="pack://application:,,,/Resources/Images/add.png"/>
                             <TextBlock Style="{DynamicResource TextBl}" TextWrapping="Wrap" Text="{DynamicResource _NewProject}" VerticalAlignment="Center" FontSize="24" Width="150" Margin="10,0,30,0"/>
                         </WrapPanel>
                     </Border>
@@ -124,7 +124,7 @@
                             <DropShadowEffect BlurRadius="10"/>
                         </Border.Effect>
                         <WrapPanel Margin="0,20" HorizontalAlignment="Center">
-                            <Image Margin="20,0" HorizontalAlignment="Center" Height="30" Width="30" Source="pack://application:,,,/Resourses/Images/add.png"/>
+                            <Image Margin="20,0" HorizontalAlignment="Center" Height="30" Width="30" Source="pack://application:,,,/Resources/Images/add.png"/>
                             <TextBlock Style="{DynamicResource TextBl}" TextWrapping="Wrap" Text="{DynamicResource _NewObject}" VerticalAlignment="Center" FontSize="24" Width="150" Margin="10,0,30,0"/>
                         </WrapPanel>
                     </Border>
@@ -136,7 +136,7 @@
                         <DropShadowEffect BlurRadius="10"/>
                     </Border.Effect>
                     <WrapPanel Margin="0,20" HorizontalAlignment="Center">
-                        <Image Margin="20,0" HorizontalAlignment="Center" Height="30" Width="30" Source="pack://application:,,,/Resourses/Images/add.png"/>
+                        <Image Margin="20,0" HorizontalAlignment="Center" Height="30" Width="30" Source="pack://application:,,,/Resources/Images/add.png"/>
                             <TextBlock Style="{DynamicResource TextBl}" TextWrapping="Wrap" Text="{DynamicResource _LoadProject}" VerticalAlignment="Center" FontSize="24" Width="150" Margin="10,0,30,0"/>
                     </WrapPanel>
                 </Border>

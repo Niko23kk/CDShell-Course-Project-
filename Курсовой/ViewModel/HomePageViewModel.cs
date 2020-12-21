@@ -117,7 +117,7 @@ namespace Курсовой.ViewModel
             }
         }
 
-        private BitmapImage avatar=new BitmapImage(new Uri("pack://application:,,,/Resourses/Logo.png"));
+        private BitmapImage avatar=new BitmapImage(new Uri("pack://application:,,,/Resources/Logo.png"));
         public BitmapImage Avatar
         {
             get { return avatar; }

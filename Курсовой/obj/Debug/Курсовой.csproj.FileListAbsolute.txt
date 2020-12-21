@@ -56,9 +56,13 @@ D:\Учеба\4_сем\Курсач\Курсовой\Курсовой\obj\Debug\
 D:\Учеба\4_сем\Курсач\Курсовой\Курсовой\obj\Debug\Курсовой.csprojAssemblyReference.cache
 D:\Учеба\4_сем\Курсач\Курсовой\Курсовой\obj\Debug\View\Recovery.g.cs
 D:\Учеба\4_сем\Курсач\Курсовой\Курсовой\obj\Debug\View\Recovery.baml
-D:\Учеба\4_сем\Курсач\Курсовой\Курсовой\obj\Debug\Resourses\EngLanguage.baml
-D:\Учеба\4_сем\Курсач\Курсовой\Курсовой\obj\Debug\Resourses\RuLanguage.baml
-D:\Учеба\4_сем\Курсач\Курсовой\Курсовой\obj\Debug\Resourses\DefaultThem.baml
-D:\Учеба\4_сем\Курсач\Курсовой\Курсовой\obj\Debug\Resourses\BlackThem.baml
 D:\Учеба\4_сем\Курсач\Курсовой\Курсовой\obj\Debug\View\CustomMessageBox.g.cs
 D:\Учеба\4_сем\Курсач\Курсовой\Курсовой\obj\Debug\View\CustomMessageBox.baml
+D:\Учеба\4_сем\Курсач\Курсовой\Курсовой\EntityFramework.SqlServerCompact.dll
+D:\Учеба\4_сем\Курсач\Курсовой\Курсовой\System.Data.SqlServerCe.dll
+D:\Учеба\4_сем\Курсач\Курсовой\Курсовой\EntityFramework.SqlServerCompact.xml
+D:\Учеба\4_сем\Курсач\Курсовой\Курсовой\Model\Build.sdf
+D:\Учеба\4_сем\Курсач\Курсовой\Курсовой\obj\Debug\Resources\BlackThem.baml
+D:\Учеба\4_сем\Курсач\Курсовой\Курсовой\obj\Debug\Resources\EngLanguage.baml
+D:\Учеба\4_сем\Курсач\Курсовой\Курсовой\obj\Debug\Resources\DefaultThem.baml
+D:\Учеба\4_сем\Курсач\Курсовой\Курсовой\obj\Debug\Resources\RuLanguage.baml

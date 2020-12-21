@@ -54,7 +54,7 @@ namespace Курсовой.ViewModel
                 }
                 catch
                 {
-                    CustomMessageBox.Show("Error", "It is not a number", MessageBoxButton.OK);
+                    CustomMessageBox.Show("Error", "Incorrect data", MessageBoxButton.OK);
                 }
             }
         }
@@ -76,7 +76,7 @@ namespace Курсовой.ViewModel
                 }
                 catch
                 {
-                    CustomMessageBox.Show("Error", "It is not a number", MessageBoxButton.OK);
+                    CustomMessageBox.Show("Error", "Incorrect data", MessageBoxButton.OK);
                 }
             }
         }
@@ -126,7 +126,7 @@ namespace Курсовой.ViewModel
                         }
                         if (Size == 0 || Size < 5)
                         {
-                            CustomMessageBox.Show("Error", "Uncorrect size", MessageBoxButton.OK);
+                            CustomMessageBox.Show("Error", "Incorrect size", MessageBoxButton.OK);
                             check = false;
                         }
 

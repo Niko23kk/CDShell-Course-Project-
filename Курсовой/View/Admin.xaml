@@ -6,7 +6,7 @@
         xmlns:vm="clr-namespace:Курсовой.ViewModel"
         xmlns:local="clr-namespace:Курсовой.View"
         mc:Ignorable="d" Name="MainWindowName"
-        Title="CD Shell" Icon="pack://application:,,,/Resourses/Logo.png" Width="1000" Height="800" Style="{StaticResource WindowStyle}">
+        Title="CD Shell" Icon="pack://application:,,,/Resources/Logo.png" Width="1000" Height="800" Style="{StaticResource WindowStyle}">
 
     <Window.DataContext>
         <vm:AdminViewModel/>
@@ -33,7 +33,7 @@
                 <ColumnDefinition Width="100"/>
                 <ColumnDefinition Width="200"/>
             </Grid.ColumnDefinitions>
-            <Image Grid.Column="0" Source="pack://application:,,,/Resourses/Logo.png" Margin="20"/>
+            <Image Grid.Column="0" Source="pack://application:,,,/Resources/Logo.png" Margin="20"/>
             <TextBlock Grid.Column="1" FontSize="30" FontFamily="Futura Md BT" VerticalAlignment="Center" Text="CD SHELL" Foreground="{DynamicResource LogoandButton}"/>
 
             <ScrollViewer Grid.Row="1" Grid.ColumnSpan="2" Name="ScrollContainer" ScrollViewer.CanContentScroll="False" VerticalScrollBarVisibility="Hidden" Height="auto">

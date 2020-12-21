@@ -79,7 +79,7 @@ namespace Курсовой.ViewModel
 
                         SmtpClient smtp = new SmtpClient("smtp.mail.ru", 25);
                         smtp.EnableSsl = true;
-                        smtp.Credentials = new NetworkCredential("cdshellcompany@mail.ru", "Company23wow");
+                        smtp.Credentials = new NetworkCredential("cdshellcompany@mail.ru", "NIKO123wow");
                         smtp.Send(m);
                         var window = Application.Current.Windows[Application.Current.Windows.Count - 1];
                         (window as SignInWindow).Frame.Navigate(new Recovery(dBRepository.GetAll().First(s => s.Login == Login),value));

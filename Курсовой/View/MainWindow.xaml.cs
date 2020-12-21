@@ -18,8 +18,6 @@ namespace Курсовой.View
         public MainWindow()
         {
             InitializeComponent();
-            //System.Windows.Resources.StreamResourceInfo sri = System.Windows.Application.GetResourceStream(new Uri("pack://application:,,,/Resourses/pen (2).cur", UriKind.RelativeOrAbsolute));
-            //this.Cursor = new Cursor(sri.Stream);
         }
     }
     

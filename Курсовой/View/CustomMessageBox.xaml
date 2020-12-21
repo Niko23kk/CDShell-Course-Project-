@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Курсовой.View"
         mc:Ignorable="d"
-        Title="CustomMessageBox" Icon="pack://application:,,,/Resourses/Logo.png" Height="250" Width="400" Style="{DynamicResource WindowStyle}">
+        Title="CustomMessageBox" Icon="pack://application:,,,/Resources/Logo.png" Height="250" Width="400" Style="{DynamicResource WindowStyle}">
     <Grid Background="{DynamicResource MainColor}">
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
